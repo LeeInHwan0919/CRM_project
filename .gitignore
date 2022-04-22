@@ -104,11 +104,5 @@ local.properties
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-<<<<<<< HEAD
-/.metadata/
-=======
 
-# End of https://www.toptal.com/developers/gitignore/api/eclipse,java
->>>>>>> a8ac18842e4ec8bec38015fb8ce1a2aa794c9caf
+
