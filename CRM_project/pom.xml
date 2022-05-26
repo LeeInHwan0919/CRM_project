@@ -109,7 +109,7 @@
 			<version>1.2</version>
 		</dependency>
 	
-		<!-- Test -->
+		<!-- Test수정 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
