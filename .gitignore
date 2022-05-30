@@ -10,6 +10,8 @@ pom.properties
 .classpath
 MANIFEST.MF
 
+Servers/tomcat
+
 ### Eclipse ###
 .metadata
 bin/
