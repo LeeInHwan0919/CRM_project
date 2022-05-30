@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.login">
+
+
+<select id="loginChk" parameterType="String" resultType="UDto">
+  SELECT EMP_PW, EMP_AUTH
+	FROM USER_INFO
+		WHERE EMP_CODE = #{emp_code}
+</select>
+
+<insert id="signUp" parameterType="UDto">
+INSERT INTO USER_INFO
+(EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE, EMP_IMG,EMP_AUTH)
+VALUES(#{emp_code}, NULL, #{emp_name}, #{emp_pw},'남자', 'Y', EMPTY_BLOB(),'SYSTEM')
+</insert>
+
+
+</mapper>
