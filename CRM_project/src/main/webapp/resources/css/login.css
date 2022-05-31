@@ -79,6 +79,7 @@ input[type="checkbox"]:checked + .toggle { background-position: 0 -16px }
   color: #7f7f7f;
   display: inline-block;
   font: 12px/1 sans-serif;
+  float: right;
   left: -19px;
   position: relative;
   text-decoration: none;
