@@ -10,6 +10,7 @@ public class UserDto {
 	private String emp_use ;
 	private String emp_img;
 	private String emp_auth;
+	private String emp_tel;
 	
 	
 	
@@ -61,14 +62,17 @@ public class UserDto {
 	public void setEmp_auth(String emp_auth) {
 		this.emp_auth = emp_auth;
 	}
-	@Override
-	public String toString() {
-		return "MemberDto [emp_code=" + emp_code + ", area_code=" + area_code + ", emp_name=" + emp_name + ", emp_pw="
-				+ emp_pw + ", emp_gende=" + emp_gende + ", emp_use=" + emp_use + ", emp_img=" + emp_img + ", emp_auth="
-				+ emp_auth + "]";
+	public String getEmp_tel() {
+		return emp_tel;
 	}
-	public UserDto(String emp_code, String area_code, String emp_name, String emp_pw, String emp_gende,
-			String emp_use, String emp_img, String emp_auth) {
+	public void setEmp_tel(String emp_tel) {
+		this.emp_tel = emp_tel;
+	}
+	
+	
+	
+	public UserDto(String emp_code, String area_code, String emp_name, String emp_pw, String emp_gende, String emp_use,
+			String emp_img, String emp_auth, String emp_tel) {
 		this.emp_code = emp_code;
 		this.area_code = area_code;
 		this.emp_name = emp_name;
@@ -77,6 +81,16 @@ public class UserDto {
 		this.emp_use = emp_use;
 		this.emp_img = emp_img;
 		this.emp_auth = emp_auth;
+		this.emp_tel = emp_tel;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "UserDto [emp_code=" + emp_code + ", area_code=" + area_code + ", emp_name=" + emp_name + ", emp_pw="
+				+ emp_pw + ", emp_gende=" + emp_gende + ", emp_use=" + emp_use + ", emp_img=" + emp_img + ", emp_auth="
+				+ emp_auth + ", emp_tel=" + emp_tel + "]";
 	}
 	public UserDto() {
 	}

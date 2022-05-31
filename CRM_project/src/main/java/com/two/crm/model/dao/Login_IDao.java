@@ -1,5 +1,6 @@
 package com.two.crm.model.dao;
 
+
 import com.two.crm.dto.UserDto;
 
 public interface Login_IDao {
@@ -18,4 +19,12 @@ public interface Login_IDao {
 	 * @return boolean
 	 */
 	public boolean signUp(UserDto dto);
+	
+	
+	/**
+	 * 사원코드에 해당하는 전화번호체크
+	 * @param emp_code 사원코드
+	 * @return emp_tel 전화번호
+	 */
+	public String telChk(String emp_code);
 }
