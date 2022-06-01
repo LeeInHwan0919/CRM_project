@@ -17,25 +17,10 @@
 		<div class="login">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="username" name="emp_code"> 
 				<input type="password" placeholder="패스워드를 입력해 주세요." id="password" name="emp_pw"> <a
-				href="./pwFind.do" class="forgot">비밀번호를 잊으셨습니까?</a> 
+				href="./findpw.do" class="forgot">비밀번호를 잊으셨습니까?</a> 
 				<input type="submit" value="LOGIN">
 		</div>
 		<div class="shadow"></div>
 	</form>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,18 +6,18 @@ html { height: 100% }
 
 
 body { background-image: radial-gradient( cover, rgba(92,100,111,1) 0%,rgba(31,35,40,1) 100%), url('http://i.minus.com/io97fW9I0NqJq.png') }
-.login {
+.findpw {
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 257px;
+  height: 450px;
   margin: 20px auto 0;
   width: 400px;
   margin-top: 200px;
 }
 
 
-.login h1 {
+.findpw h1 {
   background-image: linear-gradient(top, #f1f3f3, #d4dae0);
   border-bottom: 1px solid #a6abaf;
   border-radius: 6px 6px 0 0;
@@ -79,7 +79,6 @@ input[type="checkbox"]:checked + .toggle { background-position: 0 -16px }
   color: #7f7f7f;
   display: inline-block;
   font: 12px/1 sans-serif;
-  float: right;
   left: -19px;
   position: relative;
   text-decoration: none;
@@ -87,7 +86,7 @@ input[type="checkbox"]:checked + .toggle { background-position: 0 -16px }
   transition: color .4s;
 }
 .forgot:hover { color: #3b3b3b }
-input[type="submit"] {
+input[type="button"] {
   width:350px;
   height:35px;
   display:block;
@@ -114,6 +113,7 @@ input[type="submit"] {
 }
 
 
+
 .shadow {
   background: #000;
   border-radius: 12px 12px 4px 4px;
@@ -130,3 +130,7 @@ input[type="submit"]:active {
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
 }
 
+.time{
+	margin-top:50px;
+	text-align: center;
+}

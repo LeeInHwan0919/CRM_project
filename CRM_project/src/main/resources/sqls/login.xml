@@ -16,4 +16,11 @@ VALUES(#{emp_code}, NULL, #{emp_name}, #{emp_pw},'남자', 'Y', EMPTY_BLOB(),'SY
 </insert>
 
 
+<!-- 비밀번호 찾을때 사원코드와 해당 전화번호가 일치하는지에 대한 코드 -->
+<select id="telChk" parameterType="String" resultType="String">
+SELECT EMP_TEL
+FROM USER_INFO
+WHERE EMP_CODE=#{emp_code}
+</select>
+
 </mapper>
