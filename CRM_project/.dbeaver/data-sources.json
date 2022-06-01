@@ -11,8 +11,8 @@
 				"host": "localhost",
 				"port": "1521",
 				"database": "ORCL",
-				"url": "jdbc:oracle:thin:@db20220523104800_medium?TNS_ADMIN=C:\\\\Wallet",
-				"home": "C:\\app\\GDJ44\\product\\21c\\dbhomeXE",
+				"url": "jdbc:oracle:thin:@crmdb_medium?TNS_ADMIN=C:\\\\Wallet",
+				"home": "E:\\app\\User\\product\\21c\\dbhomeXE",
 				"type": "dev",
 				"provider-properties": {
 					"@dbeaver-connection-type@": "CUSTOM",
