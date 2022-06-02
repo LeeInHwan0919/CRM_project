@@ -32,6 +32,9 @@ ${user}
         <br/>
     </security:authorize>
 
+
+	<a href="./boardList.do">게시물 리스트</a>
+	<a href="./clientList.do">거래처 리스트</a>
     <a href="./logout.do">Logout</a>
 </body>
 </html>
