@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Board_DaoImpl">
+
+
+<!-- ****************************게시판 query**************************** -->
+
+<!--게시글 전체조회-->
+<select id="AllBoard" resultType="bDto">
+SELECT 
+	SEQ, 
+	EMP_CODE, 
+	TITLE, 
+	CONTENT, 
+	IMPORTANT, 
+	STARTDATE, 
+	ENDDATE, 
+	S_COUNT, 
+	POST_USE
+	FROM BOARD
+ 	WHERE POST_USE ='Y'
+ 	AND
+ 	TO_DATE(SYSDATE, 'YYYY-MM-DD') >= TO_DATE(STARTDATE, 'YYYY-MM-DD')
+</select>
+
+
+<!--게시글 상세-->
+<select id="BoardDetail" parameterType="java.lang.Integer" resultType="bDto">
+	SELECT 
+		SEQ, 
+		TITLE, 
+		CONTENT, 
+		STARTDATE, 
+		ENDDATE, 
+		S_COUNT, 
+		POST_USE
+	FROM BOARD
+	WHERE SEQ=#{seq}
+</select>
+
+
+<!--게시글 입력-->
+<insert id="insertBoard" parameterType="bDto">
+	INSERT INTO BOARD
+	(SEQ, 
+	EMP_CODE, 
+	TITLE, 
+	CONTENT, 
+	STARTDATE, 
+	ENDDATE, 
+	IMPORTANT, 
+	S_COUNT, 
+	POST_USE)
+	VALUES
+	(BOARD_SEQ.NEXTVAL, 
+	'SYS_45282', 
+	#{title}, 
+	#{content}, 
+	SYSDATE,
+	'2022-06-30',
+	1, 
+	0, 
+	'Y')
+</insert>
+
+<!--게시글 수정-->
+<update id="updateBoard" parameterType="java.util.Map">
+	UPDATE 
+	BOARD
+	SET TITLE=#{title}, 
+	CONTENT=#{content} 
+	WHERE SEQ =#{seq}  
+
+</update>
+
+<!--게시글 삭제-->
+<delete id="deleteBoard" parameterType="java.lang.Integer" >
+	DELETE FROM 
+	BOARD 
+	WHERE SEQ =#{seq}
+	
+</delete>
+
+
+<!--게시글 count-->
+<update id="countBoard" parameterType="java.util.Map">
+UPDATE BOARD SET S_COUNT = S_COUNT+1 WHERE EMP_CODE != #{emp_code} AND SEQ =#{seq}
+</update>
+
+<!-- ****************************게시판 query**************************** -->
+
+
+
+</mapper>

@@ -4,11 +4,15 @@
 
 <typeAliases>
 	<typeAlias type="com.two.crm.dto.UserDto" alias="UDto"/>
+	<typeAlias type="com.two.crm.dto.BoardDto" alias="bDto"/>
+	<typeAlias type="com.two.crm.dto.ClientDto" alias="cDto"/>
 </typeAliases>
 
 
 <mappers>
 	<mapper resource="/sqls/login.xml"/>
+	<mapper resource="/sqls/board.xml"/>
+	<mapper resource="/sqls/client.xml"/>
 </mappers>
 
 </configuration>

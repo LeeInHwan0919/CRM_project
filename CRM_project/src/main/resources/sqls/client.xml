@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Client_DaoImpl">
+
+
+<!--거래처 전체조회-->
+<select id="AllClient"  resultType="cDto">
+SELECT CLI_NUM, 
+	EMP_CODE, 
+	CLI_NAME, 
+	CLI_ADDR, 
+	CLI_TEL, 
+	CLI_AREA
+FROM CLIENT
+</select>
+
+
+<!--거래처 상세조회-->
+<select id="DetailClient" parameterType="String" resultType="cDto">
+SELECT c.CLI_NUM, 
+c.EMP_CODE, 
+c.CLI_NAME, 
+c.CLI_ADDR, 
+c.CLI_TEL,
+cd.RATE,
+cg.G_NAME,
+gd.RATE AS G_CODE,
+<![CDATA[ CASE WHEN SYSDATE  > c2.CT_START AND SYSDATE < c2.CT_END THEN '진행중' ]]>
+<![CDATA[ WHEN SYSDATE < c2.CT_START THEN '대기중' ]]>
+<![CDATA[ WHEN SYSDATE > c2.CT_END THEN '종료' ]]>
+ END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, c2.CT_START ,c2.CT_END
+	FROM CLIENT c
+		JOIN CONTRACT_MANAGEMENT cm 
+		ON c.CLI_NUM = cm.CLI_NUM 
+	    JOIN CONTRACT c2 
+	    ON c2.CTM_CODE =cm.CTM_CODE 
+		JOIN CLIENT_DISCOUNT cd 
+		ON c2.DCODE_CLIENT = cd.DCODE_CLIENT 
+		JOIN CONTRACT_GOODS cg 
+		ON c2.CT_CODE = cg.CT_CODE 
+		JOIN INVENTORY_GOODS ig 
+		ON cg.G_CODE = ig.G_CODE 
+		JOIN GOODS_DISCOUNT gd 
+		ON ig.DCODE_GOODS = gd.DCODE_GOODS
+		WHERE c.CLI_NUM=#{cli_num}
+		ORDER BY gd.RATE DESC
+</select>
+
+
+
+<!--거래처 삭제-->
+<update id="DeleteClient">
+	UPDATE CLIENT SET CLI_USE ='N' 
+	WHERE CLI_NUM=#{cli_num}
+</update>
+
+
+
+<!--거래처 정보 수정-->
+<update id="UpdateClient" parameterType="java.util.Map">
+UPDATE 
+CLIENT 
+SET CLI_TEL =#{cli_tel},
+CLI_ADDR=#{cli_addr}
+WHERE CLI_NUM =#{cli_num}
+</update>
+
+
+
+
+
+</mapper>
