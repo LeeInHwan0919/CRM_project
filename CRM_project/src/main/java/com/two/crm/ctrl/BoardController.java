@@ -13,16 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.two.crm.dto.BoardDto;
-import com.two.crm.dto.ClientDto;
-import com.two.crm.dto.UserDto;
 import com.two.crm.model.service.Board_IService;
 
 
@@ -131,6 +129,11 @@ public class BoardController {
 	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.POST)
 	public String updateBoard(@RequestParam Map<String, Object> map, HttpSession session,Model model) {
 		Map<String, Object> rMap = new HashMap<String, Object>();
+		
+		System.out.println(map.get("bSeq"));
+		System.out.println(map.get("title"));
+		System.out.println(map.get("content"));
+		
 		rMap.put("seq", map.get("bSeq"));
 		rMap.put("title", map.get("title"));
 		rMap.put("content", map.get("content"));
@@ -156,6 +159,8 @@ public class BoardController {
 		BoardDto bVo = new BoardDto();
 		bVo.setTitle(bDto.getTitle());
 		bVo.setContent(bDto.getContent());
+		bVo.setStartdate(bDto.getStartdate());
+		bVo.setEnddate(bDto.getEnddate());
 		int n = bService.insertBoard(bDto);
 		if(n > 0) {
 			logger.info("게시글 입력성공");
@@ -165,16 +170,25 @@ public class BoardController {
 	}
 	
 	
-	
-	@RequestMapping(value = "/deleteBoard.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String deleteBoard(@RequestParam int seq) {
-		logger.info("deleteBoard : {}",seq);
-		int n = bService.deleteBoard(seq);
-		if(n>0) {
-			logger.info("삭제를 완료하였습니다");
-		}
-		return "redirect:/boardList.do";
-	}
-	
+	@ResponseBody
+	@RequestMapping(value = "/deleteBoard.do", method = RequestMethod.POST)
+	   public Map<String, Object> deleteBoard(BoardDto dto) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		System.out.println(dto.getSeq());
+		
+		bService.deleteBoard(dto.getSeq());
+			/*
+			 * String seqKey = request.getParameter("seq"); if(seqKey != null) { try {
+			 * System.out.println(seqKey.trim()); // print to verify int idInt =
+			 * Integer.parseInt(seqKey.trim());
+			 * 
+			 * logger.info("deleteBoard : {}",idInt); int n = bService.deleteBoard(idInt);
+			 * if(n>0) { logger.info("삭제를 완료하였습니다"); } } catch(NumberFormatException nbe) {
+			 * nbe.printStackTrace(); } }
+			 */
+	      return result;
+	   }
 	
 }
