@@ -1,5 +1,6 @@
 package com.two.crm.ctrl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.two.crm.dto.BoardDto;
 import com.two.crm.dto.ClientDto;
 import com.two.crm.model.service.Client_IService;
 
@@ -54,6 +56,195 @@ public class ClientController {
 		model.addAttribute("cVo",cVo);
 		return "clientDetail";
 	}
+	
+	@RequestMapping(value = "/insertPage.do",method = RequestMethod.GET)
+	public String insertPage() {
+		logger.info("ClientController insertPage");
+		return "insertClient";
+	}
+	
+	
+	
+	@RequestMapping(value = "/selectMGR.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectMGR(@RequestParam Map<String, Object> map) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		
+		//service
+		List<ClientDto> dto = cService.selectConractCode();
+		
+		rMap.put("data", dto.get(0).getCtm_code());
+		rMap.put("status", "OK");
+		return rMap;
+	}
+	
+	
+	//거래처 등록
+	@RequestMapping(value = "/insertClient.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertclient(@RequestParam Map<String, Object> map, Authentication user) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		Map<String, Object> rMap2 = new HashMap<String, Object>();
+		Map<String, Object> rMap3 = new HashMap<String, Object>();
+		
+		System.out.println(map.get("cli_num"));
+		System.out.println(user.getName());
+//		System.out.println(map.get("emp_code"));
+		System.out.println(map.get("cli_name"));
+		System.out.println(map.get("cli_addr"));
+		System.out.println(map.get("cli_tel"));
+		System.out.println(map.get("ct_start"));
+		System.out.println(map.get("ct_end"));
+		System.out.println(map.get("cli_area"));
+//		System.out.println(map.get("cli_use"));
+		
+		// 거래처등록
+		rMap.put("cli_num", map.get("cli_num"));
+		rMap.put("emp_code", user.getName());
+		rMap.put("cli_name", map.get("cli_name"));
+		rMap.put("cli_addr", map.get("cli_addr"));
+		rMap.put("cli_tel", map.get("cli_tel"));
+		rMap.put("cli_area", map.get("cli_area"));
+		/*
+		 * rMap.put("ct_start", map.get("ct_start")); rMap.put("ct_end",
+		 * map.get("ct_end"));
+		 */
+		int n = cService.insertClient(rMap);
+//		int n =0;
+		if(n>0) {
+			System.out.println("거래처 등록에 성공하였습니다.");
+		}
+		
+		
+		rMap2.put("cli_num", map.get("cli_num"));
+		rMap2.put("ctm_code", map.get("ctm_code"));
+		
+		int n2 = cService.insertMGT(rMap2);
+		 if(n2>0) {
+			 System.out.println("거래처 등록에 성공하였습니다.");
+		 }
+		
+		
+		System.out.println(map.get("ct_start"));
+		System.out.println(map.get("ct_end"));
+//		System.out.println(map.get("ct_code"));
+		System.out.println(map.get("ctm_code"));
+		System.out.println(map.get("du_date"));
+		
+		
+		rMap3.put("ct_start", map.get("ct_start"));
+		rMap3.put("ct_end", map.get("ct_end"));
+		rMap3.put("ctm_code", map.get("ctm_code"));
+		rMap3.put("du_date", map.get("du_date"));
+		
+		
+		rMap3.put("du_date", map.get("du_date"));
+		
+		int n3 = cService.insertContract(rMap3);
+		
+//		int n2 =0; 
+		if(n3>0) {
+			System.out.println("거래처 등록에 성공하였습니다.");
+		}
+	
+		// 계약상품등록
+//		cService.insertContractGS();
+		logger.info("ClientController insertClient");
+		return "insertClient";
+	}
+	
+	
+	@RequestMapping(value = "/selectGoodsName.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectGoodsName(@RequestParam Map<String, Object> map) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		List<String> datalistGcode = new ArrayList<String>();
+		List<String> datalistGname = new ArrayList<String>();
+ 		
+		/*
+		 * System.out.println(map.get("cli_num"));
+		 * System.out.println(map.get("emp_code"));
+		 * System.out.println(map.get("cli_name"));
+		 * System.out.println(map.get("cli_addr"));
+		 * System.out.println(map.get("cli_tel"));
+		 * System.out.println(map.get("cli_area"));
+		 * System.out.println(map.get("cli_use"));
+		 */
+		
+		//상품정보가져오기
+		List<ClientDto> dto = cService.selectGoodsName();
+		System.out.println(dto.isEmpty());
+		
+		for(ClientDto s : dto) {
+			
+			
+			System.out.println(s.getG_code());
+			System.out.println(s.getG_name());
+			
+			if(s.getG_code() != null) {
+				datalistGname.add(s.getG_name());
+				datalistGcode.add(s.getG_code());
+			}
+		}
+		// 거래처등록
+//		cService.insertClient(null);
+		
+		//계약관리 등록 
+//		cService.insertContractMGT();
+		
+		// 계약등록
+//		cService.insertContract();
+		
+		// 계약상품등록
+//		cService.insertContractGS();
+		logger.info("ClientController insertClient");
+		
+		rMap.put("gCode", datalistGcode);
+		rMap.put("gName", datalistGname);
+		rMap.put("status", "OK");
+		return rMap;
+	}
+	
+	//거래처 사업자번호 조회
+	@RequestMapping(value = "/selectCliNum.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectCliNum(@RequestParam Map<String, Object> map) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		List<String> datalisCliNum= new ArrayList<String>();
+ 		
+	
+		//상품정보가져오기
+		List<ClientDto> dto = cService.selectCliNum();
+		System.out.println(dto.isEmpty());
+		
+		for(ClientDto s : dto) {
+			
+			
+			System.out.println(s.getCli_num());
+			
+			if(s.getCli_num() != null) {
+				datalisCliNum.add(s.getCli_num());
+			}
+		}
+		// 거래처등록
+//		cService.insertClient(null);
+		
+		//계약관리 등록 
+//		cService.insertContractMGT();
+		
+		// 계약등록
+//		cService.insertContract();
+		
+		// 계약상품등록
+//		cService.insertContractGS();
+		logger.info("ClientController selectCliNum");
+		
+		rMap.put("gCliNum", datalisCliNum);
+		rMap.put("status", "OK");
+		return rMap;
+	}
+	
+	
 	
 	
 	//거래처 삭제 

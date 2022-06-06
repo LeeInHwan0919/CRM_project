@@ -51,8 +51,64 @@ public class Client_ServiceImpl implements Client_IService{
 		return dao.UpdateClient(map);
 	}
 
-	
-	
 
+	@Override
+	public int insertClient(Map<String, Object> map) {
+		logger.info("UpdateClient query: insertClient ");
+		return dao.insertClient(map);
+	}
+
+
+	@Override
+	public void insertContractMGT() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public int insertContract(Map<String, Object> rMap2) {
+		logger.info("UpdateClient query: insertContract ");
+		return dao.insertContract(rMap2);
+		
+	}
+
+
+	@Override
+	public void insertContractGS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public  List<ClientDto> selectGoodsName() {
+		logger.info("UpdateClient query: selectGoodsName ");
+		return dao.selectGoodsName();
+	}
+
+
+	@Override
+	public List<ClientDto> selectCliNum() {
+		logger.info("UpdateClient query: selectCliNum ");
+		return dao.selectCliNum();
+	}
+
+
+	@Override
+	public List<ClientDto> selectConractCode() {
+		logger.info("Client_ServiceImpl query: selectConractCode ");
+		return dao.selectConractCode();
+	}
+
+
+	@Override
+	public int insertMGT(Map<String, Object> map) {
+		logger.info("UpdateClient query: insertMGT ");
+		return dao.insertMGT(map);
+
+	
+	
+	}
 
 }

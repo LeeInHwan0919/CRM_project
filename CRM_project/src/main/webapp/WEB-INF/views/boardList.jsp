@@ -7,59 +7,57 @@
 <title>공지 게시판 리스트</title>
 <%@include file="./header.jsp" %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
- 
   
   <style type="text/css">
   th,table {
   text-align: center;
 }
-  
   </style>
+  
 </head>
 <body>
 
 <div class="container">
     <div style='text-align: center;'>
   	<h2>공지 게시판</h2><br>
-	<table id="myTable" class="display" style="width:100%">
+	<table id="myTable" class="display" style="width:100%; font-size:120%;">
 		<thead>
 			<tr>
-				<th>번호</th>
-		        <th>제목</th>
-		        <th>작성자</th>
-		      	<th>등록일</th>
-		        <th>조회</th>
+			<th style='text-align: center;'><strong>번호</strong></th>
+		        <th style='text-align: center;'>제목</th>
+		        <th style='text-align: center;'>작성자</th>
+		      	<th style='text-align: center;'>등록일</th>
+		        <th style='text-align: center;'>조회</th>
 			</tr>
 		</thead>
 		
 		
       <tbody>
-      <c:forEach var="lists" items="${lists}">
+      
+      <c:forEach var="ls" items="${lists}">
       <tr>
-        
-		<td>${lists.seq}</td>
-        <c:if test="${lists.important eq 1}">
-        <td style= 'text-align: center;' ><strong><a href="./boardDetail.do?seq=${lists.seq}" style=' color: red;'>${lists.title}</a></strong></td>
+		<td>${ls.seq}</td>
+        <c:if test="${ls.important eq 1}">
+        <td style= 'text-align: left;' ><strong><a href="./boardDetail.do?seq=${ls.seq}" style=' color: red;'>&nbsp&nbsp&nbsp<img alt=""src="./resources/img/aaa.png">&nbsp&nbsp&nbsp${ls.title}</a></strong></td>
         </c:if>
-        <c:if test="${lists.important eq 0}">
-        <td style= 'text-align: center;'><a href="./boardDetail.do?seq=${lists.seq}">${lists.title}</a></td>
+        <c:if test="${ls.important eq 0}">
+        <td style= 'text-align: center;'><a href="./boardDetail.do?seq=${ls.seq}">${ls.title}</a></td>
         </c:if>
         
         <td>관리자</td>
-        <td >${lists.startdate}</td>
-        <td>${lists.s_count}</td>
+        <td >${ls.startdate}</td>
+        <td>${ls.s_count}</td>
       </tr>
     </c:forEach>
     </tbody>
 </table>
-	<c:if test="${user == 'SYS_123456'}">
 		<div style='text-align: right;'>
-         <button type="button"class="btn btn-default" onclick="location.href='./insertBoard.do'">새글 입력</button>
+			<c:if test="${user == 'SYS_123456'}">
+         <button type="button"class="btn btn-primary" onclick="location.href='./insertBoardPage.do'">새글 입력</button>
+			 </c:if>	
+		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
          </div><br>
 		</div>
-	 </c:if>	
-	 <button  class="btn btn-default" onclick="javascript:history.back(-1)" >뒤로가기</button>
 </div>
 </body>
 <script type="text/javascript">

@@ -13,7 +13,6 @@ int strSeq = srMap.getSeq();
 <title>글 수정 양식</title>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="./css/header.css">
 <%@include file="./header.jsp" %>
 <style type="text/css">
    #container {
@@ -24,9 +23,9 @@ int strSeq = srMap.getSeq();
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container"> 
               <h3>글 수정</h3>
-              <form id="updateform" action="./updateBoard.do" method="post">
+<!--               <form action="./updateBoard.do" id="updateform" onsubmit="false; updateform()" method="post"> -->
                  <table class="table table-hover">
                  <tr>
                  <td>번호</td>
@@ -43,36 +42,45 @@ int strSeq = srMap.getSeq();
                  </tr>
                  </table>
               <div style="text-align: center;">
-              <input class="btn btn-default"  type="submit" value="수정하기">
+              <input class="btn btn-default" id="updateBtn" type="button" value="수정하기">
               <input class="btn btn-default"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
               </div>
-              </form>
+<!--               </form> -->
           </div>
    </body>
 <script type="text/javascript">
-var title = "<%=srMap.getTitle() %>";
-var content = "<%=srMap.getContent() %>";
 
-document.getElementById("title").value = title;
-document.getElementById("content").value = content;
+   var title = "<%=srMap.getTitle() %>";
+   var content = "<%=srMap.getContent() %>";
 
+   console.log(title);
+   console.log(content);
+   
+   document.getElementById("title").value = title;
+   document.getElementById("content").value = content;
 
-function updateboard() {
-	var con = confirm("해당 공지사항을 수정하시겠습니까?");
-	 if(con) {
-	      var form = document.forms[0];
-	      console.log(form);
-	      swal("성공","해당 공지사항을 수정하였습니다.");
-	      form.method = 'post';
-	      form.onclick = './updateBoard.do';
-	      form.submit();
-	   }else {
-		      swal("취소","수정을 취소하였습니다.");
-	   }
-	}
-}
-
-
+   $("#updateBtn").click(function(){
+	   
+	   //valide
+       // json 형식으로 데이터 set
+       var params = {
+                 title     : $("#title").val()
+               , content   : $("#content").val()
+               , bSeq       : $("#bSeq").val()
+       }
+       // ajax 통신
+       $.ajax({
+           type : "POST",            // HTTP method type(GET, POST) 형식이다.
+           url : "./updateBoard.do",      // 컨트롤러에서 대기중인 URL 주소이다.
+           data : params,            // Json 형식의 데이터이다.
+           success : function(data){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+        	   window.location.href = './boardList.do';
+           },
+           error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+               alert("통신 실패.")
+           }
+       });
+   });
 </script>   
    
 <%@include file="./footer.jsp" %>

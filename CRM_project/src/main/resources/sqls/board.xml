@@ -13,8 +13,8 @@ SELECT
 	TITLE, 
 	CONTENT, 
 	IMPORTANT, 
-	STARTDATE, 
-	ENDDATE, 
+	TO_CHAR(STARTDATE,'YYYY-MM-DD'),
+	TO_CHAR(ENDDATE,'YYYY-MM-DD'), 
 	S_COUNT, 
 	POST_USE
 	FROM BOARD
@@ -33,9 +33,9 @@ SELECT
 		STARTDATE, 
 		ENDDATE, 
 		S_COUNT, 
-		POST_USE
-	FROM BOARD
-	WHERE SEQ=#{seq}
+		POST_USE        
+	FROM BOARD 
+	WHERE SEQ = #{seq}
 </select>
 
 
@@ -56,8 +56,8 @@ SELECT
 	'SYS_45282', 
 	#{title}, 
 	#{content}, 
-	SYSDATE,
-	'2022-06-30',
+	#{startdate},
+	#{enddate},
 	1, 
 	0, 
 	'Y')
@@ -86,6 +86,53 @@ SELECT
 <update id="countBoard" parameterType="java.util.Map">
 UPDATE BOARD SET S_COUNT = S_COUNT+1 WHERE EMP_CODE != #{emp_code} AND SEQ =#{seq}
 </update>
+
+
+<!--시퀀스번호 가져오기-->
+<select id="selectSEQ" resultType="java.lang.Integer">
+	SELECT MAX(SEQ)+1 AS SEQ
+	FROM BOARD
+</select>
+
+
+<!--파일 업로드-->
+<insert id="insertFile" parameterType="java.util.Map">
+INSERT INTO BOARD_FILE 
+(	
+	FILE_SEQ,
+	BOARD_SEQ,
+	FILE_SIZE,
+	FILE_FOLDER,
+	FILE_NAME
+) 
+VALUES (
+	FILE_SEQ.NEXTVAL,
+	#{board_seq},
+	#{file_size},
+	#{file_folder},
+	#{file_name}
+)
+</insert>
+
+
+<!--파일 전체 조회-->
+<select id="AllFile" resultType="bDto">
+	SELECT MAX(SEQ)+1 AS SEQ
+	FROM BOARD
+</select>
+
+<!--파일 상세 조회-->
+<select id="selectFileInfo" resultType="bDto">
+	SELECT 
+		FILE_SEQ,
+		BOARD_SEQ,
+		FILE_SIZE,
+		FILE_FOLDER,
+		FILE_NAME
+	FROM BOARD_FILE 
+	WHERE BOARD_SEQ = #{seq}
+</select>
+
 
 <!-- ****************************게시판 query**************************** -->
 

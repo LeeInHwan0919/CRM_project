@@ -8,8 +8,8 @@
 <%@include file="./header.jsp" %>
 </head>
 <body>
-<div class="container">
-<table class="table table-bordered" style="text-align: center;"> 
+<div style="text-align: center; margin: 10%;">
+<table class="table table-bordered"> 
 			<tr>
 				<th>번호</th>
 				<td>${bVo.seq}</td>
@@ -33,20 +33,63 @@
 			<tr>
 				<th>내용</th>
 				<td>
-				<textarea class="form-control" rows="10" cols="50" name="content" readonly>${bVo.content}</textarea>
+				<textarea class="form-control" rows="10" cols="50" name="content" style="text-align: center;" readonly>${bVo.content}</textarea>
 				</td>
 			</tr>
 	</table>
-	<div style="text-align: center;"><br>
+	<div><br>
 <%-- 			<c:if test="${bVo.id eq member.id }"> --%>
-			<button class="btn btn-default" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'">수정</button>
+			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: left;">수정</button>
 <%-- 			</c:if> onclick="location.href='./deleteBoard.do?seq=${bVo.seq}'" --%>
-			<button class="btn btn-default" onclick="deletboard()">삭제</button>
-			<button class="btn btn-default" onclick="javascript:history.back(-1)" >목록</button>
-		</div>
+			<button class="btn btn-info" onclick="location.href='./boardList.do'" style="float: right;" >목록</button>
+			<button class="btn btn-danger" onclick="deletboard(${bVo.seq})"style="float: right;">삭제</button>
+			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: right;">수정</button>
+	</div>
 </div>
 </body>
+<script type="text/javascript">
+function deletboard(seq){
+	console.log(seq) 
+	
+	var data = confirm("삭제하시겠습니까?.");
+	
+	if(!data){
+		return false;
+	}
+	
+    $.ajax({
+         type:"POST",
+         url:"./deleteBoard.do",
+         data : {seq : seq},
+         success : function(){
+            alert("삭제 성공"); 
+            window.location.href = './boardList.do';
+            
+         },
+         error:function(error){
+            console.log("error");
+         }
+    });
+ }
 
+
+$.ajax({
+    type:"POST",
+    url:"./selectFileInfo.do",
+    data : {seq : ${bVo.seq}},
+    success : function(data){
+    	console.log(data);
+       alert("파일 성공"); 
+//        window.location.href = './boardList.do';
+       
+    },
+    error:function(error){
+       console.log("error");
+    }
+});
+
+
+</script>
 
 <%@include file="./footer.jsp" %>
 </html>
