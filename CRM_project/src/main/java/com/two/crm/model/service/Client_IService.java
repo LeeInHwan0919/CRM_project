@@ -20,5 +20,6 @@ public interface Client_IService {
 	public List<ClientDto> selectCliNum();
 	public List<ClientDto> selectConractCode();
 	public int insertMGT(Map<String, Object> map);
+	public int insertGoods(Map<String, Object> map);
 	
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +47,6 @@ public class ClientController {
 	public String getOneBoard(@RequestParam String cli_num, Authentication user, Model model) {
 		System.out.println("사업자 번호 입니다 :"+cli_num);
 		List<ClientDto> cVo = cService.DetailClient(cli_num);
-//		ClientDto cVo = cService.DetailClient(cli_num);
 		
 		System.out.println(user.getName());
 
@@ -87,17 +84,6 @@ public class ClientController {
 		Map<String, Object> rMap2 = new HashMap<String, Object>();
 		Map<String, Object> rMap3 = new HashMap<String, Object>();
 		
-		System.out.println(map.get("cli_num"));
-		System.out.println(user.getName());
-//		System.out.println(map.get("emp_code"));
-		System.out.println(map.get("cli_name"));
-		System.out.println(map.get("cli_addr"));
-		System.out.println(map.get("cli_tel"));
-		System.out.println(map.get("ct_start"));
-		System.out.println(map.get("ct_end"));
-		System.out.println(map.get("cli_area"));
-//		System.out.println(map.get("cli_use"));
-		
 		// 거래처등록
 		rMap.put("cli_num", map.get("cli_num"));
 		rMap.put("emp_code", user.getName());
@@ -105,12 +91,9 @@ public class ClientController {
 		rMap.put("cli_addr", map.get("cli_addr"));
 		rMap.put("cli_tel", map.get("cli_tel"));
 		rMap.put("cli_area", map.get("cli_area"));
-		/*
-		 * rMap.put("ct_start", map.get("ct_start")); rMap.put("ct_end",
-		 * map.get("ct_end"));
-		 */
+		
+		
 		int n = cService.insertClient(rMap);
-//		int n =0;
 		if(n>0) {
 			System.out.println("거래처 등록에 성공하였습니다.");
 		}
@@ -124,14 +107,6 @@ public class ClientController {
 			 System.out.println("거래처 등록에 성공하였습니다.");
 		 }
 		
-		
-		System.out.println(map.get("ct_start"));
-		System.out.println(map.get("ct_end"));
-//		System.out.println(map.get("ct_code"));
-		System.out.println(map.get("ctm_code"));
-		System.out.println(map.get("du_date"));
-		
-		
 		rMap3.put("ct_start", map.get("ct_start"));
 		rMap3.put("ct_end", map.get("ct_end"));
 		rMap3.put("ctm_code", map.get("ctm_code"));
@@ -142,16 +117,55 @@ public class ClientController {
 		
 		int n3 = cService.insertContract(rMap3);
 		
-//		int n2 =0; 
 		if(n3>0) {
 			System.out.println("거래처 등록에 성공하였습니다.");
 		}
+		
+		
 	
 		// 계약상품등록
-//		cService.insertContractGS();
 		logger.info("ClientController insertClient");
 		return "insertClient";
 	}
+	
+	
+//거래처 등록
+	@RequestMapping(value = "/insertGoods.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertGoods(@RequestParam Map<String, Object> map) {
+		Map<String, Object> rMaps = new HashMap<String, Object>();
+		
+		
+		ArrayList<Integer> countList = (ArrayList<Integer>) map.get("cofficeCountList");
+		ArrayList<Integer> priceList = (ArrayList<Integer>) map.get("cofficePriceList");
+		ArrayList<String> nameList = (ArrayList<String>) map.get("cofficeNameList");
+		ArrayList<String> codeList = (ArrayList<String>) map.get("cofficeCodeList");
+		
+		for(int i=0;i<22;i++) {
+			Map<String, Object> rMap = new HashMap<String, Object>();
+			
+			rMap.put("du_cnt",countList.get(i).toString());
+			rMap.put("g_price",priceList.get(i).toString());
+			rMap.put("g_name",nameList.get(i).toString());
+			rMap.put("g_code",codeList.get(i).toString());
+			cService.insertGoods(rMap);
+		}
+		return rMaps;
+	}
+	
+	
+	//거래처 삭제 
+	@RequestMapping(value = "/deleteClient.do", method = RequestMethod.POST)
+	public String DeleteClient(@RequestParam String cli_num) {
+		logger.info("DeleteClient : {}",cli_num);
+		String n = cService.DeleteClient(cli_num);
+		if(n.length()>0) {
+			logger.info("삭제를 완료하였습니다");
+		}
+		return "redirect:/clientList.do";
+	}
+
+	
 	
 	
 	@RequestMapping(value = "/selectGoodsName.do", method = RequestMethod.POST)
@@ -161,16 +175,7 @@ public class ClientController {
 		List<String> datalistGcode = new ArrayList<String>();
 		List<String> datalistGname = new ArrayList<String>();
  		
-		/*
-		 * System.out.println(map.get("cli_num"));
-		 * System.out.println(map.get("emp_code"));
-		 * System.out.println(map.get("cli_name"));
-		 * System.out.println(map.get("cli_addr"));
-		 * System.out.println(map.get("cli_tel"));
-		 * System.out.println(map.get("cli_area"));
-		 * System.out.println(map.get("cli_use"));
-		 */
-		
+
 		//상품정보가져오기
 		List<ClientDto> dto = cService.selectGoodsName();
 		System.out.println(dto.isEmpty());
@@ -186,17 +191,7 @@ public class ClientController {
 				datalistGcode.add(s.getG_code());
 			}
 		}
-		// 거래처등록
-//		cService.insertClient(null);
-		
-		//계약관리 등록 
-//		cService.insertContractMGT();
-		
-		// 계약등록
-//		cService.insertContract();
-		
-		// 계약상품등록
-//		cService.insertContractGS();
+
 		logger.info("ClientController insertClient");
 		
 		rMap.put("gCode", datalistGcode);
@@ -226,17 +221,7 @@ public class ClientController {
 				datalisCliNum.add(s.getCli_num());
 			}
 		}
-		// 거래처등록
-//		cService.insertClient(null);
 		
-		//계약관리 등록 
-//		cService.insertContractMGT();
-		
-		// 계약등록
-//		cService.insertContract();
-		
-		// 계약상품등록
-//		cService.insertContractGS();
 		logger.info("ClientController selectCliNum");
 		
 		rMap.put("gCliNum", datalisCliNum);
@@ -244,44 +229,8 @@ public class ClientController {
 		return rMap;
 	}
 	
+
 	
-	
-	
-	//거래처 삭제 
-	@RequestMapping(value = "/deleteClient.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String DeleteClient(@RequestParam String cli_num) {
-		logger.info("DeleteClient : {}",cli_num);
-		String n = cService.DeleteClient(cli_num);
-		if(n.length()>0) {
-			logger.info("삭제를 완료하였습니다");
-		}
-		return "redirect:/clientList.do";
-	}
-	
-	
-	
-	//거래처 수정
-	@RequestMapping(value = "/updateClient.do", method=RequestMethod.GET)
-	public String modify(String cli_num, Model model) {
-		List<ClientDto> cVo = cService.DetailClient(cli_num);
-		model.addAttribute("cVo", cVo);
-		return "updateClient";
-	}
-	
-	
-	
-	@RequestMapping(value = "/updateClient.do", method = RequestMethod.POST)
-	public String updateBoard(@RequestParam Map<String, Object> map, HttpSession session,Model model) {
-		Map<String, Object> rMap = new HashMap<String, Object>();
-		rMap.put("cli_num", map.get("cNum"));
-		rMap.put("cli_tel", map.get("ctel"));
-		rMap.put("cli_addr", map.get("caddr"));
-		int n = cService.UpdateClient(rMap);
-		if(n>0) {
-			logger.info("수정에 성공하였습니다");
-		}
-		return "redirect:/clientList.do";
-	}
 	
 
 }

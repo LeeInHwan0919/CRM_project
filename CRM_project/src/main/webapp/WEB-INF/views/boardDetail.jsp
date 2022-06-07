@@ -51,7 +51,7 @@
 function deletboard(seq){
 	console.log(seq) 
 	
-	var data = confirm("삭제하시겠습니까?.");
+	var data = confirm("삭제하시겠습니까?");
 	
 	if(!data){
 		return false;
@@ -79,8 +79,7 @@ $.ajax({
     data : {seq : ${bVo.seq}},
     success : function(data){
     	console.log(data);
-       alert("파일 성공"); 
-//        window.location.href = './boardList.do';
+//        alert("파일 성공"); 
        
     },
     error:function(error){
