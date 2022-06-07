@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +9,15 @@
 </head>
 <body>
 <jsp:useBean id="now" class="java.util.Date" />
-<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" /> --%>
 <div class="container" style="text-align: center;">
 <div style='text-align: left;'>
-<%-- <c:if test="${user == 'SYS_123456'}"> --%>
 <button type="button"class="btn btn-primary" onclick="location.href='./insertPage.do'">새 거래처 등록 </button>
-<%-- </c:if>	 --%>
 </div><br>
+<select id="selectstate" style="float: left;">
+	<option value="진행">진행</option>
+	<option value="대기">대기</option>
+	<option value="종료">종료</option>
+</select>
 <table id="myTable" class="display" style="width:100%">
 		<thead>
 			<tr >
@@ -25,28 +25,22 @@
 				<th style="width:10%">상태</th>
 		        <th style="text-align: center;">거래처명</th>
 		        <th style="text-align: center;">거래처 위치</th>
-		      	<th style="text-align: center;">거래처 전화번호</th>
+		      	<th style="text-align: center; width:10%;">거래처 전화번호</th>
 		        <th style="text-align: center;">거래처 지역</th>
 			</tr>
 		</thead>
 		
-		
-		
 		<tbody>
-<!-- 		<button class="btn btn-default">종료</button> -->
-<!-- 		<button class="btn btn-default">진행</button> -->
 		<c:out value="${today}" />
       <c:forEach var="clists" items="${clists}">
-<%--       	<c:if test="${today > clists.ct_star}"> --%>
       <tr>
 		<td>${clists.cli_num}</td>
 		<td>${clists.status}</td>
-        <td style= 'text-align: center;' >${clists.cli_name}</td>
-        <td style= 'text-align: center;'><a href="./clientDetail.do?cli_num=${clists.cli_num}">${clists.cli_addr}</a></td>
+        <td style= 'text-align: center;'><a href="./clientDetail.do?cli_num=${clists.cli_num}">${clists.cli_name}</a></td>
+        <td style= 'text-align: center;'>${clists.cli_addr}</td>
         <td style="text-align: center;">${clists.cli_tel}</td>
         <td style="text-align: center;">${clists.cli_area}</td>
       </tr>
-<%--          </c:if> --%>
     </c:forEach>
     </tbody>
 </table>
@@ -83,6 +77,15 @@ $(document).ready(function () {
         info: false
     });
 });
+
+
+var data = {
+		"state" : $("#selectstate").val()
+}
+
+console.log(data);
+
+
 </script>
 
 </html>

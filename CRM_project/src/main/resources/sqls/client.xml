@@ -25,6 +25,7 @@ TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-d
     ON c.CTM_CODE = cm.CTM_CODE
      JOIN CLIENT c2 
     ON c2.CLI_NUM = cm.CLI_NUM
+    WHERE c2.CLI_USE = 'Y'
 </select>
 
 
@@ -133,9 +134,33 @@ VALUES(#{contractKey}, #{ctm_code}, 'C01', 0,  #{du_date}, #{ct_start}, #{ct_end
 </insert>
 
 
+<!--상품등록 작업중-->
+<insert id="insertGoods" parameterType="java.util.Map">
+
+<selectKey resultType="int" keyProperty="contractKeys" order="BEFORE">
+    SELECT MAX(CT_CODE) FROM CONTRACT        
+</selectKey>  
+
+INSERT INTO contract_goods(
+	SEQ,
+	G_CODE,
+	G_NAME,
+	G_PRICE,
+	DU_CNT,
+	CT_CODE
+)
+VALUES(
+	CONTRACT_GOODS_SEQ.NEXTVAL,
+	#{g_code},
+	#{g_name},
+	#{g_price},
+	#{du_cnt},
+	#{contractKeys}
+)
+</insert>
 
 
-<!--상품정보 조회 / 사용x-->
+<!--상품정보 조회-->
 <select id="selectGoodsName" resultType="cDto">
 SELECT G_NAME, G_CODE FROM inventory_goods
 </select>

@@ -12,9 +12,7 @@ public class BoardDto {
 	private int s_count   ;
 	private String post_use  ;
 	
-	
 	//파일 업로드
-	
 	private int file_seq   ;
 	private int board_seq  ;
 	private String file_size  ;
@@ -22,7 +20,6 @@ public class BoardDto {
 	private String file_name  ;
 	public BoardDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public BoardDto(int seq, String emp_code, String title, String content, int important, String startdate,
 			String enddate, int s_count, String post_use, int file_seq, int board_seq, String file_size,
@@ -43,6 +40,8 @@ public class BoardDto {
 		this.file_folder = file_folder;
 		this.file_name = file_name;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "BoardDto [seq=" + seq + ", emp_code=" + emp_code + ", title=" + title + ", content=" + content
@@ -50,6 +49,8 @@ public class BoardDto {
 				+ s_count + ", post_use=" + post_use + ", file_seq=" + file_seq + ", board_seq=" + board_seq
 				+ ", file_size=" + file_size + ", file_folder=" + file_folder + ", file_name=" + file_name + "]";
 	}
+	
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -134,9 +135,6 @@ public class BoardDto {
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
 	}
-	
-	
-	
 	
 	
 	

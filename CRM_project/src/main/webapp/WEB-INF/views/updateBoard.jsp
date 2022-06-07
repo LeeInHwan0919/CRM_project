@@ -25,12 +25,11 @@ int strSeq = srMap.getSeq();
 <body>
 <div class="container"> 
               <h3>글 수정</h3>
-<!--               <form action="./updateBoard.do" id="updateform" onsubmit="false; updateform()" method="post"> -->
                  <table class="table table-hover">
                  <tr>
                  <td>번호</td>
                       <td><%=strSeq%></td>
-                        <input type="hidden" id="bSeq" name="bSeq" value="<%=strSeq%>">
+                       <td><input type="hidden" id="bSeq" name="bSeq" value="<%=strSeq%>"></td>
                  </tr>
                  <tr>
                     <td>제목</td>
@@ -45,8 +44,7 @@ int strSeq = srMap.getSeq();
               <input class="btn btn-default" id="updateBtn" type="button" value="수정하기">
               <input class="btn btn-default"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
               </div>
-<!--               </form> -->
-          </div>
+</div>
    </body>
 <script type="text/javascript">
 
@@ -59,7 +57,28 @@ int strSeq = srMap.getSeq();
    document.getElementById("title").value = title;
    document.getElementById("content").value = content;
 
+   
+   
    $("#updateBtn").click(function(){
+		
+	var data = confirm("수정하시겠습니까?");
+	
+	if(!data){
+		return false;
+	}
+	
+	const pattern = /\s/g;
+	
+	if($("#title").val().match(pattern)){
+		alert("제목은 필수값 입니다. 입력해주세요");
+		return false;
+	}
+	
+	if($("#content").val().match(pattern)){
+		alert("내용은 필수값 입니다. 입력해주세요");
+		return false;
+	}
+	
 	   
 	   //valide
        // json 형식으로 데이터 set
@@ -68,15 +87,16 @@ int strSeq = srMap.getSeq();
                , content   : $("#content").val()
                , bSeq       : $("#bSeq").val()
        }
-       // ajax 통신
+	   
        $.ajax({
-           type : "POST",            // HTTP method type(GET, POST) 형식이다.
-           url : "./updateBoard.do",      // 컨트롤러에서 대기중인 URL 주소이다.
-           data : params,            // Json 형식의 데이터이다.
-           success : function(data){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+           type : "POST",          
+           url : "./updateBoard.do",    
+           data : params,           
+           success : function(data){ 
+        	   alert("수정 성공"); 
         	   window.location.href = './boardList.do';
            },
-           error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+           error : function(XMLHttpRequest, textStatus, errorThrown){ 
                alert("통신 실패.")
            }
        });

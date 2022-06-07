@@ -8,7 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="UTF-8">
 <title>새 게시글 입력 폼</title>
-
 <style>
     .dragAndDropDiv {
         border: 2px dashed #92AAB0;
@@ -111,11 +110,13 @@ function insert(){
 
 function Btnsave() {
 	
+	
 	var data = confirm("새 공지사항을 입력 하시겠습니까?");
 	
 	if(!data){
 		return false;
 	}
+	
 	
 	var datalist = {
 			"startdate" : $("#datepicker").val(),
@@ -123,7 +124,7 @@ function Btnsave() {
 			"title" : $("#title").val(),
 			"content" : CKEDITOR.instances.content.getData() //$("#content").val()
 	}
-	
+
 	
 	$.ajax({
 	    type:"POST",
@@ -160,28 +161,20 @@ $.ajax({
 
 
 
-// function editorAction() {
-	
-// 	var title = document.getElementById("title");
-// 	var content = document.getElementById("content");
-// 	if(title.value == "" ) {
-// 		swal("필수 사항","제목을 입력하여 주세요");
-// 	} else if(content.value == ""){
-// 		swal("필수 사항","내용을 입력하여 주세요");
-// 	} else {
-// 		var str = content.value;
-// 		console.log(content.value);
-// 		isShow = false;
-// 		swal("등록 완료","해당 공지사항을 등록 완료하였습니다.");
-// 		form.submit();
-// 	}
-// 	return false;
-// }
 
+
+$(function() {
+	$( "#datepicker" ).datepicker({ minDate: 0});
+	});
+
+$(function() {
+	$( "#datepicker2" ).datepicker({ minDate: 0});
+	});
+	
 $( function() {
 	$("#datepicker").datepicker();
     $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
-});
+})
 
 $( function() {
 	$("#datepicker2").datepicker();
@@ -189,6 +182,10 @@ $( function() {
 });
 
 
+
+
+
+//파일 업로드
 $(document).ready(function(){
     var objDragAndDrop = $(".dragAndDropDiv");
     
@@ -336,8 +333,5 @@ $(document).ready(function(){
 });
 </script>
 
-
-
-<!-- </script>   -->
 <%@include file="./footer.jsp" %>
 </html>

@@ -30,13 +30,13 @@
 		        		<input type="text" name="cliaddr" id="cliaddr">
 		        	</td>
 		        </tr>
-		            <tr>
+		        <tr>
 		        		<td>거래처 위치</td>
 		        	<td>
 		        		<select id="selectarea">
-		        		<option value="서울">서울</option>
-		        		<option value="부산">부산</option>
-		        		<option value="춘천">춘천</option>
+			        		<option value="서울">서울</option>
+			        		<option value="부산">부산</option>
+			        		<option value="춘천">춘천</option>
 		        		</select>
 		        	</td>
 		        </tr>
@@ -60,20 +60,10 @@
 							<input type="text" name="enddate" id="datepicker2" readonly="readonly">
 		        	</td>
 		        </tr>
-<!-- 		         <tr> -->
-<!-- 		        		<td>납품수량</td> -->
-<!-- 		        	<td> -->
-<!-- 		        		<input type="text" name="title" id="title"> -->
-<!-- 		        	</td> -->
-<!-- 		        </tr> -->
-		        
-<!-- 		         <tr> -->
-<!-- 		        		<td>원두</td> -->
-<!-- 		        	<td> -->
-<!-- 		        		<select name="model" id="model"> -->
-<!-- 		        		</select> -->
-<!-- 		        	</td> -->
-<!-- 		        </tr> -->
+		        </table>
+		        <table class="table table-hover" id="cofficeTable">
+		        <tbody>
+		        </tbody>
 		        </table>
 		        	<div style="text-align: center;">
 		        <input class="btn btn-default"  type="button" value="거래처 등록" onclick="insertBtn()">
@@ -127,6 +117,33 @@ $.ajax({
 	
 });
 
+
+$.ajax({
+    type:"POST",
+    url:"./selectGoodsName.do",
+    success : function(data){
+       console.log(data);
+       let htmlData  = "";
+       for(i=0;i<data.gCode.length;i++){
+    	   
+    	   htmlData += "<tr>";
+    	   htmlData += "<td>"+ data.gName[i] +"</td>";
+    	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
+    	   htmlData += "<input type='hidden' name='cofficeCode' id='cofficeCode"+i+"' value="+data.gCode[i]+">";
+    	   htmlData += "<td>납품 수량 : <input type='text' name='cofficeCount' id='cofficeCount"+i+"'></td>";
+    	   htmlData += "<td>금액 : <input type='text' name='cofficePrice' id='cofficePrice"+i+"'></td>";
+    	   htmlData += "</tr>";
+       }
+       
+       $("#cofficeTable").append(htmlData);
+    
+    },
+    error:function(error){
+       console.log("error");
+    }
+});
+
+
 function insertBtn(){
 	var strid = $("#cliid").val();
 	if(strid == null || strid == " "){
@@ -168,7 +185,6 @@ function insertBtn(){
 				"du_date"  : du_date
  		}
 		console.log(data);
-		//ajax call
 		
 		 $.ajax({
 		     type:"POST",
@@ -176,9 +192,12 @@ function insertBtn(){
 		     data : data,
 		     success : function(data){
 		     	console.log(data)
-		        alert("성공"); 
-		        window.location.href = './clientList.do';
-		     
+		     	let flag = cofficeInsert();
+		     	
+		     	if(flag){
+		        	alert("성공"); 
+		        	window.location.href = './clientList.do';
+		     	}
 		     },
 		     error:function(error){
 		        console.log("error");
@@ -189,6 +208,52 @@ function insertBtn(){
 		return false;
 	}
 }
+
+function cofficeInsert(){
+	
+	var cofficeCountList = [];
+	var cofficePriceList = [];
+	var cofficeNameList = [];
+	var cofficeCodeList = [];
+	
+	for(var i=0;i<23;i++){
+	  cofficeCountList.push($("#cofficeCount"+i).val());
+	  cofficePriceList.push($("#cofficePrice"+i).val());
+	  cofficeNameList.push($("#cofficeName"+i).val());
+	  cofficeCodeList.push($("#cofficeCode"+i).val());
+	}
+	
+	var dataList = {
+			"cofficeCountList": cofficeCountList,
+			"cofficePriceList": cofficePriceList,
+			"cofficeNameList": cofficeNameList,
+			"cofficeCodeList": cofficeCodeList,
+			"size" : 23
+	}
+	console.log(dataList);
+	//insertGoods
+	
+	$.ajax({
+	     type:"POST",
+	     url:"./insertGoods.do",
+	     data : dataList,
+	     success : function(data){
+	     	console.log(data)
+	     	cofficeInsert();
+	     	
+	        alert("성공1"); 
+	        return true;
+	     
+	     },
+	     error:function(error){
+	        console.log("error");
+	     }
+	 });
+	
+}
+
+
+
 
 
 // $.ajax({

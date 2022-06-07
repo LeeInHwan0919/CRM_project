@@ -86,5 +86,11 @@ public class Client_DaoImpl implements Client_IDao{
 		return cnt;
 	}
 
+	@Override
+	public int insertGoods(Map<String, Object> map) {
+		int cnt= sqlSession.insert(NS+"insertGoods",map);
+		return cnt;
+	}
+
 
 }

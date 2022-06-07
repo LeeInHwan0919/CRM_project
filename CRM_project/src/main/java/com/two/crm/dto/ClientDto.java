@@ -20,10 +20,11 @@ public class ClientDto {
 	private String ct_start;
 	private String ct_end;
 	private String ctm_code;
+	
 	public ClientDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
 	public ClientDto(String cli_num, String emp_code, String cli_name, String cli_addr, String cli_tel, String cli_area,
 			String cli_use, String rate, String g_name, String g_code, String status, String ct_date_year_sum,
 			String ct_start, String ct_end, String ctm_code) {
@@ -51,6 +52,7 @@ public class ClientDto {
 				+ rate + ", g_name=" + g_name + ", g_code=" + g_code + ", status=" + status + ", ct_date_year_sum="
 				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code + "]";
 	}
+	
 	public String getCli_num() {
 		return cli_num;
 	}

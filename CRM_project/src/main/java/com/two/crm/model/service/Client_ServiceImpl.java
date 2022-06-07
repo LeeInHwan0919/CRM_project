@@ -111,4 +111,12 @@ public class Client_ServiceImpl implements Client_IService{
 	
 	}
 
+
+	@Override
+	public int insertGoods(Map<String, Object> map) {
+		logger.info("UpdateClient query: insertGoods ");
+		return dao.insertGoods(map);
+
+	}
+
 }

@@ -154,11 +154,6 @@ public class BoardController {
 	}
 	
 	
-//	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.GET)
-//	public String insertBoard() {
-//		logger.info("BoardController insertForm");
-//		return "insertBoard";
-//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/selectFileInfo.do", method = RequestMethod.POST)
@@ -174,9 +169,6 @@ public class BoardController {
 		rMap.put("data", Flist);
 		return rMap;
 	}
-	
-	
-	
 	
 
 	@ResponseBody
@@ -223,15 +215,7 @@ public class BoardController {
 		System.out.println(dto.getSeq());
 		
 		bService.deleteBoard(dto.getSeq());
-			/*
-			 * String seqKey = request.getParameter("seq"); if(seqKey != null) { try {
-			 * System.out.println(seqKey.trim()); // print to verify int idInt =
-			 * Integer.parseInt(seqKey.trim());
-			 * 
-			 * logger.info("deleteBoard : {}",idInt); int n = bService.deleteBoard(idInt);
-			 * if(n>0) { logger.info("삭제를 완료하였습니다"); } } catch(NumberFormatException nbe) {
-			 * nbe.printStackTrace(); } }
-			 */
+		
 	      return result;
 	   }
 	
@@ -245,6 +229,8 @@ public class BoardController {
     }
 	
 	
+	
+	//파일 업로드
 	@PostMapping(value = "/fileUpload.do") //ajax에서 호출하는 부분
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest multipartRequest,@RequestParam int seq) { //Multipart로 받는다.

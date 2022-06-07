@@ -9,7 +9,6 @@
 </head>
 <body>
 <div class="container">
-
 <table class="table table-bordered" style="text-align: center;"> 
 	<thead>
 			<tr>
@@ -23,12 +22,11 @@
 		        <th>종료날짜</th>
 			</tr>
 		</thead>
-
-<%-- 			${cVo} --%>
 	
 		<tbody>
 			<c:forEach var="cVo" items="${cVo}" begin="0" end="0"> 
 				<td>${cVo.cli_num}</td>
+				<input type="hidden" id="cli_num" value="${cVo.cli_num}" />
 				<td>${cVo.emp_code}</td>
 				<td>${cVo.cli_name}</td>
  				<td>${cVo.cli_addr}</td>
@@ -38,9 +36,7 @@
  				<td>${cVo.ct_end}</td>
 			</c:forEach>
 		</tbody>		
-			
-<%-- 	<button class="btn btn-default" onclick="location.href='./deleteClient.do?cli_num=${cVo.cli_num}'">삭제</button> --%>
-	</table>
+</table>			
 <table class="table table-bordered" style="text-align: center;"> 
 	<thead>
 			<tr>
@@ -61,35 +57,34 @@
  			</tr>
 			</c:forEach>
 		</tbody>
-</table>	
-		<button class="btn btn-danger" onclick="deletClient()"style="float: right;">삭제</button>
-	</div>
-	</body>
+		<button  class="btn btn-default" onclick="deletClient()" >삭제</button>
+</table>
+
+</div>
+</body>
 	<script type="text/javascript">
-	function deletClient(cli_num){
-		console.log(cli_num) 
-		
-		var data = confirm("삭제하시겠습니까?");
-		
-		if(!data){
-			return false;
+		function deletClient(){
+			
+			let data = confirm("삭제하시겠습니까?");
+			 
+			if(!data){
+				return false;
+			}
+			
+			let cli_num = $("#cli_num").val();
+			
+			$.ajax({
+		         type:"POST",
+		         url:"./deleteClient.do",
+		         data : {cli_num : cli_num},
+		         success : function(){
+		            alert("삭제 성공"); 
+		            window.location.href = './clientList.do';
+		         },
+		         error:function(error){
+		            console.log("error");
+		         }
+		    });
 		}
-		
-	    $.ajax({
-	         type:"POST",
-	         url:"./deleteClient.do",
-	         data : {cli_num : cli_num},
-	         success : function(){
-	            alert("삭제 성공"); 
-	            window.location.href = './clientList.do';
-	            
-	         },
-	         error:function(error){
-	            console.log("error");
-	         }
-	    });
-	 }
-	
-	
 	</script>
 </html>
