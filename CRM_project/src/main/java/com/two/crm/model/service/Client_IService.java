@@ -12,5 +12,13 @@ public interface Client_IService {
 //	public ClientDto DetailClient(int cli_num);
 	public String DeleteClient(String cli_num);
 	public int UpdateClient(Map<String, Object> map);
+	public int  insertClient(Map<String, Object> map);
+	public void insertContractMGT();
+	public int insertContract(Map<String, Object> rMap2);
+	public void insertContractGS();
+	public  List<ClientDto> selectGoodsName();
+	public List<ClientDto> selectCliNum();
+	public List<ClientDto> selectConractCode();
+	public int insertMGT(Map<String, Object> map);
 	
 }

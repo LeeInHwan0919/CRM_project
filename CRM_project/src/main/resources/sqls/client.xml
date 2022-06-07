@@ -5,13 +5,26 @@
 
 <!--거래처 전체조회-->
 <select id="AllClient"  resultType="cDto">
-SELECT CLI_NUM, 
-	EMP_CODE, 
-	CLI_NAME, 
-	CLI_ADDR, 
-	CLI_TEL, 
-	CLI_AREA
-FROM CLIENT
+SELECT c2.CLI_NUM, 
+	c2.EMP_CODE, 
+	c2.CLI_NAME, 
+	c2.CLI_ADDR, 
+	c2.CLI_TEL,
+	c2.CLI_AREA,
+	c.CT_START,
+	c.CT_END,
+<![CDATA[CASE WHEN TO_DATE(CT_START,'YYYY-MM-DD') > TO_DATE(SYSDATE,'YYYY-MM-DD')]]>
+<![CDATA[       THEN '대기']]>
+<![CDATA[     WHEN TO_DATE(CT_END,'YYYY-MM-DD') < TO_DATE(SYSDATE,'YYYY-MM-DD')]]>
+<![CDATA[       THEN '종료']]>
+            ELSE '진행'
+       END AS STATUS,
+TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM
+  FROM CONTRACT c 
+    JOIN CONTRACT_MANAGEMENT cm 
+    ON c.CTM_CODE = cm.CTM_CODE
+     JOIN CLIENT c2 
+    ON c2.CLI_NUM = cm.CLI_NUM
 </select>
 
 
@@ -65,7 +78,73 @@ CLI_ADDR=#{cli_addr}
 WHERE CLI_NUM =#{cli_num}
 </update>
 
+<!--거래처 등록-->
+<insert id="insertClient" parameterType="java.util.Map">
+INSERT INTO CLIENT
+(	CLI_NUM , 
+	EMP_CODE , 
+	CLI_NAME , 
+	CLI_ADDR , 
+	CLI_TEL  ,
+	CLI_AREA ,
+	CLI_USE
+)VALUES(
+	#{cli_num} , 
+	#{emp_code} , 
+	#{cli_name} , 
+	#{cli_addr} , 
+	#{cli_tel} ,
+	#{cli_area} ,
+	'Y'
+)
+</insert>
 
+<!--계약 관리 코드 조회-->
+<select id="selectConractCode" resultType="cDto">
+SELECT MAX(CTM_CODE) AS CTM_CODE
+FROM CONTRACT_MANAGEMENT
+</select>
+
+
+<!--계약 관리 등록-->
+<insert id="insertMGT" parameterType="java.util.Map">
+INSERT INTO CONTRACT_MANAGEMENT(
+	CTM_CODE,
+	CLI_NUM
+)
+VALUES(
+	#{ctm_code},
+	#{cli_num}
+)
+</insert>
+
+
+<!-- 계약 등록 --> 
+<insert id="insertContract" parameterType="java.util.Map">
+
+<selectKey resultType="int" keyProperty="contractKey" order="BEFORE">
+    SELECT MAX(CT_CODE)+1 FROM CONTRACT        
+</selectKey>    
+    
+INSERT INTO CONTRACT
+(CT_CODE, CTM_CODE, DCODE_CLIENT, DU_PRICE, DU_DATE, CT_START, CT_END)
+VALUES(#{contractKey}, #{ctm_code}, 'C01', 0,  #{du_date}, #{ct_start}, #{ct_end})
+
+</insert>
+
+
+
+
+<!--상품정보 조회 / 사용x-->
+<select id="selectGoodsName" resultType="cDto">
+SELECT G_NAME, G_CODE FROM inventory_goods
+</select>
+
+<!--거래처 사업자 번호 조회-->
+<select id="selectCliNum" resultType="cDto">
+SELECT CLI_NUM
+FROM CLIENT
+</select>
 
 
 

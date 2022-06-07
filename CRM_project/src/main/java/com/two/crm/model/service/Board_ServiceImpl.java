@@ -65,5 +65,23 @@ public class Board_ServiceImpl implements Board_IService{
 		return dao.countBoard(map);
 	}
 
+	@Override
+	public int selectSEQ() {
+		logger.info("Board_ServiceImpl query: selectSEQ ");
+		return dao.selectSEQ();
+	}
+
+	@Override
+	public int insertFile(Map<String, Object> map) {
+		logger.info("Board_ServiceImpl query: insertFile ");
+		return dao.insertFile(map);
+	}
+
+	@Override
+	public List<BoardDto> selectFileInfo(int seq) {
+		logger.info("Board_ServiceImpl query: selectFileInfo ");
+		return dao.selectFileInfo(seq);
+	}
+
 
 }

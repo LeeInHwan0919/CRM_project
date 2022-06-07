@@ -16,18 +16,17 @@ public class ClientDto {
 	private String g_code;
 	private String status;
 	private String ct_date_year_sum;
+//	private String du_date;
 	private String ct_start;
 	private String ct_end;
-	
-	
+	private String ctm_code;
 	public ClientDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	
 	public ClientDto(String cli_num, String emp_code, String cli_name, String cli_addr, String cli_tel, String cli_area,
 			String cli_use, String rate, String g_name, String g_code, String status, String ct_date_year_sum,
-			String ct_start, String ct_end) {
+			String ct_start, String ct_end, String ctm_code) {
 		super();
 		this.cli_num = cli_num;
 		this.emp_code = emp_code;
@@ -43,15 +42,14 @@ public class ClientDto {
 		this.ct_date_year_sum = ct_date_year_sum;
 		this.ct_start = ct_start;
 		this.ct_end = ct_end;
+		this.ctm_code = ctm_code;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "ClientDto [cli_num=" + cli_num + ", emp_code=" + emp_code + ", cli_name=" + cli_name + ", cli_addr="
 				+ cli_addr + ", cli_tel=" + cli_tel + ", cli_area=" + cli_area + ", cli_use=" + cli_use + ", rate="
 				+ rate + ", g_name=" + g_name + ", g_code=" + g_code + ", status=" + status + ", ct_date_year_sum="
-				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + "]";
+				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code + "]";
 	}
 	public String getCli_num() {
 		return cli_num;
@@ -137,8 +135,12 @@ public class ClientDto {
 	public void setCt_end(String ct_end) {
 		this.ct_end = ct_end;
 	}
-	
-	
+	public String getCtm_code() {
+		return ctm_code;
+	}
+	public void setCtm_code(String ctm_code) {
+		this.ctm_code = ctm_code;
+	}
 	
 	
 	

@@ -19,4 +19,7 @@ public interface Board_IService {
 		public int updateBoard(Map<String, Object> map);
 		public int deleteBoard(int seq);
 		public int countBoard (Map<String, Object> map);
+		public int selectSEQ();
+		public int insertFile(Map<String, Object> map);
+		public List<BoardDto> selectFileInfo(int seq);
 }

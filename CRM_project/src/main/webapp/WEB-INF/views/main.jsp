@@ -9,7 +9,7 @@
 <title>로그인 성공!</title>
 
 </head>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<%@include file="./header.jsp" %>
 <body>
 환영합니다!<br>
 ${user}

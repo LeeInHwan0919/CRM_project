@@ -57,7 +57,26 @@ public class Board_DaoImpl implements Board_IDao{
 			int cnt= sqlSession.insert(NS+"countBoard",map);
 			return cnt;
 		}
-	
+
+
+		@Override
+		public int selectSEQ() {
+			int cnt= sqlSession.selectOne(NS+"selectSEQ");
+			return cnt;
+		}
+
+
+		@Override
+		public int insertFile(Map<String, Object> map) {
+			int cnt= sqlSession.insert(NS+"insertFile",map);
+			return cnt;
+		}
+
+
+		@Override
+		public List<BoardDto> selectFileInfo(int seq) {
+			return sqlSession.selectList(NS+"selectFileInfo",seq);
+		}
 	
 
 }
