@@ -23,11 +23,11 @@
 	<table id="myTable" class="display" style="width:100%; font-size:120%;">
 		<thead>
 			<tr>
-			<th style='text-align: center;'><strong>번호</strong></th>
-		        <th style='text-align: center;'>제목</th>
-		        <th style='text-align: center;'>작성자</th>
-		      	<th style='text-align: center;'>등록일</th>
-		        <th style='text-align: center;'>조회</th>
+			<th style="text-align: center;"><strong>번호</strong></th>
+		        <th style="text-align: center;">제목</th>
+		        <th style="text-align: center;">작성자</th>
+		      	<th style="text-align: center;">등록일</th>
+		        <th style="text-align: center;">조회</th>
 			</tr>
 		</thead>
 		

@@ -1,5 +1,6 @@
 package com.two.crm.ctrl;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.two.crm.dto.BoardDto;
+import com.two.crm.dto.ClientDto;
+import com.two.crm.dto.ContractDto;
 import com.two.crm.dto.UserDto;
+import com.two.crm.model.service.Board_IService;
+import com.two.crm.model.service.Graph_IService;
 import com.two.crm.model.service.Login_IService;
 import com.two.crm.model.service.SMS_Service;
 
@@ -26,9 +32,15 @@ public class LoginController {
 	@Autowired
 	Login_IService service;
 	
+	@Autowired
+	private Board_IService bService;
+	
 	
 	@Autowired
 	private SMS_Service sms_service;
+	
+	@Autowired
+	private Graph_IService g_service;
 	
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
@@ -60,11 +72,24 @@ public class LoginController {
 	public String maingo(Authentication user, Model model ) {
 		UserDetails userdto = (UserDetails) user.getPrincipal();
 		model.addAttribute("user", userdto.toString());
-		System.out.println(":::::::::::::::::::::::: " + userdto.toString());
+		System.out.println("::::::::::::::::::::::::" + userdto.toString());
 		System.out.println("비밀번호 : " + userdto.getPassword());
+		
+		List<BoardDto> lists = bService.AllBoard();
+		model.addAttribute("lists", lists);
+		
+		
 		return "main";
 	}
 
+	//거래처 차트 
+	@RequestMapping(value = "/ClientChart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Integer> chart() {
+		List<Integer> list = g_service.ClientGraph();
+		System.out.println("사이즈"+list.size());
+		return list;
+	}
 
 	//회원가입으로 가는 매핑
 	@RequestMapping(value = "/signUpgo.do", method = RequestMethod.GET)

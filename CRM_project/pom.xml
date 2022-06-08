@@ -246,12 +246,27 @@
 			<version>1.1.1</version>
 		</dependency>
 		
-		<!-- 공공데이터 활용 사업자 번호 확인에 사용 될 라이브러리 -->
+		
+		<!-- itext core -->
 		<dependency>
-		    <groupId>kr.co.linkhub</groupId>
-		    <artifactId>popbill-sdk</artifactId>
-		    <version>1.54.0</version>
+    		<groupId>com.itextpdf</groupId>
+    		<artifactId>itextpdf</artifactId>
+    		<version>5.5.13</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>html2pdf</artifactId>
+		    <version>4.0.2</version>
+		</dependency>
+	
+		
+		<!-- poi  -->
+    	<dependency>
+	      <groupId>org.apache.poi</groupId>
+	      <artifactId>poi-ooxml</artifactId>
+	      <version>4.1.2</version>
+	    </dependency>			
 
 	</dependencies>
 	<build>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Users_DaoImpl">
+
+
+<!--사원 전체조회-->
+<select id="AllUsers"  resultType="UDto">
+SELECT u.EMP_NAME,
+u.EMP_AUTH ,
+u.EMP_CODE, u.EMP_GENDER, u.EMP_USE, u.EMP_TEL
+FROM USER_INFO u
+LEFT JOIN LOCATION l 
+ON u.AREA_CODE= l.AREA_CODE
+</select>
+
+
+</mapper>

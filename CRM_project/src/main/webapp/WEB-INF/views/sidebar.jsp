@@ -18,43 +18,43 @@
   <nav class="side-bar__Top">
     <ul>
       <li>
-         <a href="./The_Entire.jsp">
+         <a href="./boardList.do">
           <span>
             <i class="fas fa-list"></i>
           </span>
-          <span>The_Entire</span>
+          <span>공지 게시판</span>
         </a>
       </li>
       <li>
-        <a href="./Best.jsp">
+        <a href="./GoodsList.do">
           <span>
            <i class="fa-solid fa-trophy"></i>
           </span>
-          <span>best</span>
+          <span>재고관리</span>
         </a>
       </li>
       <li>
-         <a href="./New.jsp">
+         <a href="./clientList.do">
           <span>
               <i class="fa-solid fa-magnifying-glass-plus"></i>
           </span>
-          <span>new</span>
+          <span>거래처관리</span>
         </a>
       </li>
       <li>
-          <a href="./list.jsp">
+          <a href="./UsersList.do">
           <span>
             <i class="fa-solid fa-comment-dots"></i>
           </span>
-          <span>curious</span>
+          <span>계정관리</span>
         </a>
       </li>
       <li>
-        <a href="./Main.jsp">
+        <a href="./result.do">
           <span>
             <i class="fa-solid fa-house"></i>
           </span>
-          <span>Home</span>
+          <span>메인화면 이동</span>
         </a>
       </li>
     </ul>
