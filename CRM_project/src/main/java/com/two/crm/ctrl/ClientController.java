@@ -136,9 +136,13 @@ public class ClientController {
 		Map<String, Object> rMaps = new HashMap<String, Object>();
 		
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<Integer> countList = (ArrayList<Integer>) map.get("cofficeCountList");
+		@SuppressWarnings("unchecked")
 		ArrayList<Integer> priceList = (ArrayList<Integer>) map.get("cofficePriceList");
+		@SuppressWarnings("unchecked")
 		ArrayList<String> nameList = (ArrayList<String>) map.get("cofficeNameList");
+		@SuppressWarnings("unchecked")
 		ArrayList<String> codeList = (ArrayList<String>) map.get("cofficeCodeList");
 		
 		for(int i=0;i<22;i++) {

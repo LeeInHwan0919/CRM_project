@@ -61,7 +61,6 @@ public class Client_ServiceImpl implements Client_IService{
 
 	@Override
 	public void insertContractMGT() {
-		// TODO Auto-generated method stub
 		
 	}
 

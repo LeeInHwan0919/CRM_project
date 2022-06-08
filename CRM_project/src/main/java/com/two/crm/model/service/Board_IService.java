@@ -3,7 +3,6 @@ package com.two.crm.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
 
 import com.two.crm.dto.BoardDto;
 
