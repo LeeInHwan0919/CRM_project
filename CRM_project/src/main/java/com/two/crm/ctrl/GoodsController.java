@@ -1,12 +1,7 @@
 package com.two.crm.ctrl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
+
 
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,14 +12,11 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.List;
+
+
+
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +28,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
 import com.two.crm.dto.GoodsDto;
 import com.two.crm.model.service.Goods_IService;
 
@@ -60,10 +53,6 @@ public class GoodsController {
 		return "goodsList";
 	}
 
-	
-	
-	
-	
 	
 //	재고관리 pdf , excel 다운로드
 	
@@ -218,5 +207,6 @@ public class GoodsController {
 			doc.open();
 		}			
 	}
+
 
 }
