@@ -47,7 +47,7 @@ public class BoardController {
 		List<BoardDto> lists = bService.AllBoard();
 		model.addAttribute("lists", lists);
 		
-//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서 비교
+//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서   비교
 		model.addAttribute("user", user.getName());
 		return "boardList";
 	}
