@@ -25,8 +25,20 @@ public class Graph_ServiceImpl implements Graph_IService{
 
 	@Override
 	public List<Integer> ClientGraph(){
-		logger.info("Chart ServiceImpl");
+		logger.info("Chart ServiceImpl ClientGraph");
 		return dao.ClientGraph();
+	}
+
+	@Override
+	public List<Integer> GoodsGraph() {
+		logger.info("Chart ServiceImpl GoodsGraph");
+		return dao.GoodsGraph();
+	}
+
+	@Override
+	public List<Integer> LocationGraph() {
+		logger.info("Chart ServiceImpl LocationGraph");
+		return dao.LocationGraph();
 	}
 
 }

@@ -23,6 +23,11 @@ public class Users_DaoImpl implements Users_IDao{
 		return sqlSession.selectList(NS+"AllUsers");
 	}
 
+	@Override
+	public List<UserDto> UserDetail(String emp_code) {
+		return sqlSession.selectList(NS+"UserDetail",emp_code);
+	}
+
 	
 
 

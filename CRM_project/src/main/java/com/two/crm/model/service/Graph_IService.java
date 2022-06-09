@@ -9,4 +9,7 @@ public interface Graph_IService {
 	
 	public List<Integer> ClientGraph();
 	
+	public List<Integer> GoodsGraph();
+	
+	public List<Integer> LocationGraph();
 }

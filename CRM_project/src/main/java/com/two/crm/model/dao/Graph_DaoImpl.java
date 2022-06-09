@@ -25,6 +25,20 @@ public class Graph_DaoImpl implements Graph_IDao{
 		return sqlSession.selectList(NS+"ClientGraph");
 	}
 
+	@Override
+	public List<Integer> GoodsGraph() {
+		List<Integer> list = sqlSession.selectList(NS+"GoodsGraph");
+		System.out.println(list);
+		return sqlSession.selectList(NS+"GoodsGraph");
+	}
+
+	@Override
+	public List<Integer> LocationGraph() {
+		List<Integer> list = sqlSession.selectList(NS+"LocationGraph");
+		System.out.println(list);
+		return sqlSession.selectList(NS+"LocationGraph");
+	}
+
 	
 
 

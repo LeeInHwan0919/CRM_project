@@ -28,4 +28,10 @@ public class Users_ServiceImpl implements Users_IService{
 		return dao.AllUsers();
 	}
 
+	@Override
+	public List<UserDto> UserDetail(String emp_code) {
+		logger.info("UserDetail");
+		return dao.UserDetail(emp_code);
+	}
+
 }
