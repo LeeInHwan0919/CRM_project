@@ -1,6 +1,5 @@
 package com.two.crm.dto;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class UserDto {
 

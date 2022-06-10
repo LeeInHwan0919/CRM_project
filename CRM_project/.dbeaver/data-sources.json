@@ -11,7 +11,7 @@
 				"host": "localhost",
 				"port": "1521",
 				"database": "ORCL",
-				"url": "jdbc:oracle:thin:@crmdb_medium?TNS_ADMIN=C:\\\\Wallet_crmdb",
+				"url": "jdbc:oracle:thin:@(description= (retry_count=15)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gca183d5fcac879_crm_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)(ssl_server_cert_dn=\"CN=adb.ap-seoul-1.oraclecloud.com, OU=Oracle ADB SEOUL, O=Oracle Corporation, L=Redwood City, ST=California, C=US\")))",
 				"home": "C:\\app\\User\\product\\21c\\dbhomeXE",
 				"type": "dev",
 				"provider-properties": {

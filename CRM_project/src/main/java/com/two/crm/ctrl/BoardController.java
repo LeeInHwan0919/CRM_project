@@ -28,10 +28,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.two.crm.dto.BoardDto;
 import com.two.crm.model.service.Board_IService;
 
-
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class BoardController {
 	

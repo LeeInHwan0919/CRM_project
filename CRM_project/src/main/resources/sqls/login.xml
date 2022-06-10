@@ -11,8 +11,8 @@
 
 <insert id="signUp" parameterType="UDto">
 INSERT INTO USER_INFO
-(EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE, EMP_IMG,EMP_AUTH)
-VALUES(#{emp_code}, NULL, #{emp_name}, #{emp_pw},'남자', 'Y', EMPTY_BLOB(),'SYSTEM')
+(EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE, EMP_IMG, EMP_AUTH, EMP_TEL)
+VALUES('SYS_12345', NULL, '이인환', #{emp_pw}, '남자', 'Y', null, 'SYSTEM', '01033097483')
 </insert>
 
 

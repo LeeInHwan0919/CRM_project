@@ -118,10 +118,9 @@ public class LoginController {
 
 	// 회원가입 성공 매핑
 	@RequestMapping(value = "/signUpSc.do", method = RequestMethod.POST)
-	public String maingo(UserDto dto, Model model) {
+	public void maingo(UserDto dto, Model model) {
 		System.out.println("회원가입 정보"+dto.toString());
 		service.signUp(dto);
-		return "login";
 	}
 	
 	//관리자 페이지
