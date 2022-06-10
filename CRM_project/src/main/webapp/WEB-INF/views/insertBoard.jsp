@@ -78,7 +78,6 @@
 </head>
 <%@include file="./header.jsp" %>
 <body>
-<!-- style='text-align: center;' -->
 		<div class="container" >
 				제목: <input type="text" id="title" name="title" class="form-control"><br>
 				<div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
@@ -101,6 +100,10 @@ CKEDITOR.replace( 'content', {
     uiColor: '#9AB8F3',
 
 });
+
+
+
+
 function insert(){
 	var data = document.getElementById("inputContent").value;
 	console.log(data);
@@ -108,10 +111,12 @@ function insert(){
 	CKEDITOR.instances.content.setData(data); 
 }
 
+	
 function Btnsave() {
 	
 	
 	var data = confirm("새 공지사항을 입력 하시겠습니까?");
+	
 	
 	if(!data){
 		return false;
@@ -123,6 +128,10 @@ function Btnsave() {
 			"enddate" : $("#datepicker2").val(),
 			"title" : $("#title").val(),
 			"content" : CKEDITOR.instances.content.getData() //$("#content").val()
+	}
+	
+	if(title == null || title == ""){
+		alert("제목 입력은 필수 값 입니다. 입력하여 주세요.");
 	}
 
 	
@@ -158,6 +167,8 @@ $.ajax({
        console.log("error");
     }
 });
+
+
 
 
 

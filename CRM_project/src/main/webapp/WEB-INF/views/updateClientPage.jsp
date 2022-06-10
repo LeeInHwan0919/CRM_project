@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.two.crm.dto.ClientDto" %>
-<%
-ClientDto srMap = (ClientDto) request.getAttribute("cVo");
-String cli_num = srMap.getCli_num();
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +13,7 @@ String cli_num = srMap.getCli_num();
                  <table class="table table-hover">
                  <tr>
                     <td>사업자 번호</td>
-                      <td><%= cli_num %><input class="form-control" type="text" id="title" name="title"/></td>
+                      <td><input class="form-control" type="text" id="title" name="title"/></td>
                  </tr>
                  <tr>
                     <td>거래처명</td>

@@ -33,11 +33,12 @@
 		        <tr>
 		        		<td>거래처 위치</td>
 		        	<td>
-		        		<select id="selectarea">
-			        		<option value="서울">서울</option>
-			        		<option value="부산">부산</option>
+		        	<select id="selectarea">
+			        		<option value="서울">대구</option>
+			        		<option value="서울">부산</option>
+			        		<option value="부산">서울</option>
 			        		<option value="춘천">춘천</option>
-		        		</select>
+		        	  </select>
 		        	</td>
 		        </tr>
 		         <tr>
@@ -49,7 +50,6 @@
 		         <tr>
 		        		<td>계약 시작일자</td>
 		        	<td>
-<!-- 		        		<input type="text" name="title" id="title"> -->
 							<input type="text" name="startdate" id="datepicker" readonly="readonly">
 		        	</td>
 		        </tr>
@@ -73,10 +73,19 @@
 	</body>
 </body>
 <script type="text/javascript">
+
+$(function() {
+	$( "#datepicker" ).datepicker({ minDate: 0});
+	});
+
+$(function() {
+	$( "#datepicker2" ).datepicker({ minDate: 0});
+	});
+	
 $( function() {
 	$("#datepicker").datepicker();
     $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
-});
+})
 
 $( function() {
 	$("#datepicker2").datepicker();
@@ -101,6 +110,7 @@ $.ajax({
 
 var clinum = [];
 var ctm_code = 0;
+var cofficeCount1 = 0;
 
 $.ajax({
 	type:"POST",
@@ -125,7 +135,7 @@ $.ajax({
        console.log(data);
        let htmlData  = "";
        for(i=0;i<data.gCode.length;i++){
-    	   
+    	   cofficeCount1++;
     	   htmlData += "<tr>";
     	   htmlData += "<td>"+ data.gName[i] +"</td>";
     	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
@@ -161,8 +171,6 @@ function insertBtn(){
 	});
 	
 	
-	console.log(check);
-	
 	if(!check){
 		
 		var date = new Date($("#datepicker").val());
@@ -192,12 +200,9 @@ function insertBtn(){
 		     data : data,
 		     success : function(data){
 		     	console.log(data)
-		     	let flag = cofficeInsert();
-		     	
-		     	if(flag){
-		        	alert("성공"); 
-		        	window.location.href = './clientList.do';
-		     	}
+				cofficeInsert();
+		     	alert("등록이 완료되었습니다."); 
+		        window.location.href = './clientList.do';
 		     },
 		     error:function(error){
 		        console.log("error");
@@ -211,70 +216,32 @@ function insertBtn(){
 
 function cofficeInsert(){
 	
-	var cofficeCountList = [];
-	var cofficePriceList = [];
-	var cofficeNameList = [];
-	var cofficeCodeList = [];
+	var dataObj = {};
+	var dataArr = [];
 	
-	for(var i=0;i<23;i++){
-	  cofficeCountList.push($("#cofficeCount"+i).val());
-	  cofficePriceList.push($("#cofficePrice"+i).val());
-	  cofficeNameList.push($("#cofficeName"+i).val());
-	  cofficeCodeList.push($("#cofficeCode"+i).val());
+	for(var i=0;i<cofficeCount1;i++){
+		dataObj.count = $("#cofficeCount"+i).val();
+		dataObj.price = $("#cofficePrice"+i).val();
+		dataObj.name = $("#cofficeName"+i).val();
+		dataObj.code = $("#cofficeCode"+i).val();
+		dataArr.push(dataObj);
+		dataObj = {};
 	}
 	
-	var dataList = {
-			"cofficeCountList": cofficeCountList,
-			"cofficePriceList": cofficePriceList,
-			"cofficeNameList": cofficeNameList,
-			"cofficeCodeList": cofficeCodeList,
-			"size" : 23
-	}
-	console.log(dataList);
-	//insertGoods
+	var jsonData = JSON.stringify(dataArr);
 	
 	$.ajax({
 	     type:"POST",
 	     url:"./insertGoods.do",
-	     data : dataList,
+	     data : {"codeArrObj" : jsonData},
+	     dataType : 'json',
 	     success : function(data){
-	     	console.log(data)
-	     	cofficeInsert();
-	     	
-	        alert("성공1"); 
-	        return true;
-	     
+	        console.log(data);
 	     },
 	     error:function(error){
 	        console.log("error");
 	     }
 	 });
-	
 }
-
-
-
-
-
-// $.ajax({
-//     type:"POST",
-//     url:"./selectGoodsName.do",
-//     success : function(data){
-//     	console.log(data)
-//     	for(var i=0; i< data.gName.length;i++){
-//     		var option = $("<option value="+ data.gCode[i] +">"+data.gName[i]+"</option>");
-//     		$('#model').append(option);
-//     	}
-    	
-/*        alert("성공");  */
-//        window.location.href = './boardList.do';
-       
-//     },
-//     error:function(error){
-//        console.log("error");
-//     }
-// });
-
-
 </script>
 </html>

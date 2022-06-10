@@ -52,9 +52,9 @@
     </tbody>
 </table>
 		<div style='text-align: right;'>
-			<c:if test="${user == 'SYS_123456'}">
+<%-- 			<c:if test="${user == 'SYS_123456'}"> --%>
          <button type="button"class="btn btn-primary" onclick="location.href='./insertBoardPage.do'">새글 입력</button>
-			 </c:if>	
+<%-- 			 </c:if>	 --%>
 		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
          </div><br>
 		</div>

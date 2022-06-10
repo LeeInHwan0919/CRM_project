@@ -38,9 +38,7 @@
 			</tr>
 	</table>
 	<div><br>
-<%-- 			<c:if test="${bVo.id eq member.id }"> --%>
 			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: left;">수정</button>
-<%-- 			</c:if> onclick="location.href='./deleteBoard.do?seq=${bVo.seq}'" --%>
 			<button class="btn btn-info" onclick="location.href='./boardList.do'" style="float: right;" >목록</button>
 			<button class="btn btn-danger" onclick="deletboard(${bVo.seq})"style="float: right;">삭제</button>
 			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: right;">수정</button>
@@ -79,7 +77,6 @@ $.ajax({
     data : {seq : ${bVo.seq}},
     success : function(data){
     	console.log(data);
-//        alert("파일 성공"); 
        
     },
     error:function(error){
