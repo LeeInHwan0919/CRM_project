@@ -49,7 +49,6 @@ public class Client_DaoImpl implements Client_IDao{
 
 	@Override
 	public void insertContractMGT() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -61,7 +60,6 @@ public class Client_DaoImpl implements Client_IDao{
 
 	@Override
 	public void insertContractGS() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -91,12 +89,6 @@ public class Client_DaoImpl implements Client_IDao{
 		int cnt= sqlSession.insert(NS+"insertGoods",map);
 		return cnt;
 	}
-
-	@Override
-	public List<ClientDto> selectStatus(Map<String, Object> map){
-		return sqlSession.selectList(NS+"selectStatus",map);
-	}
-
 
 
 }

@@ -61,7 +61,6 @@ public class Client_ServiceImpl implements Client_IService{
 
 	@Override
 	public void insertContractMGT() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -118,12 +117,5 @@ public class Client_ServiceImpl implements Client_IService{
 		return dao.insertGoods(map);
 
 	}
-	
-	@Override
-	public List<ClientDto> selectStatus(Map<String, Object> map) {
-		logger.info("Client_ServiceImpl : selectStatus ");
-		return dao.selectStatus(map);
-	}
-
 
 }

@@ -137,12 +137,10 @@ VALUES(#{contractKey}, #{ctm_code}, 'C01', 0,  #{du_date}, #{ct_start}, #{ct_end
 <!--상품등록 작업중-->
 <insert id="insertGoods" parameterType="java.util.Map">
 
-<selectKey resultType="hashmap"  keyProperty="SEQ,CT_CODE" order="BEFORE">
-    SELECT MAX(T1.SEQ)+1 AS SEQ , MAX(T2.CT_CODE) AS CT_CODE
-FROM contract_goods T1
-    FULL OUTER JOIN CONTRACT T2
-    ON T1.CT_CODE = T2.CT_CODE
+<selectKey resultType="int" keyProperty="contractKeys" order="BEFORE">
+    SELECT MAX(CT_CODE) FROM CONTRACT        
 </selectKey>  
+
 INSERT INTO contract_goods(
 	SEQ,
 	G_CODE,
@@ -152,16 +150,13 @@ INSERT INTO contract_goods(
 	CT_CODE
 )
 VALUES(
-	#{SEQ},
+	CONTRACT_GOODS_SEQ.NEXTVAL,
 	#{g_code},
 	#{g_name},
 	#{g_price},
 	#{du_cnt},
-	#{CT_CODE}
+	#{contractKeys}
 )
-
-
-
 </insert>
 
 

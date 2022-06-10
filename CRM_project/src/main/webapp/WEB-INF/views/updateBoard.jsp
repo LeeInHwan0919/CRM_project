@@ -69,20 +69,19 @@ int strSeq = srMap.getSeq();
 	
 	const pattern = /\s/g;
 	
-	//if($("#title").val().match(pattern)){
-	//if(!pattern.test($("#title"))){
-	if(checkSpace($("#title").val())){
+	if($("#title").val().match(pattern)){
 		alert("제목은 필수값 입니다. 입력해주세요");
 		return false;
 	}
 	
-	//if($("#content").val().match(pattern)){
-	//if(!pattern.test($("#content"))){
-	if(checkSpace($("#content").val())){
+	if($("#content").val().match(pattern)){
 		alert("내용은 필수값 입니다. 입력해주세요");
 		return false;
 	}
-
+	
+	   
+	   //valide
+       // json 형식으로 데이터 set
        var params = {
                  title     : $("#title").val()
                , content   : $("#content").val()
@@ -102,14 +101,6 @@ int strSeq = srMap.getSeq();
            }
        });
    });
-   
-   function checkSpace(str) { 
-	    if(str.length == 0 || str == null) {
-	        return true; // 스페이스가 있는 경우
-	    }else{
-	        return false; // 스페이스 없는 경우
-	    } 
-	}
 </script>   
    
 <%@include file="./footer.jsp" %>

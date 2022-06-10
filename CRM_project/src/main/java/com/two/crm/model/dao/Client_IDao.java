@@ -23,6 +23,4 @@ public interface Client_IDao {
 	public List<ClientDto> selectConractCode();
 	public int insertMGT(Map<String, Object> map);
 	public int insertGoods(Map<String, Object> map);
-	public List<ClientDto> selectStatus(Map<String, Object> map);
-	
 }
