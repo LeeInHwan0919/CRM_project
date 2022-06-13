@@ -10,6 +10,10 @@ pom.properties
 .classpath
 MANIFEST.MF
 
+Servers/
+Servers2/
+Servers3/
+
 ### Eclipse ###
 .metadata
 bin/
