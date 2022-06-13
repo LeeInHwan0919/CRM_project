@@ -9,4 +9,7 @@ public interface Users_IService {
 	public List<UserDto> AllUsers();
 	
 	public List<UserDto> UserDetail(String emp_code);
+	
+	public List<UserDto> BackUpUsers();
+	public List<UserDto> BackUpLocation();
 }

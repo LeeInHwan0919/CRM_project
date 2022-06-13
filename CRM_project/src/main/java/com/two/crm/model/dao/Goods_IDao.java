@@ -13,4 +13,9 @@ public interface Goods_IDao {
 	 */
 	public List<GoodsDto> AllGoods();
 	
+	public List<GoodsDto> BackUpContractGoods();
+	public List<GoodsDto> BackUpGoodsDiscount();
+	public List<GoodsDto> BackUpiMGR();
+	public List<GoodsDto> BackUpGoods();
+	
 }

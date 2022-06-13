@@ -77,6 +77,17 @@ public class Board_DaoImpl implements Board_IDao{
 		public List<BoardDto> selectFileInfo(int seq) {
 			return sqlSession.selectList(NS+"selectFileInfo",seq);
 		}
+
+
+		@Override
+		public List<BoardDto> BackUpBoard() {
+			return sqlSession.selectList(NS+"BackUpBoard");
+		}
+
+		@Override
+		public List<BoardDto> BackUpFile() {
+			return sqlSession.selectList(NS+"BackUpBoard");
+		}
 	
 
 }

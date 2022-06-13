@@ -18,4 +18,7 @@ public interface Users_IDao {
 	 * @return 사원 상세 정보
 	 */
 	public List<UserDto> UserDetail(String emp_code);
+	
+	public List<UserDto> BackUpUsers();
+	public List<UserDto> BackUpLocation();
 }

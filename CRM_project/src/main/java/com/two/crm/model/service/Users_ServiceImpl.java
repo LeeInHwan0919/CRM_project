@@ -34,4 +34,14 @@ public class Users_ServiceImpl implements Users_IService{
 		return dao.UserDetail(emp_code);
 	}
 
+	@Override
+	public List<UserDto> BackUpUsers() {
+		return dao.BackUpUsers();
+	}
+
+	@Override
+	public List<UserDto> BackUpLocation() {
+		return dao.BackUpLocation();
+	}
+
 }

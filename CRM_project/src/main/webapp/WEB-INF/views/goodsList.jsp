@@ -6,10 +6,63 @@
 <meta charset="UTF-8">
 <title>재고 리스트</title>
 <%@include file="./header.jsp" %>
+<script type="text/javascript">
+var today
+var year
+var month
+var date
+var hours 
+var minute
+
+function callFun(str){
+      $.ajax({
+           type:"POST",
+           url:"DBtoPdf.do",
+           data : {
+               fileName : str
+           },
+           success : function(){
+              alert("PDF 다운로드 성공"); 
+           },
+           error:function(error){
+              console.log("error");
+           }
+      });
+   }
+   
+function clickBtn(){
+	 today = new Date();   
+     year = today.getFullYear(); // 년도
+     month = today.getMonth() + 1;  // 월
+     date = today.getDate();  // 날짜
+//      hours = today.getHours(); //시간
+//      minutes = today.getMinutes();//분
+     
+     var str = year + '_' + month + '_' + date /* + '_' + hours + '_' + minutes */;
+     console.log(str);
+     
+     $.ajax({
+         type:"POST",
+         url:"DBtoExcel.do",
+         data : {
+             fileName : str
+         },
+         success : function(){
+            alert("Excel 다운로드 성공"); 
+            callFun(str);
+         },
+         error:function(error){
+            console.log("error");
+         }
+    });
+}
+
+</script>
 </head>
 <body>
 <div class="container" style="text-align: center; margin-top: 50px;">
 <h2>재고 관리</h2><br>
+<input type="button" value="재고 리스드 다운로드" onclick="clickBtn();"><br>
 <table id="myTable" class="display" style="width:100%">
 		<thead>
 			<tr >

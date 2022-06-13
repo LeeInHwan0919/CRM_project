@@ -32,7 +32,6 @@ table{
 </style>
 <body>
 <c:forEach var="users" items="${users}">
-
 <div class="container" style="margin-top: 30px; margin-left: 550px;">
   <table border="1">
     <tr>

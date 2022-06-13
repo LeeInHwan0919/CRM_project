@@ -23,4 +23,37 @@ USING (AREA_CODE)
 WHERE EMP_CODE=#{emp_code}
 </select>
 
+
+
+
+
+
+
+<!-- ****************************백업 query subin 수정 x **************************** -->
+
+<!--사원-->
+<select id="BackUpUsers"  resultType="UDto">
+SELECT
+    EMP_CODE, 
+    AREA_CODE, 
+    EMP_NAME, 
+    EMP_PW, 
+    EMP_GENDER, 
+    EMP_USE, 
+    EMP_IMG, 
+    EMP_AUTH, 
+    EMP_TEL, 
+    EMP_ADDR 
+    FROM user_info
+</select>
+
+<!--지역-->
+<select id="BackUpLocation"  resultType="UDto">
+SELECT
+    AREA_CODE, 
+    AREA FROM 
+    location
+</select>
+<!-- ****************************백업 query**************************** -->
+
 </mapper>
