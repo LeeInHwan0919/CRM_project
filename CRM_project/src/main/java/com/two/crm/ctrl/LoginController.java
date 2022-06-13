@@ -1,9 +1,12 @@
 package com.two.crm.ctrl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.two.crm.dto.BoardDto;
-import com.two.crm.dto.ClientDto;
-import com.two.crm.dto.ContractDto;
+
 import com.two.crm.dto.UserDto;
 import com.two.crm.model.service.Board_IService;
 import com.two.crm.model.service.Graph_IService;
@@ -72,7 +74,7 @@ public class LoginController {
 	public String maingo(Authentication user, Model model ) {
 		UserDetails userdto = (UserDetails) user.getPrincipal();
 		model.addAttribute("user", userdto.toString());
-		System.out.println("::::::::::::::::::::::::" + userdto.toString());
+		System.out.println("userDto.toString:" + userdto.toString());
 		System.out.println("비밀번호 : " + userdto.getPassword());
 		
 		List<BoardDto> lists = bService.AllBoard();
@@ -109,28 +111,7 @@ public class LoginController {
 			return llist;
 		}
 	
-	//회원가입으로 가는 매핑
-	@RequestMapping(value = "/signUpgo.do", method = RequestMethod.GET)
-	public String SignUpgo() {
-		return "SignUp";
-	}
 
-
-	// 회원가입 성공 매핑
-	@RequestMapping(value = "/signUpSc.do", method = RequestMethod.POST)
-	public void maingo(UserDto dto, Model model) {
-		System.out.println("회원가입 정보"+dto.toString());
-		service.signUp(dto);
-	}
-	
-	//관리자 페이지
-	@RequestMapping(value = "/admin/adminPage.do", method = RequestMethod.GET)
-	public String adminPasge(Model model) {
-		System.out.println("관리자 페이지");
-		System.out.println();
-		return "adminPage";
-	}
-	
 	@RequestMapping(value = "/AuthError.do", method = RequestMethod.GET)
 	public String AuthError(Model model) {
 		return "AuthError";
@@ -141,18 +122,26 @@ public class LoginController {
 		return "redirect:/logingo.do";
 	}
 	
-	@RequestMapping(value = "/duplicateLogin.do", method = RequestMethod.GET)
-	public String duplicateLogin() {
-		return "duplicateLogin";
-	}
-	
 	@RequestMapping(value = "/findpw.do", method = RequestMethod.GET)
 	public String findpw() {
 		return "findpw";
 	}
+	
+	
 
+	@RequestMapping(value = "/findpw.do", produces="application/string;charset=UTF-8", method = RequestMethod.POST)
+	@ResponseBody
+	public String findpw(String phoneNumber) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("emp_tel", phoneNumber);
+		int cnt = service.match(map);
+		System.out.println(cnt+"cntcntcnt");
+		return (cnt>0)?"성공":"실패";
+	}
+	
 	@RequestMapping(value = "/newpw.do", method = RequestMethod.GET)
-	public String newpw() {
+	public String newpw(@RequestParam String emp_code, Model model) {
+		model.addAttribute("emp_code",emp_code);
 		return "newpw";
 	}
 	
@@ -170,4 +159,10 @@ public class LoginController {
         sms_service.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
+
+	@RequestMapping(value="/modifyPW.do",method = RequestMethod.POST)
+	public void modifyPW(UserDto dto, HttpServletRequest request) {
+		System.out.println("회원가입 정보"+dto.toString());
+		service.modifyPW(dto);
+	}
 }

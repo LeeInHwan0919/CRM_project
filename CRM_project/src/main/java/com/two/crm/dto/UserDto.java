@@ -16,6 +16,15 @@ public class UserDto {
 	private String emp_addr;
 	
 	
+	public UserDto(String emp_code, String emp_gender, String emp_use, String emp_img, String emp_tel,
+			String emp_addr) {
+		this.emp_code = emp_code;
+		this.emp_gender = emp_gender;
+		this.emp_use = emp_use;
+		this.emp_img = emp_img;
+		this.emp_tel = emp_tel;
+		this.emp_addr = emp_addr;
+	}
 	public String getEmp_code() {
 		return emp_code;
 	}
@@ -90,7 +99,6 @@ public class UserDto {
 	}
 	public UserDto(String emp_code, String area_code, String emp_name, String emp_pw, String emp_gender, String emp_use,
 			String emp_img, String emp_auth, String emp_tel, String area, String emp_addr) {
-		super();
 		this.emp_code = emp_code;
 		this.area_code = area_code;
 		this.emp_name = emp_name;
@@ -102,6 +110,12 @@ public class UserDto {
 		this.emp_tel = emp_tel;
 		this.area = area;
 		this.emp_addr = emp_addr;
+	}
+	
+	
+	public UserDto(String emp_code, String emp_pw) {
+		this.emp_code = emp_code;
+		this.emp_pw = emp_pw;
 	}
 	public UserDto() {
 		super();

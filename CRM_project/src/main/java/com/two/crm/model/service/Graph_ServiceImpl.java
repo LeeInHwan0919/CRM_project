@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.two.crm.dto.ClientDto;
-import com.two.crm.dto.ContractDto;
 import com.two.crm.model.dao.Graph_IDao;
 
 

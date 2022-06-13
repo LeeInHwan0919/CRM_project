@@ -57,7 +57,7 @@
  			</tr>
 			</c:forEach>
 		</tbody>
-		<button  class="btn btn-default" onclick="deletClient()" >삭제</button>
+		<button class="btn btn-default" onclick="deletClient()">삭제</button>
 </table>
 
 </div>
