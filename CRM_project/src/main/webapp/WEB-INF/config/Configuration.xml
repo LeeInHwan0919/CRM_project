@@ -4,11 +4,20 @@
 
 <typeAliases>
 	<typeAlias type="com.two.crm.dto.UserDto" alias="UDto"/>
+	<typeAlias type="com.two.crm.dto.BoardDto" alias="bDto"/>
+	<typeAlias type="com.two.crm.dto.ClientDto" alias="cDto"/>
+	<typeAlias type="com.two.crm.dto.GoodsDto" alias="gDto"/>
+	<typeAlias type="com.two.crm.dto.ContractDto" alias="ctDto"/>
 </typeAliases>
 
 
 <mappers>
 	<mapper resource="/sqls/login.xml"/>
+	<mapper resource="/sqls/board.xml"/>
+	<mapper resource="/sqls/client.xml"/>
+	<mapper resource="/sqls/goods.xml"/>
+	<mapper resource="/sqls/users.xml"/>
+	<mapper resource="/sqls/chart.xml"/>
 </mappers>
 
 </configuration>

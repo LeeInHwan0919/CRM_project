@@ -1,17 +1,19 @@
 package com.two.crm.dto;
 
+
 public class UserDto {
 
 	private String emp_code;
 	private String area_code;
 	private String emp_name;
 	private String emp_pw;
-	private String emp_gende;
+	private String emp_gender;
 	private String emp_use ;
 	private String emp_img;
 	private String emp_auth;
 	private String emp_tel;
-	
+	private String area;
+	private String emp_addr;
 	
 	
 	public String getEmp_code() {
@@ -38,11 +40,11 @@ public class UserDto {
 	public void setEmp_pw(String emp_pw) {
 		this.emp_pw = emp_pw;
 	}
-	public String getEmp_gende() {
-		return emp_gende;
+	public String getEmp_gender() {
+		return emp_gender;
 	}
-	public void setEmp_gende(String emp_gende) {
-		this.emp_gende = emp_gende;
+	public void setEmp_gender(String emp_gender) {
+		this.emp_gender = emp_gender;
 	}
 	public String getEmp_use() {
 		return emp_use;
@@ -68,37 +70,47 @@ public class UserDto {
 	public void setEmp_tel(String emp_tel) {
 		this.emp_tel = emp_tel;
 	}
-	
-	
-	
-	public UserDto(String emp_code, String area_code, String emp_name, String emp_pw, String emp_gende, String emp_use,
-			String emp_img, String emp_auth, String emp_tel) {
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getEmp_addr() {
+		return emp_addr;
+	}
+	public void setEmp_addr(String emp_addr) {
+		this.emp_addr = emp_addr;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [emp_code=" + emp_code + ", area_code=" + area_code + ", emp_name=" + emp_name + ", emp_pw="
+				+ emp_pw + ", emp_gender=" + emp_gender + ", emp_use=" + emp_use + ", emp_img=" + emp_img
+				+ ", emp_auth=" + emp_auth + ", emp_tel=" + emp_tel + ", area=" + area + ", emp_addr=" + emp_addr + "]";
+	}
+	public UserDto(String emp_code, String area_code, String emp_name, String emp_pw, String emp_gender, String emp_use,
+			String emp_img, String emp_auth, String emp_tel, String area, String emp_addr) {
+		super();
 		this.emp_code = emp_code;
 		this.area_code = area_code;
 		this.emp_name = emp_name;
 		this.emp_pw = emp_pw;
-		this.emp_gende = emp_gende;
+		this.emp_gender = emp_gender;
 		this.emp_use = emp_use;
 		this.emp_img = emp_img;
 		this.emp_auth = emp_auth;
 		this.emp_tel = emp_tel;
-	}
-	
-	
-	
-	@Override
-	public String toString() {
-		return "UserDto [emp_code=" + emp_code + ", area_code=" + area_code + ", emp_name=" + emp_name + ", emp_pw="
-				+ emp_pw + ", emp_gende=" + emp_gende + ", emp_use=" + emp_use + ", emp_img=" + emp_img + ", emp_auth="
-				+ emp_auth + ", emp_tel=" + emp_tel + "]";
+		this.area = area;
+		this.emp_addr = emp_addr;
 	}
 	public UserDto() {
+		super();
 	}
-	public UserDto(String emp_code, String emp_name, String emp_pw) {
-		this.emp_code = emp_code;
-		this.emp_name = emp_name;
-		this.emp_pw = emp_pw;
-	}
+	
+	
+	
+	
+	
 	
 	
 	

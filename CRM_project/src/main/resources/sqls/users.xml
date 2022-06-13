@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Users_DaoImpl">
+
+<!--사원 전체조회-->
+<select id="AllUsers"  resultType="UDto">
+SELECT u.EMP_NAME,
+u.EMP_AUTH ,
+u.EMP_CODE, u.EMP_GENDER, u.EMP_USE, u.EMP_TEL
+FROM USER_INFO u
+LEFT JOIN LOCATION l 
+ON u.AREA_CODE= l.AREA_CODE
+</select>
+
+<select id="UserDetail" resultType="UDto">
+SELECT EMP_CODE, l.AREA , EMP_NAME, EMP_GENDER, CASE WHEN EMP_USE='Y' THEN '계정 활성화' ELSE '계정 비활성화' END AS EMP_USE,
+EMP_IMG, CASE WHEN SUBSTR(EMP_AUTH,1,2)='CL' THEN '거래처관리'
+WHEN SUBSTR(EMP_AUTH,1,2)='SY' THEN '시스템관리' ELSE '재고관리' END AS EMP_AUTH 
+, EMP_TEL ,EMP_ADDR
+FROM USER_INFO
+LEFT JOIN LOCATION l
+USING (AREA_CODE)
+WHERE EMP_CODE=#{emp_code}
+</select>
+
+</mapper>

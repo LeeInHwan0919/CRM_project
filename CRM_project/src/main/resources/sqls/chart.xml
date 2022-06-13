@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Graph_DaoImpl">
+
+<!--연도별 계약 건수 통계-->
+<select id="ClientGraph"  resultType="int">
+SELECT COUNT(cm.CLI_NUM)
+FROM CONTRACT c 
+JOIN CONTRACT_MANAGEMENT cm
+ON c.CTM_CODE = cm.CTM_CODE  
+<![CDATA[WHERE ADD_MONTHS(SYSDATE,0) > c.CT_START 
+AND ADD_MONTHS(SYSDATE,0) < c.CT_END]]>
+GROUP BY TO_CHAR(c.CT_START,'YYYY')
+ORDER BY TO_CHAR(c.CT_START,'YYYY')
+</select>
+
+
+<select id="GoodsGraph" resultType="int">
+SELECT SUM_DU
+FROM
+(SELECT G_NAME, SUM_DU, ROWNUM RM
+FROM(
+SELECT G_NAME, SUM(DU_CNT) SUM_DU
+FROM CONTRACT_GOODS cg
+JOIN CONTRACT c
+ON cg.CT_CODE = c.CT_CODE
+GROUP BY G_NAME
+ORDER BY SUM(DU_CNT) desc)) 
+<![CDATA[WHERE RM <=3
+OR RM >=21]]>
+</select>
+
+
+<select id="LocationGraph" resultType="int">
+SELECT COUNT(*)
+FROM USER_INFO ui 
+JOIN LOCATION l 
+ON ui.AREA_CODE = l.AREA_CODE 
+JOIN CLIENT c 
+ON c.EMP_CODE = ui.EMP_CODE
+GROUP BY l.AREA
+</select>
+
+</mapper>

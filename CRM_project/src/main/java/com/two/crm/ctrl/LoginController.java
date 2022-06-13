@@ -1,5 +1,6 @@
 package com.two.crm.ctrl;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.two.crm.dto.BoardDto;
+import com.two.crm.dto.ClientDto;
+import com.two.crm.dto.ContractDto;
 import com.two.crm.dto.UserDto;
+import com.two.crm.model.service.Board_IService;
+import com.two.crm.model.service.Graph_IService;
 import com.two.crm.model.service.Login_IService;
 import com.two.crm.model.service.SMS_Service;
 
@@ -26,9 +32,15 @@ public class LoginController {
 	@Autowired
 	Login_IService service;
 	
+	@Autowired
+	private Board_IService bService;
+	
 	
 	@Autowired
 	private SMS_Service sms_service;
+	
+	@Autowired
+	private Graph_IService g_service;
 	
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
@@ -60,12 +72,43 @@ public class LoginController {
 	public String maingo(Authentication user, Model model ) {
 		UserDetails userdto = (UserDetails) user.getPrincipal();
 		model.addAttribute("user", userdto.toString());
-		System.out.println(":::::::::::::::::::::::: " + userdto.toString());
+		System.out.println("::::::::::::::::::::::::" + userdto.toString());
 		System.out.println("비밀번호 : " + userdto.getPassword());
+		
+		List<BoardDto> lists = bService.AllBoard();
+		model.addAttribute("lists", lists);
+		
+		
 		return "main";
 	}
 
-
+	//거래처 차트 
+	@RequestMapping(value = "/ClientChart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Integer> barchart() {
+		List<Integer> clist = g_service.ClientGraph();
+		System.out.println("사이즈"+clist.size());
+		return clist;
+	}
+	
+	//상품 차트
+	@RequestMapping(value = "/GoodsChart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Integer> piechart() {
+		List<Integer> glist = g_service.GoodsGraph();
+		System.out.println("사이즈"+glist.size());
+		return glist;
+	}
+	
+	//지역 차트
+		@RequestMapping(value = "/LocationChart.do", method = RequestMethod.POST)
+		@ResponseBody
+		public List<Integer> bubblechart() {
+			List<Integer> llist = g_service.LocationGraph();
+			System.out.println("사이즈"+llist.size());
+			return llist;
+		}
+	
 	//회원가입으로 가는 매핑
 	@RequestMapping(value = "/signUpgo.do", method = RequestMethod.GET)
 	public String SignUpgo() {
@@ -75,10 +118,9 @@ public class LoginController {
 
 	// 회원가입 성공 매핑
 	@RequestMapping(value = "/signUpSc.do", method = RequestMethod.POST)
-	public String maingo(UserDto dto, Model model) {
+	public void maingo(UserDto dto, Model model) {
 		System.out.println("회원가입 정보"+dto.toString());
 		service.signUp(dto);
-		return "login";
 	}
 	
 	//관리자 페이지
