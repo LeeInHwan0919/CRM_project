@@ -85,12 +85,30 @@ public class LoginController {
 	//거래처 차트 
 	@RequestMapping(value = "/ClientChart.do", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Integer> chart() {
-		List<Integer> list = g_service.ClientGraph();
-		System.out.println("사이즈"+list.size());
-		return list;
+	public List<Integer> barchart() {
+		List<Integer> clist = g_service.ClientGraph();
+		System.out.println("사이즈"+clist.size());
+		return clist;
 	}
-
+	
+	//상품 차트
+	@RequestMapping(value = "/GoodsChart.do", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Integer> piechart() {
+		List<Integer> glist = g_service.GoodsGraph();
+		System.out.println("사이즈"+glist.size());
+		return glist;
+	}
+	
+	//지역 차트
+		@RequestMapping(value = "/LocationChart.do", method = RequestMethod.POST)
+		@ResponseBody
+		public List<Integer> bubblechart() {
+			List<Integer> llist = g_service.LocationGraph();
+			System.out.println("사이즈"+llist.size());
+			return llist;
+		}
+	
 	//회원가입으로 가는 매핑
 	@RequestMapping(value = "/signUpgo.do", method = RequestMethod.GET)
 	public String SignUpgo() {
@@ -100,10 +118,9 @@ public class LoginController {
 
 	// 회원가입 성공 매핑
 	@RequestMapping(value = "/signUpSc.do", method = RequestMethod.POST)
-	public String maingo(UserDto dto, Model model) {
+	public void maingo(UserDto dto, Model model) {
 		System.out.println("회원가입 정보"+dto.toString());
 		service.signUp(dto);
-		return "login";
 	}
 	
 	//관리자 페이지

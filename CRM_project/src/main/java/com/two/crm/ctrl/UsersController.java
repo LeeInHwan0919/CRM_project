@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.two.crm.dto.UserDto;
 import com.two.crm.model.service.Users_IService;
 
@@ -33,6 +34,27 @@ public class UsersController {
 		
 		return "usersList";
 	}
+	
+	//사원 상세 조회 이동 
+		@RequestMapping(value = "/usersDetail.do", method = RequestMethod.GET)
+		public String userDetail(Model model, Authentication user,@RequestParam String emp_code) {
+			logger.info("UsersController userDetail GET");
+			List<UserDto> users = uService.UserDetail(emp_code);
+			model.addAttribute("users", users);
+			System.out.println(users);
+			return "usersDetail";
+		}
+	
+		
+		
+	
+	//사원 상세 조회 이동 
+		@RequestMapping(value = "/insertUser.do", method = RequestMethod.GET)
+		public String userDetail(Model model, Authentication user) {
+			logger.info("UsersController insertUser GET");
+			return "insertUser";
+		}
+	
 
 
 }

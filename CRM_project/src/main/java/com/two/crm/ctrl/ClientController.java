@@ -93,6 +93,7 @@ public class ClientController {
 		rMap.put("cli_area", map.get("cli_area"));
 		
 		
+		
 		int n = cService.insertClient(rMap);
 		if(n>0) {
 			System.out.println("거래처 등록에 성공하였습니다.");

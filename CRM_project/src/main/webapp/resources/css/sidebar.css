@@ -5,6 +5,7 @@ body, ul, li {
   margin:0;
   padding:0;
   list-style:none;
+
 }
 
 a {
@@ -13,7 +14,7 @@ a {
 }
 
 
-.side-bar {
+.side-bar{
   position:fixed;
   top:0;
   left:0;
@@ -23,6 +24,7 @@ a {
   transition:width 0.3s;
   color:#fff;
   overflow:hidden;
+  z-index:1;
 }
 
 .side-bar:hover {

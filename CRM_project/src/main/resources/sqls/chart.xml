@@ -14,4 +14,31 @@ GROUP BY TO_CHAR(c.CT_START,'YYYY')
 ORDER BY TO_CHAR(c.CT_START,'YYYY')
 </select>
 
+
+<select id="GoodsGraph" resultType="int">
+SELECT SUM_DU
+FROM
+(SELECT G_NAME, SUM_DU, ROWNUM RM
+FROM(
+SELECT G_NAME, SUM(DU_CNT) SUM_DU
+FROM CONTRACT_GOODS cg
+JOIN CONTRACT c
+ON cg.CT_CODE = c.CT_CODE
+GROUP BY G_NAME
+ORDER BY SUM(DU_CNT) desc)) 
+<![CDATA[WHERE RM <=3
+OR RM >=21]]>
+</select>
+
+
+<select id="LocationGraph" resultType="int">
+SELECT COUNT(*)
+FROM USER_INFO ui 
+JOIN LOCATION l 
+ON ui.AREA_CODE = l.AREA_CODE 
+JOIN CLIENT c 
+ON c.EMP_CODE = ui.EMP_CODE
+GROUP BY l.AREA
+</select>
+
 </mapper>

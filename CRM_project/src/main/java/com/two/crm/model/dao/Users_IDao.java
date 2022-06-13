@@ -13,4 +13,9 @@ public interface Users_IDao {
 	 */
 	public List<UserDto> AllUsers();
 	
+	/**
+	 * 사원 상세 조회
+	 * @return 사원 상세 정보
+	 */
+	public List<UserDto> UserDetail(String emp_code);
 }

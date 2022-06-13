@@ -14,4 +14,15 @@ public interface Graph_IDao {
 	 */
 	public List<Integer> ClientGraph();
 	
+	/**
+	 * 상품 통계
+	 * @return 판매중인 상품들의 총 갯수 count
+	 */
+	public List<Integer> GoodsGraph();
+	
+	/**
+	 * 위치 통계
+	 * @return 거래처의 지역에 따라 갯수 count
+	 */
+	public List<Integer> LocationGraph();
 }
