@@ -211,7 +211,7 @@ function barGraph(){
 		new Chart(document.getElementById("LocationChart"),{
 			type:"bar",
 			data:{
-				labels:["대구","춘천","서울","부산"],//x축 data
+				labels:["서울","대구","춘천","부산"],//x축 data
 				datasets:[{
 					data:lList,//y축 data
 					label:"계약 건수",

@@ -9,18 +9,18 @@
 		WHERE EMP_CODE = #{emp_code}
 </select>
 
-<insert id="signUp" parameterType="UDto">
-INSERT INTO USER_INFO
-(EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE, EMP_IMG, EMP_AUTH, EMP_TEL)
-VALUES('SYS_12345', NULL, '이인환', #{emp_pw}, '남자', 'Y', null, 'SYSTEM', '01033097483')
-</insert>
-
-
-<!-- 비밀번호 찾을때 사원코드와 해당 전화번호가 일치하는지에 대한 코드 -->
-<select id="telChk" parameterType="String" resultType="String">
-SELECT EMP_TEL
-FROM USER_INFO
+<update id="modifyPW" parameterType="UDto">
+UPDATE USER_INFO
+SET EMP_PW=#{emp_pw}
 WHERE EMP_CODE=#{emp_code}
-</select>
+</update>
 
+
+
+<!--  사원코드에 해당하는 전화번호가 맞는지 확인 -->
+<select id="match" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(EMP_CODE)
+FROM USER_INFO
+WHERE EMP_TEL =#{emp_tel}
+</select>
 </mapper>
