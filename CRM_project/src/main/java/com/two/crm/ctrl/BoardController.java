@@ -1,6 +1,10 @@
 package com.two.crm.ctrl;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +18,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +35,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.two.crm.dto.BoardDto;
+import com.two.crm.dto.ClientDto;
+import com.two.crm.dto.UserDto;
 import com.two.crm.model.service.Board_IService;
 
+
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 public class BoardController {
 	
@@ -43,7 +58,7 @@ public class BoardController {
 		List<BoardDto> lists = bService.AllBoard();
 		model.addAttribute("lists", lists);
 		
-//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서   비교
+//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서 비교
 		model.addAttribute("user", user.getName());
 		return "boardList";
 	}
@@ -55,14 +70,9 @@ public class BoardController {
 	public String getOneBoard(@RequestParam int seq, Authentication user, HttpServletRequest request, Model model, HttpServletResponse response) {
 		
 		BoardDto bVo = bService.BoardDetail(seq);
-		//BoardDto bVo = bService.insertFile(map);
-		
+
 		System.out.println(user.getName());
-		//UserDetails userdto = (UserDetails) user.getPrincipal();
-		//System.out.println("user_id ::: " + userdto.getUsername());
-		
-		//model.addAttribute("user", );
-		
+	
 		Cookie[] cookies = request.getCookies();
 		
 		// 비교하기 위해 새로운 쿠키
@@ -135,10 +145,12 @@ public class BoardController {
 		System.out.println(map.get("bSeq"));
 		System.out.println(map.get("title"));
 		System.out.println(map.get("content"));
+		System.out.println(map.get("important"));
 		
 		rMap.put("seq", map.get("bSeq"));
 		rMap.put("title", map.get("title"));
 		rMap.put("content", map.get("content"));
+		rMap.put("important", map.get("important"));
 		int n = bService.updateBoard(rMap);
 		if(n>0) {
 			logger.info("수정에 성공하였습니다");
@@ -173,31 +185,36 @@ public class BoardController {
 		System.out.println(bDto.getTitle()); 
 		System.out.println(bDto.getContent()); 
 		System.out.println(bDto.getStartdate()); 
+		System.out.println(bDto.getImportant());
 		
 		 bVo.setTitle(bDto.getTitle()); 
 		 bVo.setContent(bDto.getContent());
 		 bVo.setStartdate(bDto.getStartdate()); 
 		 bVo.setEnddate(bDto.getEnddate()); 
+		 bVo.setImportant(bDto.getImportant());
 		 int n = bService.insertBoard(bDto); 
+		 
 		 if(n > 0) { 
 			 logger.info("게시글 입력성공"); 
 		 }
-	
 		return "redirect:/boardList.do";
-		
 	}
+	
 	
 	@RequestMapping(value = "/insertBoardPage.do", method = RequestMethod.GET)
 	public String insertPage() {
 		return "insertBoard";
 	}
 	
+	
+	//seq 조회
 	@ResponseBody
 	@RequestMapping(value = "/selectSEQ.do", method = RequestMethod.POST)
 	public int selectSEQ() {
 		int n =  bService.selectSEQ();
 		return n;
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/deleteBoard.do", method = RequestMethod.POST)
@@ -210,10 +227,7 @@ public class BoardController {
 		bService.deleteBoard(dto.getSeq());
 		
 	      return result;
-	   }
-	
-	
-	
+	   }	
 	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
     public String dragAndDrop(Model model) {
@@ -221,14 +235,12 @@ public class BoardController {
         
     }
 	
-	
-	
 	//파일 업로드
 	@PostMapping(value = "/fileUpload.do") //ajax에서 호출하는 부분
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest multipartRequest,@RequestParam int seq) { //Multipart로 받는다.
 	        
-			System.out.println("HEE");
+//			System.out.println("확인확인");
 			
 			System.out.println(seq);
 	        Iterator<String> itr =  multipartRequest.getFileNames();
@@ -237,15 +249,10 @@ public class BoardController {
 	        
 	        while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
 	            
-	            /* 기존 주석처리
-	            MultipartFile mpf = multipartRequest.getFile(itr.next());
-	            String originFileName = mpf.getOriginalFilename();
-	            System.out.println("FILE_INFO: "+originFileName); //받은 파일 리스트 출력'
-	            */
 	            
 	            MultipartFile mpf = multipartRequest.getFile(itr.next());
+	            
 	            String originalFilename = mpf.getOriginalFilename(); //파일명
-	     
 	            String fileFullPath = filePath+"/"+originalFilename; //파일 전체 경로
 	            
 	            Map<String, Object> map = new HashMap<String, Object>();
@@ -273,9 +280,25 @@ public class BoardController {
 	                System.out.println("postTempFile_ERROR======>"+fileFullPath);
 	                e.printStackTrace();
 	            }
-	                         
 	       }
-	         
 	    }
+	
+	
+	//파일 다운로드
+	@PostMapping(value = "/filedownload.do") //ajax에서 호출하는 부분
+	@ResponseBody
+	public ResponseEntity<Resource> fileDownload(@RequestParam Map<String, Object> map) throws IOException {
+
+      Path path1 = Paths.get(map.get("filePath").toString()); // 다운로드 할 파일의 최종 경로
+      String contentType = Files.probeContentType(path1); // 타입 받아오기
+
+      Resource resource = new InputStreamResource(Files.newInputStream(path1)); // path1의 
+
+      return ResponseEntity.ok()
+              .header(HttpHeaders.CONTENT_DISPOSITION, "attachement; filename=\"" + map.get("fileName").toString() +"\"")
+              .header(HttpHeaders.CONTENT_TYPE, contentType)
+              .body(resource);
+	}
+	
 	
 }

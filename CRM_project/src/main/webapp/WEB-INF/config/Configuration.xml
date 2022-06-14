@@ -8,6 +8,7 @@
 	<typeAlias type="com.two.crm.dto.ClientDto" alias="cDto"/>
 	<typeAlias type="com.two.crm.dto.GoodsDto" alias="gDto"/>
 	<typeAlias type="com.two.crm.dto.ContractDto" alias="ctDto"/>
+	<typeAlias type="com.two.crm.dto.BackupDto" alias="bkDto"/>
 </typeAliases>
 
 
@@ -18,6 +19,7 @@
 	<mapper resource="/sqls/goods.xml"/>
 	<mapper resource="/sqls/users.xml"/>
 	<mapper resource="/sqls/chart.xml"/>
+	<mapper resource="/sqls/backup.xml"/>
 </mappers>
 
 </configuration>

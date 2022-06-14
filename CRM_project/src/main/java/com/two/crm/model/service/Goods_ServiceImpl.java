@@ -28,4 +28,28 @@ public class Goods_ServiceImpl implements Goods_IService{
 		return dao.AllGoods();
 	}
 
+	@Override
+	public List<GoodsDto> BackUpContractGoods() {
+		return dao.BackUpContractGoods();
+	}
+
+
+	@Override
+	public List<GoodsDto> BackUpGoodsDiscount() {
+		return dao.BackUpGoodsDiscount();
+	}
+
+	@Override
+	public List<GoodsDto> BackUpiMGR() {
+		return dao.BackUpiMGR();
+		}
+
+
+	@Override
+	public List<GoodsDto> BackUpGoods() {
+		return dao.BackUpGoods();
+		}
+
+
+
 }

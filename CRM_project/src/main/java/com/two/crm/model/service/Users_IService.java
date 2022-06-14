@@ -11,7 +11,12 @@ public interface Users_IService {
 	
 	public List<UserDto> UserDetail(String emp_code);
 	
+
 	public int updateUser(Map<String, Object> map);
 	
 	public int insertUser(Map<String, Object> map);
+
+	public List<UserDto> BackUpUsers();
+	public List<UserDto> BackUpLocation();
+
 }

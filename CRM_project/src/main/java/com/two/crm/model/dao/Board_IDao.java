@@ -19,4 +19,7 @@ public interface Board_IDao {
 		public int selectSEQ();
 		public int insertFile(Map<String, Object> map);
 		public List<BoardDto> selectFileInfo(int seq);
+		
+		public List<BoardDto> BackUpBoard();
+		public List<BoardDto> BackUpFile();
 }

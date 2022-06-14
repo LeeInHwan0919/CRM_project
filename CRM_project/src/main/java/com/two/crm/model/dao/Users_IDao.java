@@ -20,6 +20,7 @@ public interface Users_IDao {
 	 */
 	public List<UserDto> UserDetail(String emp_code);
 	
+
 	/**
 	 * 사원 정보 업데이트
 	 * @param map (사원코드, 성별, 전화번호, 주소, 계정사용여부)
@@ -33,4 +34,8 @@ public interface Users_IDao {
 	 * @return int
 	 */
 	public int insertUser(Map<String, Object> map);
+
+	public List<UserDto> BackUpUsers();
+	public List<UserDto> BackUpLocation();
+
 }

@@ -45,6 +45,14 @@ public class Users_ServiceImpl implements Users_IService{
 	public int insertUser(Map<String, Object> map) {
 		logger.info("insertUser ServiceImpl");
 		return dao.insertUser(map);
+    
+	public List<UserDto> BackUpUsers() {
+		return dao.BackUpUsers();
+	}
+
+	@Override
+	public List<UserDto> BackUpLocation() {
+		return dao.BackUpLocation();
 	}
 
 }
