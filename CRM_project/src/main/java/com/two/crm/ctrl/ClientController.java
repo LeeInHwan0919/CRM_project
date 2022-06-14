@@ -1,11 +1,17 @@
 package com.two.crm.ctrl;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itextpdf.io.exceptions.IOException;
 import com.two.crm.dto.ClientDto;
 import com.two.crm.model.service.Client_IService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 
 @Controller
 public class ClientController {
@@ -34,10 +45,10 @@ public class ClientController {
 	@RequestMapping(value = "/clientList.do", method = RequestMethod.GET)
 	public String boardList(Model model, Authentication user) {
 		List<ClientDto> clists = cService.AllClient();
-		model.addAttribute("clists", clists);
 		
-//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서 비교
+		model.addAttribute("clists", clists);
 		model.addAttribute("user", user.getName());
+		
 		return "clientList";
 	}
 	
@@ -54,7 +65,7 @@ public class ClientController {
 		return "clientDetail";
 	}
 	
-	@RequestMapping(value = "/insertPage.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/insertPage.do", method = RequestMethod.GET)
 	public String insertPage() {
 		logger.info("ClientController insertPage");
 		return "insertClient";
@@ -93,7 +104,6 @@ public class ClientController {
 		rMap.put("cli_area", map.get("cli_area"));
 		
 		
-		
 		int n = cService.insertClient(rMap);
 		if(n>0) {
 			System.out.println("거래처 등록에 성공하였습니다.");
@@ -130,32 +140,33 @@ public class ClientController {
 	}
 	
 	
-//거래처 등록
+	//거래처 등록
 	@RequestMapping(value = "/insertGoods.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insertGoods(@RequestParam Map<String, Object> map) {
-		Map<String, Object> rMaps = new HashMap<String, Object>();
+	public int insertGoods(@RequestParam Map<String, Object> map) {
 		
+		JSONArray arry = new JSONArray();
+		 
+		arry = JSONArray.fromObject(map.get("codeArrObj"));
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<Integer> countList = (ArrayList<Integer>) map.get("cofficeCountList");
-		@SuppressWarnings("unchecked")
-		ArrayList<Integer> priceList = (ArrayList<Integer>) map.get("cofficePriceList");
-		@SuppressWarnings("unchecked")
-		ArrayList<String> nameList = (ArrayList<String>) map.get("cofficeNameList");
-		@SuppressWarnings("unchecked")
-		ArrayList<String> codeList = (ArrayList<String>) map.get("cofficeCodeList");
-		
-		for(int i=0;i<22;i++) {
-			Map<String, Object> rMap = new HashMap<String, Object>();
+		for(int i=0;i<arry.size();i++) {
+			JSONObject obj = (JSONObject)arry.get(i);
+			Map<String, Object> rMaps = new HashMap<String, Object>();
+				
+			rMaps.put("g_code",obj.get("code"));
+			rMaps.put("g_price",obj.get("price"));
+			rMaps.put("g_name",obj.get("name"));
+			rMaps.put("du_cnt",obj.get("count"));
 			
-			rMap.put("du_cnt",countList.get(i).toString());
-			rMap.put("g_price",priceList.get(i).toString());
-			rMap.put("g_name",nameList.get(i).toString());
-			rMap.put("g_code",codeList.get(i).toString());
-			cService.insertGoods(rMap);
+			int n = cService.insertGoods(rMaps);
+			if(n>0) {
+				System.out.println("저장 성공");
+			}else {
+				System.out.println("저장 실패");
+			}
 		}
-		return rMaps;
+	
+		return 0;
 	}
 	
 	
@@ -234,8 +245,154 @@ public class ClientController {
 		return rMap;
 	}
 	
+	
+	
+	
+
+	@RequestMapping(value = "/DBtoExcel2.do", method =RequestMethod.POST)
+	@ResponseBody
+	public String DBtoExcel(@RequestParam Map<String, Object> map) throws IOException, java.io.IOException {
+
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		
+		rMap.put("status",map.get("status"));
+		//rMap.put("date",map.get("date"));
+ 		
+
+		Workbook workbook = new XSSFWorkbook();
+		Sheet sheet = workbook.createSheet("거래처 다운");
+		int rowNo = 0;
+		
+		Row headerRow = sheet.createRow(rowNo++);
+		headerRow.createCell(0).setCellValue("사업자번호");
+		headerRow.createCell(1).setCellValue("사원코드");
+		headerRow.createCell(2).setCellValue("업체명");
+		headerRow.createCell(3).setCellValue("주소");
+		headerRow.createCell(4).setCellValue("전화번호");
+		headerRow.createCell(5).setCellValue("지역");
+		headerRow.createCell(6).setCellValue("계약 시작 일");
+		headerRow.createCell(7).setCellValue("계약 만료 일");
+		headerRow.createCell(8).setCellValue("계약 상태");
+		
+		List<ClientDto> lists = cService.selectStatus(rMap);
+		for (ClientDto clist : lists) {
+			Row row = sheet.createRow(rowNo++);
+			row.createCell(0).setCellValue(clist.getCli_num());
+			row.createCell(1).setCellValue(clist.getEmp_code());
+			row.createCell(2).setCellValue(clist.getCli_name());
+			row.createCell(3).setCellValue(clist.getCli_addr());
+			row.createCell(4).setCellValue(clist.getCli_tel());
+			row.createCell(5).setCellValue(clist.getCli_area());
+			row.createCell(6).setCellValue(clist.getCt_start());
+			row.createCell(7).setCellValue(clist.getCt_end());
+			row.createCell(8).setCellValue(clist.getStatus());
+			
+		}
+
+		FileOutputStream fileOutPut = new FileOutputStream("C:\\Users\\User\\Downloads\\거래처리스트_"+ map.get("date").toString() +".xlsx");
+	    workbook.write(fileOutPut);
+	    fileOutPut.close();
+	    return "excel complete";
+	}
 
 	
 	
+	
+	//거래처 수정 
+	@RequestMapping(value = "/updateClientPage.do", method=RequestMethod.GET)
+	public String UpdateClient(String cli_num, Model model) {
+		List<ClientDto>  cVo = cService.DetailClient(cli_num);
+		model.addAttribute("cVo", cVo);
+		return "updateClient";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateClient.do", method = RequestMethod.POST)
+	public void UpdateClient(@RequestParam Map<String, Object> map, Model model) {
+		
+		System.out.println("업데이트를 위해 받아온 사업자 번호 입니다 :"+ map);
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		rMap.put("cli_num",map.get("cli_num"));
+		rMap.put("cli_name",map.get("cli_name"));
+		rMap.put("cli_addr",map.get("cli_addr"));
+		rMap.put("cli_area",map.get("cli_area"));
+		rMap.put("cli_tel",map.get("cli_tel"));
+		
+		int n = cService.UpdateClient(rMap);
+		if(n>0) {
+			logger.info("UpdateClient 수정에 성공하였습니다. ");
+		}
+		
+		Map<String, Object> rMap2 = new HashMap<String, Object>();
+		rMap2.put("ct_start",map.get("ct_start"));
+		rMap2.put("ct_end",map.get("ct_end"));
+		rMap2.put("ct_code",map.get("ct_code"));
+		
+		int n2 = cService.UpdateContract(rMap2);
+		if(n2>0) {
+			logger.info("UpdateContract 수정에 성공하였습니다. ");
+		}
+		
+		
+	}
+	
+	
+	@RequestMapping(value = "/updateGoods.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateGoods(@RequestParam Map<String, Object> map) {
+		
+		JSONArray arry = new JSONArray();
+		 
+		arry = JSONArray.fromObject(map.get("codeArrObj"));
+		
+		for(int i=0;i<arry.size();i++) {
+			JSONObject obj = (JSONObject)arry.get(i);
+			Map<String, Object> rMaps = new HashMap<String, Object>();
+				
+			
+			rMaps.put("seq",obj.get("seq"));
+			rMaps.put("g_price",obj.get("price"));
+			rMaps.put("du_cnt",obj.get("count"));
+			
+			System.out.println(rMaps);
+			
+			int n = cService.UpdateGoods(rMaps);
+			if(n>0) {
+				System.out.println("저장 성공");
+			}else {
+				System.out.println("저장 실패");
+			}
+		}
+	
+		return 0;
+	}
+	
+	
+	
+	//지역 검색
+	@RequestMapping(value = "/selectLocation.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectLocation(@RequestParam Map<String, Object> map) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		List<String> datalistLname = new ArrayList<String>();
+ 		
 
+		//상품정보가져오기
+		List<Map<String, Object>> dto = cService.selectLocation();
+		System.out.println(dto.isEmpty());
+		
+		
+		
+		for(Map<String, Object> data : dto){
+			rMap.put("area", data.get("area"));
+		}
+
+		logger.info("ClientController insertClient");
+		
+		rMap.put("AreaName", dto);
+		return rMap;
+	}
+
+	
 }

@@ -39,10 +39,15 @@ c.CLI_TEL,
 cd.RATE,
 cg.G_NAME,
 gd.RATE AS G_CODE,
+CG.DU_CNT,
+CG.G_PRICE,
+cg.SEQ,
+c2.CT_CODE,
+c.CLI_AREA,
 <![CDATA[ CASE WHEN SYSDATE  > c2.CT_START AND SYSDATE < c2.CT_END THEN '진행중' ]]>
 <![CDATA[ WHEN SYSDATE < c2.CT_START THEN '대기중' ]]>
 <![CDATA[ WHEN SYSDATE > c2.CT_END THEN '종료' ]]>
- END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, c2.CT_START ,c2.CT_END
+ END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, TO_CHAR(c2.CT_START , 'YYYY-MM-DD') AS CT_START ,TO_CHAR(c2.CT_END , 'YYYY-MM-DD') AS CT_END
 	FROM CLIENT c
 		JOIN CONTRACT_MANAGEMENT cm 
 		ON c.CLI_NUM = cm.CLI_NUM 
@@ -70,14 +75,14 @@ gd.RATE AS G_CODE,
 
 
 
-<!--거래처 정보 수정-->
+<!--거래처 정보 수정
 <update id="UpdateClient" parameterType="java.util.Map">
 UPDATE 
 CLIENT 
 SET CLI_TEL =#{cli_tel},
 CLI_ADDR=#{cli_addr}
 WHERE CLI_NUM =#{cli_num}
-</update>
+</update>-->
 
 <!--거래처 등록-->
 <insert id="insertClient" parameterType="java.util.Map">
@@ -134,12 +139,16 @@ VALUES(#{contractKey}, #{ctm_code}, 'C01', 0,  #{du_date}, #{ct_start}, #{ct_end
 </insert>
 
 
-<!--상품등록 작업중-->
+<!--상품등록 after-->
 <insert id="insertGoods" parameterType="java.util.Map">
 
-<selectKey resultType="int" keyProperty="contractKeys" order="BEFORE">
-    SELECT MAX(CT_CODE) FROM CONTRACT        
-</selectKey>  
+<selectKey resultType="hashmap" keyProperty="SEQ,CT_CODE" order="BEFORE">
+    SELECT MAX(T1.SEQ)+1 AS SEQ , MAX(T2.CT_CODE) AS CT_CODE
+    FROM contract_goods T1
+    	FULL OUTER JOIN CONTRACT T2
+    	ON T1.CT_CODE = T2.CT_CODE
+</selectKey>    
+
 
 INSERT INTO contract_goods(
 	SEQ,
@@ -150,12 +159,12 @@ INSERT INTO contract_goods(
 	CT_CODE
 )
 VALUES(
-	CONTRACT_GOODS_SEQ.NEXTVAL,
+	#{SEQ},
 	#{g_code},
 	#{g_name},
 	#{g_price},
 	#{du_cnt},
-	#{contractKeys}
+	#{CT_CODE}
 )
 </insert>
 
@@ -171,6 +180,86 @@ SELECT CLI_NUM
 FROM CLIENT
 </select>
 
+<!--지역 조회-->
+<select id="selectLocation" resultType="java.util.Map">
+SELECT
+   AREA
+  FROM location 
+</select>
+
+<!-- ****************************백업 query**************************** -->
+
+<!--거래처-->
+<select id="BackUpClient"  resultType="cDto">
+SELECT 
+    CLI_NUM, 
+    EMP_CODE, 
+    CLI_NAME, 
+    CLI_ADDR, 
+    CLI_TEL, 
+    CLI_AREA, 
+    CLI_USE
+FROM client
+</select>
+
+
+
+<!--계약관리-->
+<select id="BackUpcMGR"  resultType="cDto">
+SELECT
+   CTM_CODE, 
+   CLI_NUM 
+   FROM contract_management
+</select>
+
+
+
+<!-- 거래처 할인-->
+<select id="BackUpGoodsClient"  resultType="cDto">
+select  
+	DCODE_CLIENT, 
+	RATE 
+from client_discount
+</select>
+
+
+<!--계약-->
+<select id="BackUpContract"  resultType="cDto">
+SELECT
+ CT_CODE, 
+ CTM_CODE, 
+ DCODE_CLIENT, 
+ DU_PRICE, 
+ DU_DATE, 
+ CT_START, 
+ CT_END 
+ FROM contract
+</select>
+
+<!-- ****************************백업 query**************************** -->
+<!--거래처 수정-->  
+<update id="UpdateClient" parameterType="java.util.Map">  
+UPDATE CLIENT
+	SET 
+	CLI_NAME = #{cli_name}, 
+	CLI_ADDR = #{cli_addr}, 
+	CLI_TEL = #{cli_tel}, 
+	CLI_AREA = #{cli_area}
+	WHERE CLI_NUM = #{cli_num}
+</update>
+
+
+<update id="UpdateContract" parameterType="java.util.Map"> 
+UPDATE CONTRACT
+	SET CT_START = #{ct_start}, CT_END = #{ct_end}
+WHERE CT_CODE = #{ct_code}
+</update>
+
+<update id="UpdateGoods" parameterType="java.util.Map"> 
+UPDATE CONTRACT_GOODS
+	SET G_PRICE = #{g_price}, DU_CNT = #{du_cnt}
+	WHERE SEQ = #{seq}
+</update>
 
 
 </mapper>

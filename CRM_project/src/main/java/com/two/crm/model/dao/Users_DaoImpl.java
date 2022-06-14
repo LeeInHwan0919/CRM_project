@@ -37,6 +37,14 @@ public class Users_DaoImpl implements Users_IDao{
 	@Override
 	public int insertUser(Map<String, Object> map) {
 		return sqlSession.update(NS+"insertUser",map);
+
+	public List<UserDto> BackUpUsers() {
+		return sqlSession.selectList(NS+"BackUpUsers");
+	}
+
+	@Override
+	public List<UserDto> BackUpLocation() {
+		return sqlSession.selectList(NS+"BackUpLocation");
 	}
 
 	

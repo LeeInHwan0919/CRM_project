@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<th>첨부파일</th>
-				<td></td>
+				<td><div id="fileList"></div></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -38,9 +38,7 @@
 			</tr>
 	</table>
 	<div><br>
-<%-- 			<c:if test="${bVo.id eq member.id }"> --%>
-			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: left;">수정</button>
-<%-- 			</c:if> onclick="location.href='./deleteBoard.do?seq=${bVo.seq}'" --%>
+<%-- 			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: left;">수정</button> --%>
 			<button class="btn btn-info" onclick="location.href='./boardList.do'" style="float: right;" >목록</button>
 			<button class="btn btn-danger" onclick="deletboard(${bVo.seq})"style="float: right;">삭제</button>
 			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: right;">수정</button>
@@ -79,7 +77,15 @@ $.ajax({
     data : {seq : ${bVo.seq}},
     success : function(data){
     	console.log(data);
-//        alert("파일 성공"); 
+    	console.log(data.data[0].file_folder);
+    	var htmlMarker = "";
+    	var item = "";
+    	for(var i=0;i<data.data.length;i++){
+    		item = data.data[i].file_name;
+    		htmlMarker += '<a href="javascript:download('+ "'" + item + "'" +')">' + item +'</a>';
+    	}
+    	$("#fileList").append(htmlMarker);
+
        
     },
     error:function(error){
@@ -87,6 +93,69 @@ $.ajax({
     }
 });
 
+
+function download(fileName){
+	
+	var filePath = "C:/test/";
+	var originPath = filePath+fileName;
+	
+	var data =  {
+		"filePath" : originPath
+		, "fileName" : fileName
+	}
+	
+	$.ajax({
+	    type:"POST",
+	    url:"./filedownload.do",
+	    data : data,
+	    cache: false,
+	    xhrFields: {
+	        responseType: "blob",
+	    },
+	    success : function(blob, status, xhr){
+	    	
+	    	var fileName = "";
+	    	var disposition = xhr.getResponseHeader("Content-Disposition");
+
+	    	if (disposition && disposition.indexOf("attachment") !== -1) {
+	    	    var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+	    	    var matches = filenameRegex.exec(disposition);
+
+	    	    if (matches != null && matches[1]) {
+	    	        fileName = decodeURI(matches[1].replace(/['"]/g, ""));
+	    	    }
+	    	}
+	    	
+	    	
+	    	// for IE
+	    	if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+	    	    window.navigator.msSaveOrOpenBlob(blob, fileName);
+	    	} else {
+	    	    var URL = window.URL || window.webkitURL;
+	    	    var downloadUrl = URL.createObjectURL(blob);
+
+	    	    if (fileName) {
+	    	        var a = document.createElement("a");
+
+	    	        // for safari
+	    	        if (a.download === undefined) {
+	    	            window.location.href = downloadUrl;
+	    	        } else {
+	    	            a.href = downloadUrl;
+	    	            a.download = fileName;
+	    	            document.body.appendChild(a);
+	    	            a.click();
+	    	        }
+	    	    } else {
+	    	        window.location.href = downloadUrl;
+	    	    }
+	    	}
+	    },
+	    error:function(error){
+	       console.log("error");
+	    }
+	});
+}
 
 </script>
 
