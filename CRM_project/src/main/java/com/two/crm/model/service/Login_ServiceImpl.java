@@ -1,6 +1,8 @@
 package com.two.crm.model.service;
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,14 @@ public class Login_ServiceImpl implements Login_IService{
 	}
 
 	@Override
-	public boolean signUp(UserDto dto) {
-		return dao.signUp(dto);
+	public boolean modifyPW(UserDto dto) {
+		return dao.modifyPW(dto);
 	}
 
+
 	@Override
-	public String telChk(String emp_code) {
-		return dao.telChk(emp_code);
+	public int match(Map<String, Object> map) {
+		return dao.match(map);
 	}
 
 }

@@ -73,24 +73,34 @@
         cursor:pointer;
         vertical-align:top
     }
+    
+    
+    input[type=checkbox] {
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	padding: 10px;
+
+}
 </style>
 
 </head>
 <%@include file="./header.jsp" %>
 <body>
-<!-- style='text-align: center;' -->
+<h2 style="text-align: center;"><strong>새 공지사항</strong></h2><br><br>
 		<div class="container" >
-				제목: <input type="text" id="title" name="title" class="form-control"><br>
-				<div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
-        			<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> <br>
-        		
-				<!-- 20220603 subin 오늘 이전 일자 선택 불가능하게 설정해주기 -->
-					시작 일자<input type="text" name="startdate" id="datepicker" readonly="readonly">
-					만료 일자<input type="text" name="enddate" id="datepicker2" readonly="readonly"><br>
-					내용: <textarea name="content" id="content"></textarea><br><br>
-				<button  class="btn btn-default" onclick="javascript:history.back(-1)" >뒤로가기</button>
-				<button  class="btn btn-default" onclick="Btnsave()" >저장</button>
-			<!-- <input class="btn btn-default" type="reset" value="다시작성"> -->
+				
+				<h4>제목</h4><input type="text" id="title" name="title" class="form-control"><br>
+				<h4>첨부파일</h4><div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
+        			 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> <br>
+        			<h4>게시 일자</h4>
+					시작 일자 : <input type="text"  class="start" name="startdate" id="datepicker" readonly="readonly">
+					만료 일자 : <input type="text"  class="last" name="enddate" id="datepicker2" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					중요 공지 사항 : <input type="checkbox" id="important" name="important" value="1"><br><br>
+					<h4>내용</h4> <textarea name="content" id="content"></textarea><br><br>
+				<button  class="btn btn-info" onclick="javascript:history.back(-1)"  style="float: right;">뒤로가기</button>
+				<button  class="btn btn-success" onclick="Btnsave()" style="float: right;">저장</button>
 		</div>
 	</body>
 	
@@ -101,13 +111,51 @@ CKEDITOR.replace( 'content', {
     uiColor: '#9AB8F3',
 
 });
+ 
+ 
+/* <p> 삭제 안됨 2022.06.13 subin */
+CKEDITOR.editorConfig = function( config ) {
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
+};
+
 function insert(){
 	var data = document.getElementById("inputContent").value;
 	console.log(data);
-	// <textarea>에 넣어줄 값을 data 부분에 넣어주면 됨 
 	CKEDITOR.instances.content.setData(data); 
 }
 
+
+$( "#datepicker" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+$( "#datepicker2" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+
+	
+function dateCheck (first, last) {
+	let firstDates = new Date(first.val()); //시작 
+	let SecondDates = new Date(last.val()); //마지막 
+	if (firstDates >= SecondDates) {
+		alert("게시 시작일짜 보다 빠른 날짜를 선택하 실 수는 없습니다. ");
+		first.val('');
+		last.val(''); 
+		return false;
+	}
+}
+
+// $("input:checkbox[id='important']").prop("checked", 1);   // 체크박스 체크 
+// $("input:checkbox[id='important']").prop("checked", 0);   // 체크박스 해제 
+
+// 	$("input:checkbox[name=important]:checked").each(function() {
+// 	    var checkVal = $(this).val(); // 체크된 값의 value값 가져오기
+// 	    console.log(checkVal);
+// 	});
+	
+	
 function Btnsave() {
 	
 	
@@ -117,12 +165,20 @@ function Btnsave() {
 		return false;
 	}
 	
+	let checkState = 0;
+	if($("#important").is(":checked")){
+		checkState = 1;
+	}
+
+	var regText = /<[^>]*>?/g;
 	
 	var datalist = {
 			"startdate" : $("#datepicker").val(),
 			"enddate" : $("#datepicker2").val(),
 			"title" : $("#title").val(),
-			"content" : CKEDITOR.instances.content.getData() //$("#content").val()
+// 			"important" : $(#"important").val(),
+			"content" : CKEDITOR.instances.content.getData().replace(regText,'') //$("#content").val()
+			, "important" : checkState
 	}
 
 	
@@ -149,16 +205,11 @@ $.ajax({
     success : function(data){
     	console.log(data);
     	board_seq = data;
-    	
-       /* alert("공지사항 입력 성공");  */
-//        window.location.href = './boardList.do';
-       
     },
     error:function(error){
        console.log("error");
     }
 });
-
 
 
 
@@ -170,7 +221,7 @@ $(function() {
 $(function() {
 	$( "#datepicker2" ).datepicker({ minDate: 0});
 	});
-	
+
 $( function() {
 	$("#datepicker").datepicker();
     $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
@@ -179,10 +230,7 @@ $( function() {
 $( function() {
 	$("#datepicker2").datepicker();
     $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
-});
-
-
-
+}); 
 
 
 //파일 업로드
@@ -238,7 +286,7 @@ $(document).ready(function(){
             fd.append('file', files[i]);
             fd.append('seq', board_seq);
      
-            var status = new createStatusbar(obj); //Using this we can set progress.
+            var status = new createStatusbar(obj); 
             status.setFileNameSize(files[i].name,files[i].size);
             sendFileToServer(fd,status);
      
@@ -292,6 +340,7 @@ $(document).ready(function(){
         }
     }
     
+    
     function sendFileToServer(formData,status)
     {
     	console.log(status);
@@ -322,15 +371,16 @@ $(document).ready(function(){
             success: function(data){
             	console.log(data);
                 status.setProgress(100);
-     
              /*   $(".status1").append("File upload Done<br>");   */         
             }
         }); 
-     
         status.setAbort(jqXHR);
     }
-    
 });
+
+
+
+
 </script>
 
 <%@include file="./footer.jsp" %>

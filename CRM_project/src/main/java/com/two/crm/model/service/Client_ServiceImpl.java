@@ -45,11 +45,6 @@ public class Client_ServiceImpl implements Client_IService{
 	}
 
 
-	@Override
-	public int UpdateClient(Map<String, Object> map) {
-		logger.info("UpdateClient query: UpdateClient ");
-		return dao.UpdateClient(map);
-	}
 
 
 	@Override
@@ -61,6 +56,7 @@ public class Client_ServiceImpl implements Client_IService{
 
 	@Override
 	public void insertContractMGT() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -117,5 +113,66 @@ public class Client_ServiceImpl implements Client_IService{
 		return dao.insertGoods(map);
 
 	}
+	
+	@Override
+	public List<ClientDto> selectStatus(Map<String, Object> map) {
+		logger.info("Client_ServiceImpl : selectStatus ");
+		return dao.selectStatus(map);
+	}
+
+
+	@Override
+	public List<ClientDto> BackUpClient() {
+		logger.info("Client_ServiceImpl : BackUpClient ");
+		return dao.BackUpClient();
+	}
+
+
+	@Override
+	public List<ClientDto> BackUpcMGR() {
+		logger.info("Client_ServiceImpl : BackUpcMGR ");
+		return dao.BackUpcMGR();
+	}
+
+
+	@Override
+	public List<ClientDto> BackUpContract() {
+		logger.info("Client_ServiceImpl : BackUpContract ");
+		return dao.BackUpContract();
+	}
+
+
+	@Override
+	public List<ClientDto> BackUpGoodsClient() {
+		logger.info("Client_ServiceImpl : BackUpGoodsClient ");
+		return dao.BackUpGoodsClient();
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectLocation() {
+		return dao.selectLocation();
+	}
+
+
+	@Override
+	public int UpdateClient(Map<String, Object> map) {
+		logger.info("Client_ServiceImpl query: UpdateClient ");
+		return dao.UpdateClient(map);
+	}
+	
+	@Override
+	public int UpdateContract(Map<String, Object> map) {
+		logger.info("Client_ServiceImpl query: UpdateContract ");
+		return dao.UpdateContract(map);
+	}
+
+
+	@Override
+	public int UpdateGoods(Map<String, Object> map) {
+		logger.info("Client_ServiceImpl query: UpdateGoods ");
+		return dao.UpdateGoods(map);
+	}
+
 
 }

@@ -10,6 +10,7 @@
 <body>
 <div class="container">
 <table class="table table-bordered" style="text-align: center;"> 
+	<h3><strong>거래처 상세 조회</strong></h3><br>
 	<thead>
 			<tr>
 				<th>사업자 번호</th>
@@ -57,12 +58,40 @@
  			</tr>
 			</c:forEach>
 		</tbody>
-		<button  class="btn btn-default" onclick="deletClient()" >삭제</button>
-</table>
 
+		<button class="btn btn-default" onclick="deletClient()">삭제</button>
+
+</table>
+		<div>
+		<button class="btn btn-info" onclick="location.href='./clientList.do'" style="float: right;margin: 0 0 0 10px;" >목록</button>
+		<button class="btn btn-danger" onclick="deletClient()" style="float: right;margin: 0 0 0 10px;" >삭제</button>
+		<button class="btn btn-success" onclick="updateClient()"  style="float: right;margin: 0 0 0 10px;">거래처 수정</button>
+		</div>
 </div>
 </body>
 	<script type="text/javascript">
+
+	$(function() {
+		$( "#datepicker" ).datepicker({ minDate: 0});
+		});
+
+	$(function() {
+		$( "#datepicker2" ).datepicker({ minDate: 0});
+		});
+		
+	$( function() {
+		$("#datepicker").datepicker();
+	    $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
+	})
+
+	$( function() {
+		$("#datepicker2").datepicker();
+	    $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
+	});
+
+	
+	
+	
 		function deletClient(){
 			
 			let data = confirm("삭제하시겠습니까?");
@@ -86,5 +115,38 @@
 		         }
 		    });
 		}
+		
+		function updateClient(){
+			var key = $("#cli_num").val();
+			if(key != null){
+			 window.location.href = './updateClientPage.do?cli_num='+key;
+			}
+		}
+		
+	
+	$.ajax({
+	    type:"POST",
+	    url:"./selectGoodsName.do",
+	    success : function(data){
+	       console.log(data);
+	       let htmlData  = "";
+	       for(i=0;i<data.gCode.length;i++){
+	    	   htmlData += "<tr>";
+	    	   htmlData += "<td>"+ data.gName[i] +"</td>";
+	    	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
+	    	   htmlData += "<input type='hidden' name='cofficeCode' id='cofficeCode"+i+"' value="+data.gCode[i]+">";
+	    	   htmlData += "<td>납품 수량 : <input type='text' name='cofficeCount' id='cofficeCount"+i+"'></td>";
+	    	   htmlData += "<td>금액 : <input type='text' name='cofficePrice' id='cofficePrice"+i+"'></td>";
+	    	   htmlData += "</tr>";
+	       }
+	       
+	       $("#cofficeTable").append(htmlData);
+	    
+	    },
+	    error:function(error){
+	       console.log("error");
+	    }
+	});
+
 	</script>
 </html>

@@ -1,6 +1,8 @@
 package com.two.crm.model.dao;
 
 
+import java.util.Map;
+
 import com.two.crm.dto.UserDto;
 
 public interface Login_IDao {
@@ -14,17 +16,18 @@ public interface Login_IDao {
 	
 	
 	/**
-	 * 회원가입 
-	 * @param 사용자 정보 담은 dto(id, pw, name, sex, email, phone)
-	 * @return boolean
+	 * 사원코드에 해당하는 비밀번호 변경 
+	 * @param 사원코드, 새 비밀번호
+	 * @return true, false
 	 */
-	public boolean signUp(UserDto dto);
+	public boolean modifyPW(UserDto dto);
 	
 	
 	/**
-	 * 사원코드에 해당하는 전화번호체크
-	 * @param emp_code 사원코드
-	 * @return emp_tel 전화번호
+	 * 사원코드에 해당하는 전화번호인지
+	 * @param emp_code 사원코드, emp_tel 전화번호
+	 * @return int
 	 */
-	public String telChk(String emp_code);
+	public int match(Map<String, Object> map);
+	
 }

@@ -20,14 +20,22 @@ public class ClientDto {
 	private String ct_start;
 	private String ct_end;
 	private String ctm_code;
+	private String du_cnt;
+	private String g_price;
+	private String seq;
+	private String ct_code;
 	
+	private String dcode_client;
+	private String du_price;
+	private String du_date;
 	public ClientDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
 	public ClientDto(String cli_num, String emp_code, String cli_name, String cli_addr, String cli_tel, String cli_area,
 			String cli_use, String rate, String g_name, String g_code, String status, String ct_date_year_sum,
-			String ct_start, String ct_end, String ctm_code) {
+			String ct_start, String ct_end, String ctm_code, String du_cnt, String g_price, String seq, String ct_code,
+			String dcode_client, String du_price, String du_date) {
 		super();
 		this.cli_num = cli_num;
 		this.emp_code = emp_code;
@@ -44,15 +52,23 @@ public class ClientDto {
 		this.ct_start = ct_start;
 		this.ct_end = ct_end;
 		this.ctm_code = ctm_code;
+		this.du_cnt = du_cnt;
+		this.g_price = g_price;
+		this.seq = seq;
+		this.ct_code = ct_code;
+		this.dcode_client = dcode_client;
+		this.du_price = du_price;
+		this.du_date = du_date;
 	}
 	@Override
 	public String toString() {
 		return "ClientDto [cli_num=" + cli_num + ", emp_code=" + emp_code + ", cli_name=" + cli_name + ", cli_addr="
 				+ cli_addr + ", cli_tel=" + cli_tel + ", cli_area=" + cli_area + ", cli_use=" + cli_use + ", rate="
 				+ rate + ", g_name=" + g_name + ", g_code=" + g_code + ", status=" + status + ", ct_date_year_sum="
-				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code + "]";
+				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code
+				+ ", du_cnt=" + du_cnt + ", g_price=" + g_price + ", seq=" + seq + ", ct_code=" + ct_code
+				+ ", dcode_client=" + dcode_client + ", du_price=" + du_price + ", du_date=" + du_date + "]";
 	}
-	
 	public String getCli_num() {
 		return cli_num;
 	}
@@ -143,6 +159,49 @@ public class ClientDto {
 	public void setCtm_code(String ctm_code) {
 		this.ctm_code = ctm_code;
 	}
+	public String getDu_cnt() {
+		return du_cnt;
+	}
+	public void setDu_cnt(String du_cnt) {
+		this.du_cnt = du_cnt;
+	}
+	public String getG_price() {
+		return g_price;
+	}
+	public void setG_price(String g_price) {
+		this.g_price = g_price;
+	}
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+	public String getCt_code() {
+		return ct_code;
+	}
+	public void setCt_code(String ct_code) {
+		this.ct_code = ct_code;
+	}
+	public String getDcode_client() {
+		return dcode_client;
+	}
+	public void setDcode_client(String dcode_client) {
+		this.dcode_client = dcode_client;
+	}
+	public String getDu_price() {
+		return du_price;
+	}
+	public void setDu_price(String du_price) {
+		this.du_price = du_price;
+	}
+	public String getDu_date() {
+		return du_date;
+	}
+	public void setDu_date(String du_date) {
+		this.du_date = du_date;
+	}
+
 	
 	
 	

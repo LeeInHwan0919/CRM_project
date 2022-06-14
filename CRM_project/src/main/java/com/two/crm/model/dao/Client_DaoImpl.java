@@ -35,11 +35,6 @@ public class Client_DaoImpl implements Client_IDao{
 		return cli_num;
 	}
 
-	@Override
-	public int UpdateClient(Map<String, Object> map) {
-		int cnt= sqlSession.insert(NS+"UpdateClient",map);
-		return cnt;
-	}
 
 	@Override
 	public int insertClient(Map<String, Object> map) {
@@ -49,6 +44,7 @@ public class Client_DaoImpl implements Client_IDao{
 
 	@Override
 	public void insertContractMGT() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -60,6 +56,7 @@ public class Client_DaoImpl implements Client_IDao{
 
 	@Override
 	public void insertContractGS() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -89,6 +86,57 @@ public class Client_DaoImpl implements Client_IDao{
 		int cnt= sqlSession.insert(NS+"insertGoods",map);
 		return cnt;
 	}
+
+	@Override
+	public List<ClientDto> selectStatus(Map<String, Object> map){
+		return sqlSession.selectList(NS+"selectStatus",map);
+	}
+
+	@Override
+	public List<ClientDto> BackUpClient() {
+		return sqlSession.selectList(NS+"BackUpClient");
+	}
+
+
+	@Override
+	public List<ClientDto> BackUpContract() {
+		return sqlSession.selectList(NS+"BackUpContract");
+	}
+
+	@Override
+	public List<ClientDto> BackUpGoodsClient() {
+		return sqlSession.selectList(NS+"BackUpGoodsClient");
+	}
+
+	@Override
+	public List<ClientDto> BackUpcMGR() {
+		return sqlSession.selectList(NS+"BackUpcMGR");
+		}
+
+	@Override
+	public List<Map<String, Object>> selectLocation() {
+		return sqlSession.selectList(NS+"selectLocation");
+	}
+
+	
+	@Override
+	public int UpdateClient(Map<String, Object> map) {
+		int cnt= sqlSession.insert(NS+"UpdateClient",map);
+		return cnt;
+	}
+
+	@Override
+	public int UpdateContract(Map<String, Object> map) {
+		int cnt= sqlSession.insert(NS+"UpdateContract",map);
+		return cnt;
+	}
+
+	@Override
+	public int UpdateGoods(Map<String, Object> map) {
+		int cnt= sqlSession.insert(NS+"UpdateGoods",map);
+		return cnt;
+	}
+
 
 
 }

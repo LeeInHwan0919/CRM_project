@@ -11,7 +11,7 @@
 <body>
 		<div class="findpw">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="emp_code" name="emp_code"> 
-				<input type="text" placeholder="전화번호를 입력해 주세요." id="inputPhoneNumber" name="emp_tel"> 
+				<input type="text" placeholder="전화번호를 입력해 주세요." id="emp_tel" name="emp_tel"> 
 				<input type="button" id="sendPhoneNumber" value="SMS전송">
 				<div class="time"></div>
 				<input type="text" id="inputCertifiedNumber" placeholder='인증번호'>
@@ -27,22 +27,46 @@
 var timer = null;
 var isRunning = false;
         $('#sendPhoneNumber').click(function(){
-            let phoneNumber = $('#inputPhoneNumber').val();
-            let emp_code = $('#emp_code');
+        	
+            let phoneNumber = $('#emp_tel').val();
+            let emp_code = $('#emp_code').val();
             
-            	alert('인증번호 발송 완료!');
-                window.close();
-                var display = $('.time');
-            	var leftSec = 180;
-            	// 남은 시간
-            	// 이미 타이머가 작동중이면 중지
-            	if (isRunning){
-            		clearInterval(timer);
-            		display.html("");
-            		startTimer(leftSec, display);
-            	}else{
-            		startTimer(leftSec, display);
-            	}
+            $.ajax({
+                type: "POST",
+                url: "./findpw.do",
+                data: {"phoneNumber" : phoneNumber},
+                dataType:"text",
+                success: function(msg){
+                	if(msg=='성공'){
+                		if(phoneNumber == '' || emp_code==''){
+                        	alert('값을 입력하세요.');
+                        }else{
+                        	alert('인증번호 발송 완료!');
+//                         	window.close();
+                            var display = $('.time');
+                        	var leftSec = 180;
+                        	// 남은 시간
+                        	// 이미 타이머가 작동중이면 중지
+                        	if (isRunning){
+                        		clearInterval(timer);
+//                         		display.html("");
+                        		startTimer(leftSec, display);
+                        	}else{
+                        		startTimer(leftSec, display);
+                        	}
+                        }
+                	}else{
+                		alert('사원번호에 해당하는 전화번호가 아닙니다. 다시 입력해주세요.');
+                	}
+                },
+                error:function(err){
+                	alert(JSON.stringify(err));
+                }
+            });
+            
+            
+            
+            	
             
             
             
@@ -60,9 +84,8 @@ var isRunning = false;
                             // 타이머가 활성화 되어있고 값이 정확히 입력되었을 때
                     		alert('인증성공!'+'휴대폰 인증이 정상적으로 완료되었습니다.'+'새 비밀번호 입력창으로 넘어갑니다.');
 							clearInterval(timer);
-			        		display.html("");
-			        		location.href="./newpw.do";
-			        		
+// 			        		display.html("");
+			        		location.href="./newpw.do?emp_code="+emp_code
                         }else{
                         	if(isRunning) {
                         		// 타이머가 활성화 되어있고 인증번호가 틀렸을때
