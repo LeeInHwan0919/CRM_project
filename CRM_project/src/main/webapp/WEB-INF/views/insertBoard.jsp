@@ -87,7 +87,7 @@
 
 </head>
 <%@include file="./header.jsp" %>
-<body>
+<body style="background-color: #FFFAFA">
 <h2 style="text-align: center;"><strong>새 공지사항</strong></h2><br><br>
 		<div class="container" >
 				

@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>백업 페이지 입니다. </title>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <select id="selectarea">
 </select>
 <!--  <input type="button" value="백업하기" onclick="BackUp();"> -->

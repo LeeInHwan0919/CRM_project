@@ -14,7 +14,7 @@
   </style>
   
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 
 <div class="container" style="text-align: center; margin-top: 50px;">
   	<h2>공지 게시판</h2><br>

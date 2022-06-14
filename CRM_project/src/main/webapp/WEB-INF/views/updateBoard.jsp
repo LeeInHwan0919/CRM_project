@@ -22,7 +22,7 @@ int strSeq = srMap.getSeq();
    }
 </style>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container"> 
               <h3>글 수정</h3>
                  <table class="table table-hover">

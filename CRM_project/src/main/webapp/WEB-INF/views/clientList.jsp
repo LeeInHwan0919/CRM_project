@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <%@include file="./header.jsp" %>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <jsp:useBean id="now" class="java.util.Date" />
 <div class="container" style="text-align: center; margin-top: 50px;">
   	<h2>공지 게시판</h2><br>

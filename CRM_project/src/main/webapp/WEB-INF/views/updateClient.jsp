@@ -34,7 +34,7 @@ for(int i=0;i<cMap.size();i++){
 <title>Insert title here</title>
 <%@include file="./header.jsp" %>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container"> 
               <h3>거래처 수정</h3>
                  <table class="table table-hover">

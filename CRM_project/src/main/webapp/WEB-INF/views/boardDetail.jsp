@@ -7,7 +7,7 @@
 <title>게시글 상세보기</title>  
 <%@include file="./header.jsp" %>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div style="text-align: center; margin: 10%;">
 <table class="table table-bordered"> 
 			<tr>

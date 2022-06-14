@@ -59,7 +59,7 @@ function clickBtn(){
 
 </script>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container" style="text-align: center; margin-top: 50px;">
 <h2>재고 관리</h2><br>
 <input type="button" value="재고 리스드 다운로드" onclick="clickBtn();"><br>

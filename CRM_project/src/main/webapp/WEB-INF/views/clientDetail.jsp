@@ -7,7 +7,7 @@
 <title>거래처 상세 조회</title>
 <%@include file="./header.jsp" %>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container">
 <table class="table table-bordered" style="text-align: center;"> 
 	<h3><strong>거래처 상세 조회</strong></h3><br>
