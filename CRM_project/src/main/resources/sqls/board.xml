@@ -13,7 +13,7 @@ SELECT
 	TITLE, 
 	CONTENT, 
 	IMPORTANT, 
-	STARTDATE,
+	TO_CHAR(STARTDATE, 'YYYY-MM-DD') AS STARTDATE,
 	ENDDATE, 
 	S_COUNT, 
 	POST_USE
@@ -21,6 +21,7 @@ SELECT
  	WHERE POST_USE ='Y'
  	AND
  	TO_DATE(SYSDATE, 'YYYY-MM-DD') >= TO_DATE(STARTDATE, 'YYYY-MM-DD')
+ 	ORDER BY IMPORTANT,STARTDATE  DESC
 </select>
 
 
@@ -30,9 +31,10 @@ SELECT
 		SEQ, 
 		TITLE, 
 		CONTENT, 
-		STARTDATE, 
+		TO_CHAR(STARTDATE, 'YYYY-MM-DD') AS STARTDATE, 
 		ENDDATE, 
 		S_COUNT, 
+		IMPORTANT,
 		POST_USE        
 	FROM BOARD 
 	WHERE SEQ = #{seq}
@@ -58,7 +60,7 @@ SELECT
 	#{content}, 
 	#{startdate},
 	#{enddate},
-	1, 
+	#{important}, 
 	0, 
 	'Y')
 </insert>
@@ -68,7 +70,8 @@ SELECT
 	UPDATE 
 	BOARD
 	SET TITLE=#{title}, 
-	CONTENT=#{content} 
+	CONTENT=#{content},
+	IMPORTANT =#{important}
 	WHERE SEQ =#{seq}  
 
 </update>
@@ -134,8 +137,33 @@ VALUES (
 </select>
 
 
-<!-- ****************************게시판 query**************************** -->
+<!-- ****************************백업 query**************************** -->
 
 
+<!--게시판-->
+<select id="BackUpBoard" resultType="bDto">
+SELECT 
+	SEQ, 
+	EMP_CODE, 
+	TITLE, 
+	CONTENT, 
+	STARTDATE,
+	ENDDATE, 
+	S_COUNT, 
+	POST_USE,
+	IMPORTANT
+FROM BOARD
+</select>
+
+<!-- 첨부파일 -->
+<select id="BackUpFile"  resultType="bDto">
+ SELECT
+        FILE_SEQ
+        ,BOARD_SEQ
+        ,FILE_SIZE
+        ,FILE_FOLDER
+        ,FILE_NAME 
+FROM board_file
+</select>
 
 </mapper>

@@ -26,4 +26,55 @@ SELECT DISTINCT ig.G_NAME,
 </select>
 
 
+<!-- ****************************백업 query**************************** -->
+
+<!--계약 상품-->
+<select id="BackUpContractGoods"  resultType="gDto">
+SELECT
+    SEQ, 
+    CT_CODE, 
+    G_CODE, 
+    G_NAME, 
+    G_PRICE, 
+    DU_CNT
+    FROM contract_goods
+</select>
+
+<!-- 상품 할인 -->
+<select id="BackUpGoodsDiscount"  resultType="gDto">
+select 
+   DCODE_GOODS, 
+   RATE 
+   from goods_discount
+</select>
+
+<select id="BackUpiMGR"  resultType="gDto">
+SELECT
+    SEQ, 
+    G_CODE, 
+    EMP_CODE, 
+    G_NAME, 
+    IN_DATE, 
+    IN_CNT 
+    FROM inventory_management
+    
+</select>
+
+<!--재고 -->
+<select id="BackUpGoods"  resultType="gDto">
+SELECT
+   G_CODE,
+    DCODE_GOODS, 
+    G_NAME, 
+    IV_CNT, 
+    G_KG, 
+    G_COUNTRY, 
+    G_CONTENT, 
+    G_AMOUNT, 
+    G_DATE
+    FROM inventory_goods
+</select>
+
+
+
 </mapper>

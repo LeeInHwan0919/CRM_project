@@ -23,6 +23,28 @@ public class Goods_DaoImpl implements Goods_IDao{
 		return sqlSession.selectList(NS+"AllGoods");
 	}
 
+	@Override
+	public List<GoodsDto> BackUpContractGoods() {
+		return sqlSession.selectList(NS+"BackUpContractGoods");
+	}
+
+	@Override
+	public List<GoodsDto> BackUpGoodsDiscount() {
+		return sqlSession.selectList(NS+"BackUpGoodsDiscount");
+	}
+
+	@Override
+	public List<GoodsDto> BackUpiMGR() {
+		return sqlSession.selectList(NS+"BackUpiMGR");
+	}
+
+
+	@Override
+	public List<GoodsDto> BackUpGoods() {
+		return sqlSession.selectList(NS+"BackUpGoods");
+	}
+
+
 	
 
 

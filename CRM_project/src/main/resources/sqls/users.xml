@@ -24,6 +24,7 @@ USING (AREA_CODE)
 WHERE EMP_CODE=#{emp_code}
 </select>
 
+
 <!-- 사원 정보 수정 -->
 <update id="updateUser" parameterType="java.util.HashMap">
 UPDATE USER_INFO
@@ -37,4 +38,38 @@ INSERT INTO USER_INFO
 (EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE, EMP_IMG, EMP_AUTH, EMP_TEL, EMP_ADDR)
 VALUES(#{emp_code}, #{area_code}, #{emp_name}, #{emp_pw}, #{emp_gender}, 'Y', NULL, #{emp_auth}, #{emp_tel}, #{emp_addr})
 </insert>
+
+
+
+
+
+
+
+<!-- ****************************백업 query subin 수정 x **************************** -->
+
+<!--사원-->
+<select id="BackUpUsers"  resultType="UDto">
+SELECT
+    EMP_CODE, 
+    AREA_CODE, 
+    EMP_NAME, 
+    EMP_PW, 
+    EMP_GENDER, 
+    EMP_USE, 
+    EMP_IMG, 
+    EMP_AUTH, 
+    EMP_TEL, 
+    EMP_ADDR 
+    FROM user_info
+</select>
+
+<!--지역-->
+<select id="BackUpLocation"  resultType="UDto">
+SELECT
+    AREA_CODE, 
+    AREA FROM 
+    location
+</select>
+<!-- ****************************백업 query**************************** -->
+
 </mapper>

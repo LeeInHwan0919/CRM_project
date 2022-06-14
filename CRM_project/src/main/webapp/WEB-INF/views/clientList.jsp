@@ -11,13 +11,19 @@
 <jsp:useBean id="now" class="java.util.Date" />
 <div class="container" style="text-align: center;">
 <div style='text-align: left;'>
-<button type="button"class="btn btn-primary" onclick="location.href='./insertPage.do'">새 거래처 등록 </button>
-</div><br>
-<select id="selectstate" style="float: left;">
+<br>
+
+<select id="selectstate" style='text-align: right;'>
 	<option value="진행">진행</option>
 	<option value="대기">대기</option>
 	<option value="종료">종료</option>
 </select>
+
+<input type="button" class="btn btn-info" value="리스드 다운로드" onclick="clickBtn();">
+
+</div><br>
+
+
 <table id="myTable" class="display" style="width:100%">
 		<thead>
 			<tr >
@@ -44,11 +50,11 @@
     </c:forEach>
     </tbody>
 </table>
-		<div style='text-align: right;'>
+		 <div style='text-align: right;'><br>
+		 <button type="button"class="btn btn-primary" onclick="location.href='./insertPage.do'">새 거래처 등록 </button>
 		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
          </div>
 </div>
-
 
 </body>
 
@@ -79,11 +85,35 @@ $(document).ready(function () {
 });
 
 
-var data = {
-		"state" : $("#selectstate").val()
-}
 
-console.log(data);
+function clickBtn(){
+	 today = new Date();   
+    year = today.getFullYear(); // 년도
+    month = today.getMonth() + 1;  // 월
+    date = today.getDate();  // 날짜
+    
+    var str = year + '_' + month + '_' + date /* + '_' + hours + '_' + minutes */;
+    console.log(str);
+    
+	 var data = {
+			"status" : $("#selectstate").val(),
+			"date" : str
+	}
+	
+	console.log(status);
+    
+    $.ajax({
+        type:"POST",
+        url:"DBtoExcel2.do",
+        data : data,
+        success : function(){
+           alert("Excel 다운로드 성공"); 
+        },
+        error:function(error){
+           console.log("error");
+        }
+   });
+}
 
 
 </script>

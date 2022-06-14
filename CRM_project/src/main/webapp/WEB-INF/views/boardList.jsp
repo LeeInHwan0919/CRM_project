@@ -7,7 +7,6 @@
 <title>공지 게시판 리스트</title>
 <%@include file="./header.jsp" %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <style type="text/css">
   th,table {
   text-align: center;
@@ -51,10 +50,10 @@
     </c:forEach>
     </tbody>
 </table>
+<br>
+<br>
 		<div style='text-align: right;'>
-			<c:if test="${user == 'SYS_123456'}">
          <button type="button"class="btn btn-primary" onclick="location.href='./insertBoardPage.do'">새글 입력</button>
-			 </c:if>	
 		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
          </div><br>
 		</div>
@@ -80,6 +79,14 @@ $(document).ready(function () {
             }
         },
 		
+        
+        columnDefs: [
+            {
+                targets: [0],
+                orderData: [0],
+            }
+        ],
+        
         pagingType: "full_numbers", // 페이징 타입 설정 : simple, simple_numbers, full_numbers 등
         lengthChange: false,
         info: false

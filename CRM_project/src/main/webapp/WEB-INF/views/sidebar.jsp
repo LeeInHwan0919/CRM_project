@@ -50,6 +50,14 @@
         </a>
       </li>
       <li>
+          <a href="./Backup.do">
+          <span>
+            <i class="fa-solid fa-comment-dots"></i>
+          </span>
+          <span>백업</span>
+        </a>
+      </li>
+      <li>
         <a href="./result.do">
           <span>
             <i class="fa-solid fa-house"></i>

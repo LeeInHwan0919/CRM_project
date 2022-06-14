@@ -83,5 +83,17 @@ public class Board_ServiceImpl implements Board_IService{
 		return dao.selectFileInfo(seq);
 	}
 
+	@Override
+	public List<BoardDto> BackUpBoard() {
+		logger.info("Board_ServiceImpl : BackUpBoard ");
+		return dao.BackUpBoard();
+	}
+
+	@Override
+	public List<BoardDto> BackUpFile() {
+		logger.info("Board_ServiceImpl : BackUpFile ");
+		return dao.BackUpFile();
+	}
+
 
 }

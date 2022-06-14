@@ -100,7 +100,7 @@ public class GoodsController {
 			row.createCell(7).setCellValue(goods.getIv_cnt());
 		}
 
-		FileOutputStream fileOutPut = new FileOutputStream("C:\\Users\\User\\Downloads\\"+fileName+".xlsx");
+		FileOutputStream fileOutPut = new FileOutputStream("C:\\Users\\User\\Downloads\\재고리스트_"+fileName+".xlsx");
 	    workbook.write(fileOutPut);
 	    fileOutPut.close();
 	    return "excel complete";
@@ -114,7 +114,7 @@ public class GoodsController {
 
 		// 파일을 읽어서 excel을 핸들링하기 위해 try catch 예외처리 해줌
 		// try문 안에 파일을 연결할 수 있는 FileInputStream으로 fileName을 불러와준다
-		try (FileInputStream fis = new FileInputStream("C:/Users/User/Downloads/"+fileName+".xlsx")) { 
+		try (FileInputStream fis = new FileInputStream("C:/Users/User/Downloads/재고리스트_"+fileName+".xlsx")) { 
 			
 
 			//XSSFWorkbook을 활용하여 fis에 담겨있는 엑셀 파일 로딩
@@ -156,9 +156,6 @@ public class GoodsController {
 
 	private static void pdf_maker(List<GoodsDto> data, String pdffile) {
 		
-		//String 배열로 header에 들어갈 타이틀 선정
-//		String[] headers = new String[] {"상품코드","할인코드","원두명","kg","지역","원두 함량","EA","개수"}; 
-		//가상의 메모리에 A4사이즈로 document 생성 
 		Document doc = new Document(PageSize.A4); 
 		float[] widths = {30, 30, 30, 30, 30, 30, 30, 30};
 		PdfPTable table = new PdfPTable(widths);
@@ -169,16 +166,9 @@ public class GoodsController {
 			//폰트설정 ("폰트이름","폰트 배열","외부에 있는 폰트 사용")
 			BaseFont basefont = BaseFont.createFont("C:\\eclipse-jee-2020-12-R-win32-x86_64\\eclipse\\workspace_web\\iText_API\\HANDOTUM.TTF",BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
 			
-//			Font fontHeader = new Font(basefont,12);//Header 폰트, 크기 설정
 			Font fontRow = new Font(basefont,10);//Row 폰트. 크기 설정
 			
-//			PdfPTable table = new PdfPTable(data.size());//테이블의 길이 설정 ArrayList 만큼의 사이즈 설정
-//			for (String header : headers) { //headers 에 있는 것을 String 타입으로 하나씩 넣는다
-//				PdfPCell cell = new PdfPCell(); 
-//				cell.setGrayFill(0.9f);//cell의 배경색 , 투명도 설정
-//				cell.setPhrase(new Phrase(header,fontHeader));//header의 title을 대문자로 변환(.toUpperCase()사용)
-//				table.addCell(cell);//만들어진 cell 넣어준다
-//			}
+
 			table.completeRow();//Row가 하나 만들어졌으니 마감해준다.
 			
 			//ArrayList에 저장되어 있는 데이터를 Row로 변환
@@ -219,6 +209,7 @@ public class GoodsController {
 			doc.open();
 		}			
 	}
+
 
 
 }
