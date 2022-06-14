@@ -21,11 +21,5 @@
 		</div>
 		<div class="shadow"></div>
 	</form>
-	<form action="./signUpSc.do" method="post">
-	  <div>
-	    <input type="text" id="emp_pw" name="emp_pw"> 
-				<input type="submit" value="회원가입">
-	  </div>
-	</form>
 </body>
 </html>

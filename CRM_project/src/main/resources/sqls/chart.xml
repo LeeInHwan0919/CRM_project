@@ -26,8 +26,8 @@ JOIN CONTRACT c
 ON cg.CT_CODE = c.CT_CODE
 GROUP BY G_NAME
 ORDER BY SUM(DU_CNT) desc)) 
-<![CDATA[WHERE RM <=3
-OR RM >=21]]>
+<![CDATA[WHERE RM =3
+OR RM >=19]]>
 </select>
 
 

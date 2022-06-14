@@ -58,6 +58,9 @@
  			</tr>
 			</c:forEach>
 		</tbody>
+
+		<button class="btn btn-default" onclick="deletClient()">삭제</button>
+
 </table>
 		<div>
 		<button class="btn btn-info" onclick="location.href='./clientList.do'" style="float: right;margin: 0 0 0 10px;" >목록</button>

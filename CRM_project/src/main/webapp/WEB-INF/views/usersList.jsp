@@ -42,7 +42,7 @@
 		</table>
 		<br>
 		<div style='text-align: right;'>
-		<button class="btn btn-primary" onclick="location.href='./insertUser.do'">계정등록</button>
+		<button class="btn btn-primary" onclick="location.href='./insertUserGo.do'">계정등록</button>
 			<button class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
 		</div>
 

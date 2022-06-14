@@ -2,6 +2,8 @@ package com.two.crm.model.dao;
 
 
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,18 +32,19 @@ public class Login_DaoImpl implements Login_IDao{
 	}
 
 	@Override
-	public boolean signUp(UserDto dto) {
+	public boolean modifyPW(UserDto dto) {
 		// 화면에서 입력된 비밀번호를 암호화
 		String encodePw = passwordEncoder.encode(dto.getEmp_pw());
 		// 암호화된 비밀번호를 저장
 		dto.setEmp_pw(encodePw);
 		
-		return session.insert(NS+"signUp", dto) > 0 ? true : false;
+		return session.insert(NS+"modifyPW", dto) > 0 ? true : false;
 	}
 
+
 	@Override
-	public String telChk(String emp_code) {
-		return session.selectOne(NS+"telChk",emp_code);
+	public int match(Map<String, Object> map) {
+		return session.selectOne(NS+"match",map);
 	}
 
 }
