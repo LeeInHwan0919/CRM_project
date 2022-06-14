@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 상세보기</title>  
 <%@include file="./header.jsp" %>
+<br>
+<title>공지 글 상세보기</title>  
 </head>
 <body>
-<div style="text-align: center; margin: 10%;">
-<table class="table table-bordered"> 
+<div class="container">
+<table class="table table-bordered" style="text-align: center;"> 
+			<h3><strong>공지 글 상세 조회</strong></h3><br>
 			<tr>
 				<th>번호</th>
 				<td>${bVo.seq}</td>
@@ -38,10 +40,13 @@
 			</tr>
 	</table>
 	<div><br>
-<%-- 			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: left;">수정</button> --%>
-			<button class="btn btn-info" onclick="location.href='./boardList.do'" style="float: right;" >목록</button>
-			<button class="btn btn-danger" onclick="deletboard(${bVo.seq})"style="float: right;">삭제</button>
-			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: right;">수정</button>
+			<button class="btn btn-warning" onclick="location.href='./boardList.do'" style="float: right; margin: 0 0 0 10px;" >목록</button>
+			<c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
+			<button class="btn btn-danger" onclick="deletboard(${bVo.seq})"style="float: right; margin: 0 0 0 10px;">삭제</button>
+			</c:if>
+			<c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
+			<button class="btn btn-success" onclick="location.href='./updateBoard.do?seq=${bVo.seq}'" style="float: right; margin: 0 0 0 10px;">수정</button>
+			</c:if>
 	</div>
 </div>
 </body>

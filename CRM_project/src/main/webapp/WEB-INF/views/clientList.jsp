@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>거래처 리스트</title>
 <%@include file="./header.jsp" %>
 </head>
 <body>
-<jsp:useBean id="now" class="java.util.Date" />
+<%-- <jsp:useBean id="now" class="java.util.Date" /> --%>
 <div class="container" style="text-align: center;">
-<div style='text-align: left;'>
+<div style='text-align: right;'>
 <br>
 
 <select id="selectstate" style='text-align: right;'>
@@ -23,7 +23,7 @@
 
 </div><br>
 
-
+<h2><strong>거래처 관리</strong></h2><br>
 <table id="myTable" class="display" style="width:100%">
 		<thead>
 			<tr >
@@ -51,9 +51,11 @@
     </tbody>
 </table>
 		 <div style='text-align: right;'><br>
-		 <button type="button"class="btn btn-primary" onclick="location.href='./insertPage.do'">새 거래처 등록 </button>
-		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
+		 <button type="button"class="btn btn-primary" style="margin: 0 0 0 10px;" onclick="location.href='./insertPage.do'">새 거래처 등록 </button>
+		 <button  class="btn btn-warning" style="margin: 0 0 0 10px;" onclick="location.href='./result.do'">뒤로가기</button>
          </div>
+	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 </div>
 
 </body>
@@ -62,15 +64,10 @@
 $(document).ready(function () {
 	table = $("#myTable").DataTable({
 		"language": { 
-            "emptyTable": "데이터가 없어요.",
-            "lengthMenu": "페이지당 _MENU_ 개씩 보기",
             "info": "현재 _START_ - _END_ / _TOTAL_건",
             "infoEmpty": "데이터 없음",
-            "infoFiltered": "( _MAX_건의 데이터에서 필터링됨 )",
             "search": "검색: ",
-            "zeroRecords": "일치하는 데이터가 없어요.",
-            "loadingRecords": "로딩중...",
-            "processing":     "잠시만 기다려 주세요...",
+            "zeroRecords": "검색 결과가 없습니다.",
             "paginate": {
                 "next": "다음",
                 "previous": "이전"
@@ -78,7 +75,7 @@ $(document).ready(function () {
         },
 		
         pagingType: "full_numbers", // 페이징 타입 설정 : simple, simple_numbers, full_numbers 등
-        displayLength: 20, //기본표시건수 설정
+        displayLength: 10, //기본표시건수 설정
         lengthChange: false,
         info: false
     });
@@ -107,7 +104,7 @@ function clickBtn(){
         url:"DBtoExcel2.do",
         data : data,
         success : function(){
-           alert("Excel 다운로드 성공"); 
+           alert("거래처 리스트 다운로드 성공"); 
         },
         error:function(error){
            console.log("error");

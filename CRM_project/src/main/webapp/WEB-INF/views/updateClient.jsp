@@ -35,8 +35,8 @@ for(int i=0;i<cMap.size();i++){
 <%@include file="./header.jsp" %>
 </head>
 <body>
-<div class="container"> 
-              <h3>거래처 수정</h3>
+<div class="container"> <br><br>
+           		<h3><strong>거래처 수정</strong></h3><br>
                  <table class="table table-hover">
                  <tr>
                     <td>사업자 번호</td>
@@ -74,17 +74,19 @@ for(int i=0;i<cMap.size();i++){
 		        	</td>
 		        </tr>
                  </table>
-                 
-                 <table class="table table-hover" id="cofficeTable">
+	            <table class="table table-hover" id="cofficeTable">
 		        <tbody>
 		        </tbody>
-		        </table>
+		        </table><br><br>
               <div style="text-align: center;">
-              <input class="btn btn-default" id="updateBtn" type="button" value="수정하기"  onclick="updateBtn()">
-              <input class="btn btn-default"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
+              <input class="btn btn-success" id="updateBtn" type="button" value="수정하기"  style="margin: 0 0 0 10px;" onclick="updateBtn()">
+              <input class="btn btn-warning"  type="button" value="뒤로가기"   style="margin: 0 0 0 10px;" onclick="javascript:history.back(-1)">
               </div>
 </div>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 </body>
+
 <script type="text/javascript">
 
 var priceList = "<%= priceInfo %>";
@@ -185,7 +187,7 @@ function updateBtn() {
 	     success : function(data){
 	     	console.log(data)
 			cofficeUpdate();
-	     	alert("등록이 완료되었습니다."); 
+	     	alert("거래처 수정이 완료되었습니다."); 
 	        window.location.href = './clientList.do';
 	     },
 	     error:function(error){

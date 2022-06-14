@@ -42,10 +42,11 @@ public class Users_ServiceImpl implements Users_IService{
 	}
 
 	@Override
-	public int insertUser(Map<String, Object> map) {
+	public int insertUser(UserDto dto) {
 		logger.info("insertUser ServiceImpl");
-		return dao.insertUser(map);
-    
+		return dao.insertUser(dto);
+	}
+	
 	public List<UserDto> BackUpUsers() {
 		return dao.BackUpUsers();
 	}

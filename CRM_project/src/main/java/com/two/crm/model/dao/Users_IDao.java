@@ -33,7 +33,7 @@ public interface Users_IDao {
 	 * @param dto (사원코드, 담당지역, 사원이름, 비밀번호, 성별, 담당업무(권한), 전화번호, 주소
 	 * @return int
 	 */
-	public int insertUser(Map<String, Object> map);
+	public int insertUser(UserDto dto);
 
 	public List<UserDto> BackUpUsers();
 	public List<UserDto> BackUpLocation();

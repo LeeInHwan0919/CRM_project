@@ -88,52 +88,21 @@
 </head>
 <%@include file="./header.jsp" %>
 <body>
-
-<div class="container"><br><br>
-		        <h3><strong>새 공지사항 입력</strong></h3><br>
-		        <table class="table table-hover">
-		        <tr>
-		        		<td>제목</td>
-		        	<td>
-		       			<input type="text" id="title" name="title" class="form-control"placeholder="제목을 입력해 주세요">
-		        	</td>
-		        </tr>
-		         <tr>
-					<td>시작 일자</td>
-					<td><input type="text" name="startdate" id="datepicker"  readonly="readonly"></td>
-                 </tr>
-                 <tr>
-					<td>만료 일자</td>
-					<td><input type="text" name="enddate" id="datepicker2"  readonly="readonly"></td>
-                 </tr>
-                <tr>
-		        		<td>중요 공지 </td>
-		        <td>
-		        	 <input type="checkbox" id="important" name="important" value="1">
-		        </td>
-		        </tr>
-		        <tr>
-		        		<td>첨부파일</td>
-		        	<td>
-		        		<div id="fileUpload" class="dragAndDropDiv">마우스로 파일을 끌어놓으세요</div>
-		        	</td>
-		        </tr>
-		         <tr>
-		        		<td>내용</td>
-		        	<td>
-		        		<textarea name="content" id="content"></textarea>
-		        	</td>
-		        </tr>
-		        
-		        </table><br><br>
-		        	<div style="text-align: center;">
-				        <input class="btn btn-success" style="margin: 0 0 0 10px;"  type="button" value="거래처 등록" onclick="insertBtn()">
-				        <input class="btn btn-info" style="margin: 0 0 0 10px;"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
-		       		</div>
-		    </div>
-	<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
-</body>
+<h2 style="text-align: center;"><strong>새 공지사항</strong></h2><br><br>
+		<div class="container" >
+				
+				<h4>제목</h4><input type="text" id="title" name="title" class="form-control"><br>
+				<h4>첨부파일</h4><div id="fileUpload" class="dragAndDropDiv">마우스로 파일을 끌어놓으세요</div>
+        			 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> <br>
+        			<h4>게시 일자</h4>
+					시작 일자 : <input type="text"  class="start" name="startdate" id="datepicker" readonly="readonly">
+					만료 일자 : <input type="text"  class="last" name="enddate" id="datepicker2" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					중요 공지 사항 : <input type="checkbox" id="important" name="important" value="1"><br><br>
+					<h4>내용</h4> <textarea name="content" id="content"></textarea><br><br>
+				<button  class="btn btn-info" onclick="javascript:history.back(-1)"  style="float: right;">뒤로가기</button>
+				<button  class="btn btn-success" onclick="Btnsave()" style="float: right;">저장</button>
+		</div>
+	</body>
 	
 	
 <script type="text/javascript">
@@ -172,6 +141,13 @@ function dateCheck (first, last) {
 	}
 }
 
+// $("input:checkbox[id='important']").prop("checked", 1);   // 체크박스 체크 
+// $("input:checkbox[id='important']").prop("checked", 0);   // 체크박스 해제 
+
+// 	$("input:checkbox[name=important]:checked").each(function() {
+// 	    var checkVal = $(this).val(); // 체크된 값의 value값 가져오기
+// 	    console.log(checkVal);
+// 	});
 	
 	
 function Btnsave() {
@@ -194,8 +170,9 @@ function Btnsave() {
 			"startdate" : $("#datepicker").val(),
 			"enddate" : $("#datepicker2").val(),
 			"title" : $("#title").val(),
-			"content" : CKEDITOR.instances.content.getData().replace(regText,''),
-			"important" : checkState
+// 			"important" : $(#"important").val(),
+			"content" : CKEDITOR.instances.content.getData().replace(regText,'') //$("#content").val()
+			, "important" : checkState
 	}
 
 	
@@ -388,6 +365,7 @@ $(document).ready(function(){
             success: function(data){
             	console.log(data);
                 status.setProgress(100);
+             /*   $(".status1").append("File upload Done<br>");   */         
             }
         }); 
         status.setAbort(jqXHR);

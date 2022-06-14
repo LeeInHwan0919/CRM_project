@@ -41,30 +41,30 @@ table{
 </style>
 <script type="text/javascript">
 
-$("#modify").click(function(){
-	console.log("ajax 발동");
-	 $.ajax({
-        type : "POST",
-        url : "./updateUser.do", 
-        success : function(msg){
-            sweatalert(msg+"성공입니다.");
-            location.href="./usersList.do";
-        },
-        error : function(err){
-        	sweatalert(JSON.stringify(err)+"실패입니다.");
-        	location.href="redirect:/usersDetail.do"
-        }
-    });
-});
-
+	
+	function readURL(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      document.getElementById('emp_img').src = e.target.result;
+		      jQuery('#emp_img').attr("value",e.target.result);
+		    };
+		    reader.readAsDataURL(input.files[0]);
+		  } else {
+		    document.getElementById('emp_img').src = "";
+		    jQuery('#emp_img').attr("value","");
+		  }
+		}
 </script>
 <body>
 <c:forEach var="users" items="${users}">
 <div class="container" style="margin-top: 30px; margin-left: 550px;">
 <h2 style="margin-left: 100px; margin-top: 20px;">사원 정보 수정</h2>
+    <form action="./updateUser.do" method="post">
   <table border="1">
     <tr>
-      <td rowspan="3" width="150px;"><img src="${users.emp_img}" id="emp_img"></td>
+      <td rowspan="3" width="150px;"><img src="${users.emp_img}"></td>
+      <input type="hidden" id="emp_img" name="emp_img" value="${users.emp_img}">
       <td id="label">사원코드</td>
       <td colspan="2">${users.emp_code}</td>
     </tr>
@@ -77,18 +77,17 @@ $("#modify").click(function(){
       <td colspan="2">${users.emp_auth}</td>
     </tr>
     <tr>
-      <td><input type="file" accept="image/*" style="width: 100%;"></td>
+      <td><input type="file" accept="image/*" style="width: 100%;" id="Inputfile" onchange="readURL(this);"></td>
       <td colspan="3"></td>
     </tr>
-    <form action="./updateUser.do" method="post">
     <input type="hidden" value="${users.emp_code}" id="emp_code" name="emp_code">
     <tr>
       <td id="label">성별</td>
       <td colspan="3">
       <select name="emp_gender" id="emp_gender">
 		  <option value="${users.emp_gender}" selected>${users.emp_gender}</option>
-		  <option value="남">남성</option>
-		  <option value="여">여성</option>
+		  <option value="남">남</option>
+		  <option value="여">여</option>
 	  </select>
       </td>
     </tr>
@@ -124,15 +123,25 @@ $("#modify").click(function(){
     </tr>
     <tr>
       <td id="label">담당지역</td>
-      <td colspan="3" id="area">
-      ${users.area}
+      <td colspan="3">
+      <select id="area_code" name="area_code">
+             <option value="${users.area_code}">${users.area}</option>
+             <option value="LC01">서울</option>
+             <option value="LC02">대구</option>
+             <option value="LC03">울산</option>
+             <option value="LC04">부산</option>
+             <option value="LC05">춘천</option>
+             <option value="LC06">천안</option>
+             <option value="LC07">대전</option>
+             <option value="LC08">광주</option>
+           </select>
 	  </td>
     </tr>
   </table>
   <div id="btn">
-  <button class="btn btn-success" id="modify" type="submit">수정</button>
+  <button class="btn btn-success" id="modify" type="submit" >수정</button>
 </form>
-  <button class="btn btn-warning" onclick="location.href='./UsersList.do'">뒤로가기</button>
+  <button class="btn btn-warning" onclick="location.href='javascript:history.back();'">뒤로가기</button>
   </div>
 </div>
 </c:forEach>

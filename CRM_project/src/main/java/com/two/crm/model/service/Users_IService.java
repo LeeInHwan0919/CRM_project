@@ -14,7 +14,7 @@ public interface Users_IService {
 
 	public int updateUser(Map<String, Object> map);
 	
-	public int insertUser(Map<String, Object> map);
+	public int insertUser(UserDto dto);
 
 	public List<UserDto> BackUpUsers();
 	public List<UserDto> BackUpLocation();

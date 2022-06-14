@@ -39,6 +39,7 @@ ON ui.AREA_CODE = l.AREA_CODE
 JOIN CLIENT c 
 ON c.EMP_CODE = ui.EMP_CODE
 GROUP BY l.AREA
+ORDER BY COUNT(*) DESC
 </select>
 
 </mapper>

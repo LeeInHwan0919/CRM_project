@@ -16,7 +16,9 @@ public class UserDto {
 	private String emp_addr;
 	
 	
-	public UserDto(String emp_code, String emp_gender, String emp_use, String emp_img, String emp_tel,
+	
+	
+	public UserDto(String emp_code,String area_code, String emp_gender, String emp_use, String emp_img, String emp_tel,
 			String emp_addr) {
 		this.emp_code = emp_code;
 		this.emp_gender = emp_gender;
@@ -24,6 +26,7 @@ public class UserDto {
 		this.emp_img = emp_img;
 		this.emp_tel = emp_tel;
 		this.emp_addr = emp_addr;
+		this.area_code = area_code;
 	}
 	public String getEmp_code() {
 		return emp_code;

@@ -20,7 +20,10 @@ footer{
 </head>
 <body>
   <footer>
-            <div style="text-align: center; padding-top: 15px;">footer  &copy; 2022.05 </div>
+            <div style="text-align: center; padding-top: 0px;"> 
+             CRM &copy;<br>
+             02-7547-6663<br>
+             서울특별시 관악구 신림동 1440-3 </div>
     </footer>
 </body>
 </html>

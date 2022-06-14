@@ -6,40 +6,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 성공!</title>
+<title>메인페이지</title>
   <style type="text/css">
     #body{
       float:left;
       width: 750px;
       height: 550px;
-      margin-left: 115px; 
-      margin-top: 60px; 
-      background-color: #CCCCCC;
-      border-radius:15px;
+      margin-left: 50px; 
+      margin-top: 100px; 
+      background-color: #FFFAFA;
+      border-color: #a19b9b;
+      border-width: unset;
+      border-style: double;
+      border-radius: 15px;
     }
     
     #body2{
       float:left;
       width: 750px;
       height: 550px;
-      margin-left: 115px; 
-      margin-top: 60px; 
-      background-color: #CCCCCC;
-      border-radius:15px;
+      margin-left: 50px; 
+      margin-top: 100px;  
+      background-color: #FFFAFA;
+      border-color: #a19b9b;
+      border-width: unset;
+      border-style: double;
+      border-radius: 15px;
     }
     
     td,th{
       text-align: center;
     }
     
+    #allbody{
+      margin-left: 140px;
+    }
   </style>
 </head>
 <!-- <script type="text/javascript" src="./js/main.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- 필수 CDN -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%@include file="./header.jsp" %>
-<body style="margin-left: 60px; background-color: #8b5f5f">	
-
+<body style="margin-left: 60px; background-color: #FFFAFA">	
+<div id="allbody">
 <div id="body">
 <h2 style="text-align: center;">연도별 거래처 계약 건수</h2>
 <hr style="border-color: gray; border-width: 5px;">
@@ -86,7 +95,7 @@
 <hr style="border-color: gray; border-width: 5px;">
 <canvas id="LocationChart"></canvas>
 </div>
-
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	lineGraph();
@@ -211,7 +220,7 @@ function barGraph(){
 		new Chart(document.getElementById("LocationChart"),{
 			type:"bar",
 			data:{
-				labels:["서울","대구","춘천","부산"],//x축 data
+				labels:["서울","부산","대구","춘천"],//x축 data
 				datasets:[{
 					data:lList,//y축 data
 					label:"계약 건수",

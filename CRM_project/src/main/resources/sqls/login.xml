@@ -6,7 +6,7 @@
 <select id="loginChk" parameterType="String" resultType="UDto">
   SELECT EMP_PW, EMP_AUTH
 	FROM USER_INFO
-		WHERE EMP_CODE = #{emp_code}
+		WHERE EMP_CODE = #{emp_code} AND EMP_USE='Y'
 </select>
 
 <update id="modifyPW" parameterType="UDto">
