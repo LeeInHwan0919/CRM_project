@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.two.crm.dto.BoardDto;
 
@@ -29,6 +29,7 @@ import com.two.crm.model.service.Login_IService;
 import com.two.crm.model.service.SMS_Service;
 
 @Controller
+@SessionAttributes("id")
 public class LoginController {
 
 	@Autowired
@@ -54,9 +55,9 @@ public class LoginController {
 		logger.info("LoginController login이동");
 		  
 		if (error != null) {
-			model.addAttribute("msg", "로그인 에러");
+			model.addAttribute("msg", "아이디 또는 비밀번호를 다시 입력해 주세요.");
 		}
-
+		
 		if (logout != null) {
 			model.addAttribute("msg", "로그아웃 성공");
 		}
@@ -79,7 +80,7 @@ public class LoginController {
 		
 		List<BoardDto> lists = bService.AllBoard();
 		model.addAttribute("lists", lists);
-		
+		model.addAttribute("id",userdto.getUsername());
 		
 		return "main";
 	}
@@ -160,9 +161,11 @@ public class LoginController {
         return numStr;
     }
 
+	//비밀번호 변경
 	@RequestMapping(value="/modifyPW.do",method = RequestMethod.POST)
-	public void modifyPW(UserDto dto, HttpServletRequest request) {
+	public String modifyPW(UserDto dto) {
 		System.out.println("회원가입 정보"+dto.toString());
 		service.modifyPW(dto);
+		return "redirect:/loginPage.do";
 	}
 }

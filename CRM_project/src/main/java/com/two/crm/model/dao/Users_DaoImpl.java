@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.two.crm.dto.UserDto;
@@ -19,6 +20,10 @@ public class Users_DaoImpl implements Users_IDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	@Override
 	public List<UserDto> AllUsers() {
 		return sqlSession.selectList(NS+"AllUsers");
@@ -35,9 +40,12 @@ public class Users_DaoImpl implements Users_IDao{
 	}
 
 	@Override
-	public int insertUser(Map<String, Object> map) {
-		return sqlSession.update(NS+"insertUser",map);
-
+	public int insertUser(UserDto dto) {
+		String encodePw = passwordEncoder.encode(dto.getEmp_pw());
+		dto.setEmp_pw(encodePw);
+		return sqlSession.update(NS+"insertUser",dto);
+	}
+	
 	public List<UserDto> BackUpUsers() {
 		return sqlSession.selectList(NS+"BackUpUsers");
 	}

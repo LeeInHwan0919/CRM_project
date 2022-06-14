@@ -33,6 +33,7 @@
            <td>
            <select id="area_code" name="area_code">
              <option value="default">--선택--</option>
+             <option value="">없음</option>
              <option value="LC01">서울</option>
              <option value="LC02">대구</option>
              <option value="LC03">울산</option>
@@ -54,7 +55,11 @@
          </tr>
          <tr>
            <th>성별</th>
-           <td><input type="text" id="emp_gender" name="emp_gender" placeholder="성별을 입력해주세요."></td>
+           <td><select name="emp_gender" id="emp_gender">
+		  <option value="default" selected>--선택--</option>
+		  <option value="남">남</option>
+		  <option value="여">여</option>
+	  </select></td>
          </tr>
          <tr>
            <th>담당업무(권한)</th>

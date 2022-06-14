@@ -22,31 +22,27 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </head>
 <%@include file="./sidebar.jsp" %>
+<%@include file="./footer.jsp" %>
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
     
-    /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
       height: 100%;
     }
     
-    /* Set black background color, white text and some padding */
     footer {
       background-color: #555;
       color: white;
       padding: 15px;
     }
     
-    /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
@@ -64,7 +60,10 @@
       font-size: 18px;
     }
     
-    
+    body{
+    margin-left: 60px;
+    background-color: #8b5f5f";
+    }
   </style>
 </head>
 <body>
@@ -77,17 +76,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="./result.do">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="./result.do">Home</a></li>
+        <li><a href="./result.do">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Projects</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-center">
+      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px;" src="./resources/img/black_logo.png"></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="./logout.do"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		      <c:set var="id" value="${id}"/>
+		       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
+		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [시스템 관리자]	</li>
+		       </c:if>
+		       <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}">	
+		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [거래처 관리자]	</li>
+		       </c:if>
+      		   <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}">	
+		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [재고 관리자]	</li>
+		       </c:if>
+      	
+        <li><a href="./logout.do"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
   </div>

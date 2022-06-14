@@ -9,7 +9,8 @@
 </head>
 <body>
 <jsp:useBean id="now" class="java.util.Date" />
-<div class="container" style="text-align: center;">
+<div class="container" style="text-align: center; margin-top: 50px;">
+  	<h2>공지 게시판</h2><br>
 <div style='text-align: left;'>
 <br>
 
@@ -22,7 +23,6 @@
 <input type="button" class="btn btn-info" value="리스드 다운로드" onclick="clickBtn();">
 
 </div><br>
-
 
 <table id="myTable" class="display" style="width:100%">
 		<thead>

@@ -48,17 +48,13 @@ public class UsersController {
 			return "usersDetail";
 		}
 	
-		
-		
-	
-	//사원 정보 수정
+		//사원 정보 수정
 		@RequestMapping(value = "/updateUser.do", method = RequestMethod.POST)
-		@ResponseBody
 		public String updateUser(Model model, Authentication user,@RequestParam Map<String, Object> map) {
 			System.out.println("updateUser 파라미터값 :"+map.toString());
 			int cnt = uService.updateUser(map);
 			System.out.println("updateUser cnt값 :"+cnt);
-			return (cnt>0)?"성공":"실패";
+			return "redirect:/UsersList.do";
 		}
 		
 		//사원 등록 페이지 이동 
@@ -68,14 +64,13 @@ public class UsersController {
 			return "insertUser";
 		}
 		
-		//사원 등록
-		@RequestMapping(value="/insertUser.do", method = RequestMethod.POST)
-		@ResponseBody
-		public String insertUser(@RequestParam Map<String, Object> map) {
-			System.out.println("UserController insertUser POST실행 dto값 : "+map.toString());
-			int cnt = uService.insertUser(map);
+		//사원 등록 ajax
+		@RequestMapping(value="/insertUser.do",produces="application/json;charset=UTF-8", method = RequestMethod.POST)
+		public String insertUser(UserDto dto) {
+			System.out.println("UserController insertUser POST실행 dto값 : "+dto.toString());
+			int cnt = uService.insertUser(dto);
 			System.out.println("updateUser cnt값 :"+cnt);
-			return (cnt>0)?"성공":"실패";
+			return "redirect:/UsersList.do";
 		}
 
 

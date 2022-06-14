@@ -31,7 +31,14 @@
 						<td>${users.emp_auth}</td>
 						<td style='text-align: center;' id="emp_code">${users.emp_code}</td>
 						<td style='text-align: center;'>${users.emp_gender}</td>
-						<td style="text-align: center;">${users.emp_use}</td>
+						<td style="text-align: center;">
+						  <c:if test="${users.emp_use eq 'Y'}">
+						    <c:out value="${users.emp_use}"></c:out>
+						  </c:if> 
+						  <c:if test="${users.emp_use eq 'N'}">
+						    <b style="color: red;">${users.emp_use}</b> 
+						  </c:if> 
+						</td>
 						<td style="text-align: center;">${users.emp_tel}</td>
 						<td style="text-align: center;">
 						<button type="button" data-toggle="modal" data-target="#myModal"

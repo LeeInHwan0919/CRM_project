@@ -37,7 +37,6 @@ public class Login_DaoImpl implements Login_IDao{
 		String encodePw = passwordEncoder.encode(dto.getEmp_pw());
 		// 암호화된 비밀번호를 저장
 		dto.setEmp_pw(encodePw);
-		
 		return session.insert(NS+"modifyPW", dto) > 0 ? true : false;
 	}
 

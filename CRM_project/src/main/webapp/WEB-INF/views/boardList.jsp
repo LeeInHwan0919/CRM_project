@@ -16,9 +16,9 @@
 </head>
 <body>
 
-<div class="container">
-    <div style='text-align: center;'>
+<div class="container" style="text-align: center; margin-top: 50px;">
   	<h2>공지 게시판</h2><br>
+    <div style='text-align: center;'>
 	<table id="myTable" class="display" style="width:100%; font-size:120%;">
 		<thead>
 			<tr>

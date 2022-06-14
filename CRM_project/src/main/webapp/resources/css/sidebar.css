@@ -13,7 +13,7 @@ a {
   text-decoration:none;
 }
 
-
+/* 사이드바 폭 설정 (펼피기 전)*/
 .side-bar{
   position:fixed;
   top:0;
@@ -21,14 +21,17 @@ a {
   width:60px;
   height:100%;
   background-color:#13181E;
-  transition:width 0.3s;
+  transition:width 0.6s;
   color:#fff;
   overflow:hidden;
   z-index:1;
 }
 
+
+
+/* 사이드바 폭 설정 (펼친 후)*/
 .side-bar:hover {
-  width:150px;
+  width:300px;
   overflow:visible;
 }
 
