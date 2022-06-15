@@ -26,8 +26,8 @@ import com.two.crm.model.service.Users_IService;
 
 
 /**
-* 모든 테이블을 excel로 백업을 위해 다운로드 해주는 클레스
-* 2022.06.13
+* 모든 테이블을 excel로 백업
+* * 2022.06.13
 * @author nohsubin
 */
 

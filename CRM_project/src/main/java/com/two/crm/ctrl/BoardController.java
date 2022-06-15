@@ -41,7 +41,7 @@ import com.two.crm.model.service.Board_IService;
 
 
 /**
-* 게시판을 전체 조회하는 클래스 
+* 게시판을 전체 조회
 * 2022.06.02
 * @author nohsubin
 */
@@ -66,7 +66,7 @@ public class BoardController {
 	
 	
 	/**
-	* 게시판을 상세 조회 클래스 
+	* 게시판을 상세 조회
 	* 쿠키 정보를 통해 한번씩 카운트 
 	* 2022.06.02
 	* @author nohsubin
@@ -137,7 +137,7 @@ public class BoardController {
 	
 	
 	/**
-	* 게시판을 수정하는 클래스
+	* 게시판을 수정
 	* 2022.06.02
 	* @author nohsubin
 	*/
@@ -170,7 +170,7 @@ public class BoardController {
 	
 	
 	/**
-	* 해당 게시글의 파일을 조회하는 클래스
+	* 해당 게시글의 파일을 조회
 	* 2022.06.06
 	* @author nohsubin
 	*/
@@ -190,7 +190,7 @@ public class BoardController {
 	}
 	
 	/**
-	* 새 게시글을 입력하는 클래스
+	* 새 게시글을 입력
 	* 2022.06.02
 	* @author nohsubin
 	*/
@@ -226,7 +226,7 @@ public class BoardController {
 	
 	
 	/**
-	* 게시글의 seq를 확인하는 클래스
+	* 게시글의 seq를 확인
 	* 2022.06.02
 	* @author nohsubin
 	*/
@@ -239,7 +239,7 @@ public class BoardController {
 	}
 	
 	/**
-	* 공지사항을 삭제하는 클래스
+	* 공지사항을 삭제
 	* 2022.06.02
 	* @author nohsubin
 	*/
@@ -266,7 +266,7 @@ public class BoardController {
     }
 	
 	/**
-	* 파일을 업로드하는 클래스
+	* 파일을 업로드
 	* 2022.06.06
 	* @author nohsubin
 	*/
@@ -319,7 +319,7 @@ public class BoardController {
 	
 	
 	/**
-	* 파일을 다운로드하는 클래스
+	* 파일을 다운로드
 	* 2022.06.13
 	* @author nohsubin
 	*/
