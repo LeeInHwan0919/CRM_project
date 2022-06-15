@@ -20,14 +20,14 @@ div.container{
 <body>
 <div class="container">
 <div id="img">
-<img style="text-align: center; height: 66px; " src="./resources/img/blue_logo.png">
+<img style="text-align: center; height: 66px;" src="./resources/img/blue_logo.png">
 </div>
 	<form action="./logingo.do" class="signin-form" method="POST">
 		<div class="login" style="margin-top: 30px;">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="username" name="emp_code"> 
 				<input type="password" placeholder="패스워드를 입력해 주세요." id="password" name="emp_pw"> 
 				<b style="color: red; margin-left: 40px;" >${msg}</b>
-				<a href="./findpw.do" class="forgot">비밀번호를 잊으셨습니까?</a> 
+				<a href="./findpw.do" class="forgot">비밀번호를 잊으셨습니까악?</a> 
 				<input type="submit" value="LOGIN">
 		</div>
 		<div class="shadow"></div>
