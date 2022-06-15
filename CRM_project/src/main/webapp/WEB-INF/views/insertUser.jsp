@@ -19,7 +19,7 @@
  }
 </style>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
  <form action="./insertUser.do" method="post">
    <div class="container">
 		<h2 style="margin-left: 300px; margin-top: 100px;">사원 정보 등록</h2>

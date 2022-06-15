@@ -9,7 +9,9 @@
 
 <title>로그인 페이지</title>
 </head>
-<body>
+
+<body style="background-color: #FFFAFA">
+
 <div class="container">
 <h2 align="center" style="margin-top: 230px;">LOGIN</h2>
 	<form action="./logingo.do" class="signin-form" method="POST">

@@ -56,7 +56,7 @@ table{
 		  }
 		}
 </script>
-<body>
+<body style="background-color: #FFFAFA">
 <c:forEach var="users" items="${users}">
 <div class="container" style="margin-top: 30px; margin-left: 550px;">
 <h2 style="margin-left: 100px; margin-top: 20px;">사원 정보 수정</h2>

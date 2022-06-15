@@ -14,11 +14,13 @@
   </style>
   
 </head>
-<body>
+<body style="background-color: #FFFAFA">
+
 
 <div class="container">
     <div style='text-align: center;'>
   	<h2><strong>공지 게시판</strong></h2><br>
+
 	<table id="myTable" class="display" style="width:100%; font-size:120%;">
 		<thead>
 			<tr>

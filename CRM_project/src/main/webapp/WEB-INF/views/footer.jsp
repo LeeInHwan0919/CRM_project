@@ -15,6 +15,7 @@ footer{
 	width:100%;
 	color: white;
 	background-color: #333;
+	z-index:1;
 }
 </style>
 </head>

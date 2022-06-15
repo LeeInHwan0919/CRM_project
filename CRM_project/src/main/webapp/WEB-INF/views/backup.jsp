@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>백업 페이지 입니다. </title>
 </head>
+
 <body>
  <input type="button" value="게시판 백업" onclick="BackUpBoard();"><br> 
  <input type="button" value="게시판 파일 백업" onclick="BackUpFile();"><br> 
@@ -20,6 +21,7 @@
  <input type="button" value="계약 관리 백업" onclick="BackUpcMGR();"><br> 
  <input type="button" value="계약 백업" onclick="BackUpContract();"><br> 
  <input type="button" value="거래처 할인 백업" onclick="BackUpGoodsClient();"><br>
+
 </body>
 
 <script type="text/javascript">
