@@ -19,8 +19,10 @@ div.container{
 </style>
 <title>새 비밀번호 입력</title>
 </head>
+
 <body style="background-color: #FFFAFA">
 <div class="container">
+
 <form action="./modifyPW.do" method="post">
 <div id="img">
 <img style="text-align: center; height: 100px; width: 400; " src="./resources/img/blue_logo.png">

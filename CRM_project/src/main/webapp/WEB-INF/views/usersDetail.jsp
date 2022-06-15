@@ -72,7 +72,7 @@ table{
 		  }
 		}
 </script>
-<body style="background-color: #FFFAFA">
+<body>
 <c:forEach var="users" items="${users}">
       <input type="hidden" id="emp_img" name="emp_img" value="${users.emp_img}">
 <div class="container" style="margin-top: 30px; margin-left: 550px;">

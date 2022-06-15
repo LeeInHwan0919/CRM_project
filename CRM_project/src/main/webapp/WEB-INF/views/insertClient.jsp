@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <%@include file="./header.jsp" %>
-<body style="background-color: #FFFAFA">
+<body>
 
 <div class="container"><br><br>
 		        <h3><strong>계약 등록</strong></h3><br>
@@ -34,10 +34,14 @@
 		        		<td>거래처 위치</td>
 		        	<td>
 		        	 <select id="selectarea">
-			        		<option value="서울">대구</option>
-			        		<option value="서울">부산</option>
-			        		<option value="부산">서울</option>
+			        		<option value="서울">서울</option>
+			        		<option value="대구">대구</option>
+			        		<option value="울산">울산</option>
+			        		<option value="부산">부산</option>
 			        		<option value="춘천">춘천</option>
+			        		<option value="천안">천안</option>
+			        		<option value="대전">대전</option>
+			        		<option value="광주">광주</option>
 		        	  </select>
 		        	</td>
 		        </tr>
@@ -56,7 +60,6 @@
 		         <tr>
 		        		<td>계약만료 일자</td>
 		        	<td>
-<!-- 		        		<input type="text" name="title" id="title"> -->
 							<input type="text" name="enddate" id="datepicker2" readonly="readonly">
 		        	</td>
 		        </tr>
@@ -125,6 +128,28 @@ $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
 $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
 
 
+$( "#datepicker" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+$( "#datepicker2" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+
+	
+function dateCheck (first, last) {
+	let firstDates = new Date(first.val()); //시작 
+	let SecondDates = new Date(last.val()); //마지막 
+	if (firstDates >= SecondDates) {
+		alert("게시 시작일짜 보다 빠른 날짜를 선택하 실 수는 없습니다. ");
+		first.val('');
+		last.val(''); 
+		return false;
+	}
+}
+
+
 
 $.ajax({
 	type:"POST",
@@ -173,8 +198,8 @@ $.ajax({
     	   htmlData += "<td>"+ data.gName[i] +"</td>";
     	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
     	   htmlData += "<input type='hidden' name='cofficeCode' id='cofficeCode"+i+"' value="+data.gCode[i]+">";
-    	   htmlData += "<td>납품 수량 : <input type='number' name='cofficeCount' id='cofficeCount"+i+"'></td>";
-    	   htmlData += "<td>금액 : <input type='number' name='cofficePrice' id='cofficePrice"+i+"'></td>";
+    	   htmlData += "<td>납품 수량 : <input type='number' min='0' max='1000' name='cofficeCount' id='cofficeCount"+i+"'></td>";
+    	   htmlData += "<td>금액 : <input type='number' min='0S' max='10000000' name='cofficePrice' id='cofficePrice"+i+"'></td>";
     	   htmlData += "</tr>";
        }
        
@@ -188,6 +213,10 @@ $.ajax({
 
 
 function insertBtn(){
+	
+	var data = confirm("새로운 거래처를 등록 하시겠습니까?");
+	
+	
 	var strid = $("#cliid").val();
 	if(strid == null || strid == " "){
 		alert("not null data")

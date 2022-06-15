@@ -116,6 +116,7 @@
 		        		<td>첨부파일</td>
 		        	<td>
 		        		<div id="fileUpload" class="dragAndDropDiv">마우스로 파일을 끌어놓으세요</div>
+		        		<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> <br>
 		        	</td>
 		        </tr>
 		         <tr>
@@ -127,14 +128,13 @@
 		        
 		        </table><br><br>
 		        	<div style="text-align: center;">
-				        <input class="btn btn-success" style="margin: 0 0 0 10px;"  type="button" value="거래처 등록" onclick="insertBtn()">
-				        <input class="btn btn-info" style="margin: 0 0 0 10px;"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
+				        <button  class="btn btn-info" onclick="javascript:history.back(-1)"  style="float: right; margin: 0 0 0 10px;">뒤로가기</button>
+						<button  class="btn btn-success" onclick="Btnsave()" style="float: right; margin: 0 0 0 10px;">저장</button>
 		       		</div>
 		    </div>
 	<br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br>
 </body>
-
 	
 	
 <script type="text/javascript">
@@ -144,12 +144,7 @@ CKEDITOR.replace( 'content', {
 
 });
  
-
-function insert(){
-	var data = document.getElementById("inputContent").value;
-	console.log(data);
-	CKEDITOR.instances.content.setData(data); 
-}
+ 
 
 
 $( "#datepicker" ).change(function() {
@@ -173,7 +168,7 @@ function dateCheck (first, last) {
 	}
 }
 
-	
+
 	
 function Btnsave() {
 	
@@ -195,8 +190,8 @@ function Btnsave() {
 			"startdate" : $("#datepicker").val(),
 			"enddate" : $("#datepicker2").val(),
 			"title" : $("#title").val(),
-			"content" : CKEDITOR.instances.content.getData().replace(regText,''),
-			"important" : checkState
+			"content" : CKEDITOR.instances.content.getData().replace(regText,'') //$("#content").val()
+			, "important" : checkState
 	}
 
 	
@@ -230,25 +225,12 @@ $.ajax({
 });
 
 
+$( "#datepicker" ).datepicker({ minDate: 0});
+$( "#datepicker2" ).datepicker({ minDate: 0});
+	
+$("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
+$("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
 
-
-$(function() {
-	$( "#datepicker" ).datepicker({ minDate: 0});
-	});
-
-$(function() {
-	$( "#datepicker2" ).datepicker({ minDate: 0});
-	});
-
-$( function() {
-	$("#datepicker").datepicker();
-    $("#datepicker").datepicker("option", "dateFormat","yy-mm-dd");
-})
-
-$( function() {
-	$("#datepicker2").datepicker();
-    $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
-}); 
 
 
 //파일 업로드

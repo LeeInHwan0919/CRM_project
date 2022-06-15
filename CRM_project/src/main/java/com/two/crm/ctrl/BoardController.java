@@ -41,8 +41,10 @@ import com.two.crm.model.service.Board_IService;
 
 
 /**
- * Handles requests for the application home page.
- */
+* 게시판을 전체 조회하는 클래스 
+* 2022.06.02
+* @author nohsubin
+*/
 @Controller
 public class BoardController {
 	
@@ -58,14 +60,17 @@ public class BoardController {
 		List<BoardDto> lists = bService.AllBoard();
 		model.addAttribute("lists", lists);
 		
-//		for( user.getAuthorities() ) 권한으로 체크하기위해서 권한정보 가져와서 비교
 		model.addAttribute("user", user.getName());
 		return "boardList";
 	}
 	
 	
-	//게시판 상세보기 
-	//한 아이디당 한번씩 카운트 
+	/**
+	* 게시판을 상세 조회 클래스 
+	* 쿠키 정보를 통해 한번씩 카운트 
+	* 2022.06.02
+	* @author nohsubin
+	*/
 	@RequestMapping(value = "/boardDetail.do",method = RequestMethod.GET)
 	public String getOneBoard(@RequestParam int seq, Authentication user, HttpServletRequest request, Model model, HttpServletResponse response) {
 		
@@ -131,6 +136,11 @@ public class BoardController {
 	}
 	
 	
+	/**
+	* 게시판을 수정하는 클래스
+	* 2022.06.02
+	* @author nohsubin
+	*/
 	@RequestMapping(value = "/updateBoard.do", method=RequestMethod.GET)
 	public String modify(int seq, Model model) {
 		BoardDto bVo = bService.BoardDetail(seq);
@@ -159,7 +169,11 @@ public class BoardController {
 	}
 	
 	
-	
+	/**
+	* 해당 게시글의 파일을 조회하는 클래스
+	* 2022.06.06
+	* @author nohsubin
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/selectFileInfo.do", method = RequestMethod.POST)
 	public Map<String, Object> selectFileInfo(@RequestParam int seq, Model model) {
@@ -175,7 +189,11 @@ public class BoardController {
 		return rMap;
 	}
 	
-
+	/**
+	* 새 게시글을 입력하는 클래스
+	* 2022.06.02
+	* @author nohsubin
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/insertBoard.do", method = RequestMethod.POST)
 	public String insertBoard(BoardDto bDto) {
@@ -207,6 +225,11 @@ public class BoardController {
 	}
 	
 	
+	/**
+	* 게시글의 seq를 확인하는 클래스
+	* 2022.06.02
+	* @author nohsubin
+	*/
 	//seq 조회
 	@ResponseBody
 	@RequestMapping(value = "/selectSEQ.do", method = RequestMethod.POST)
@@ -215,7 +238,11 @@ public class BoardController {
 		return n;
 	}
 	
-	
+	/**
+	* 공지사항을 삭제하는 클래스
+	* 2022.06.02
+	* @author nohsubin
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/deleteBoard.do", method = RequestMethod.POST)
 	   public Map<String, Object> deleteBoard(BoardDto dto) {
@@ -229,13 +256,20 @@ public class BoardController {
 	      return result;
 	   }	
 	
+	
+	
+	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
     public String dragAndDrop(Model model) {
         return "fileUpload";
         
     }
 	
-	//파일 업로드
+	/**
+	* 파일을 업로드하는 클래스
+	* 2022.06.06
+	* @author nohsubin
+	*/
 	@PostMapping(value = "/fileUpload.do") //ajax에서 호출하는 부분
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest multipartRequest,@RequestParam int seq) { //Multipart로 받는다.
@@ -284,6 +318,11 @@ public class BoardController {
 	    }
 	
 	
+	/**
+	* 파일을 다운로드하는 클래스
+	* 2022.06.13
+	* @author nohsubin
+	*/
 	//파일 다운로드
 	@PostMapping(value = "/filedownload.do") //ajax에서 호출하는 부분
 	@ResponseBody

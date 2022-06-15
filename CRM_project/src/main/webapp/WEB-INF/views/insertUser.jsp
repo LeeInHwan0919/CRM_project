@@ -62,7 +62,7 @@ function AutoHypen(companyNum){
   }
 </script>
 </head>
-<body style="background-color: #FFFAFA">
+<body>
  <form action="./insertUser.do" method="post">
    <div class="container">
 		<h2 style="margin-left: 220px; margin-top: 100px;">사원 정보 등록</h2>

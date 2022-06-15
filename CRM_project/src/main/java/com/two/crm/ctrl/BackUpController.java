@@ -23,6 +23,14 @@ import com.two.crm.model.service.Client_IService;
 import com.two.crm.model.service.Goods_IService;
 import com.two.crm.model.service.Users_IService;
 
+
+
+/**
+* 모든 테이블을 excel로 백업을 위해 다운로드 해주는 클레스
+* 2022.06.13
+* @author nohsubin
+*/
+
 @Controller
 public class BackUpController {
 	
@@ -45,7 +53,7 @@ public class BackUpController {
 		return "backup";
 	}
 
-	//공지게시판 
+	//공지게시판 백업
 	@RequestMapping(value = "/BackUpBoard.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpBoard(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -86,7 +94,7 @@ public class BackUpController {
 	    return "excel complete";
 	}
 	
-	//첨부파일
+	//첨부파일 백업
 	@RequestMapping(value = "/BackUpFile.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpFile(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -122,7 +130,7 @@ public class BackUpController {
 	
 	
 	
-	//사원
+	//사원정보 백업
 	@RequestMapping(value = "/BackUpUsers.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpUsers(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -165,7 +173,7 @@ public class BackUpController {
 	}
 	
 	
-	//지역
+	//지역 정보 백업
 	@RequestMapping(value = "/BackUpLocation.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpLocation(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -195,7 +203,7 @@ public class BackUpController {
 	}
 	
 	
-	//재고관리
+	//재고관리 백업
 	@RequestMapping(value = "/BackUpiMGR.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpiMGR(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -232,7 +240,7 @@ public class BackUpController {
 	    return "excel complete";
 	}
 	
-	//재고상품
+	//재고상품 백업
 	@RequestMapping(value = "/BackUpGoods.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpGoods(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -274,7 +282,7 @@ public class BackUpController {
 	    return "excel complete";
 	}
 
-	//계약 상품 
+	//계약 상품 백업
 	@RequestMapping(value = "/BackUpContractGoods.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpContractGoods(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -312,7 +320,7 @@ public class BackUpController {
 	}
 	
 	
-	//상품할인
+	//상품할인 백업
 	@RequestMapping(value = "/BackUpGoodsDiscount.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpGoodsDiscount(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -341,7 +349,7 @@ public class BackUpController {
 	}
 	
 	
-	//거래처
+	//거래처 백업
 	@RequestMapping(value = "/BackUpClient.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpClient(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -370,7 +378,7 @@ public class BackUpController {
 	}
 	
 	
-	//계약관리
+	//계약관리 백업
 	@RequestMapping(value = "/BackUpcMGR.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpcMGR(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -400,7 +408,7 @@ public class BackUpController {
 	
 	
 	
-	//계약
+	//계약 백업
 	@RequestMapping(value = "/BackUpContract.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String BackUpContract(@RequestParam("fileName") String fileName) throws java.io.IOException  {
@@ -440,7 +448,7 @@ public class BackUpController {
 	
 	
 	
-	//계약 할인
+	//계약 할인 백업
 	
 	@RequestMapping(value = "/BackUpGoodsClient.do", method =RequestMethod.POST)
 	@ResponseBody

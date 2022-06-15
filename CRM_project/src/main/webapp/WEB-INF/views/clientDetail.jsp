@@ -12,7 +12,7 @@
 }
   </style>
 </head>
-<body style="background-color: #FFFAFA">
+<body>
 <div class="container">
 	<h3 style="font-weight: bold; margin-top: 50px;">거래처 상세 조회</h3>
 <table class="table table-bordered" style="text-align: center;"> 
@@ -140,6 +140,9 @@
 		}
 		
 		function updateClient(){
+			
+			var data = confirm("거래처를 수정 하시겠습니까 ? ");
+			
 			var key = $("#cli_num").val();
 			if(key != null){
 			 window.location.href = './updateClientPage.do?cli_num='+key;

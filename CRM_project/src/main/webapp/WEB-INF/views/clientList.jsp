@@ -8,11 +8,11 @@
 <%@include file="./header.jsp" %>
 </head>
 
-<body style="background-color: #FFFAFA">
-<div class="container" style="text-align: center; margin-top: 50px;">
-<h2><strong>거래처 관리</strong></h2><br>
-<div style='text-align: right;'>
+<body>
+<%-- <jsp:useBean id="now" class="java.util.Date" /> --%>
+<div class="container" style="text-align: center;">
 
+<div style='text-align: right;'>
 <br>
 
 <select id="selectstate" style='text-align: right;'>
@@ -25,6 +25,8 @@
 
 </div><br>
 
+
+<h2><strong>거래처 관리</strong></h2><br>
 
 <table id="myTable" class="display" style="width:100%">
 		<thead>

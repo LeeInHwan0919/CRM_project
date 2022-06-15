@@ -16,7 +16,8 @@ String ct_end = cMap.get(0).getCt_end().toString();
 String ct_code = cMap.get(0).getCt_code().toString();
 
 ArrayList<String> priceInfo =  new ArrayList<String>();
-ArrayList<String> cntInfo =  new ArrayList<String>();
+ArrayList<String> cntInfo =  
+new ArrayList<String>();
 ArrayList<String> seqInfo =  new ArrayList<String>();
 
 for(int i=0;i<cMap.size();i++){
@@ -34,11 +35,9 @@ for(int i=0;i<cMap.size();i++){
 <title>Insert title here</title>
 <%@include file="./header.jsp" %>
 </head>
-
-<body style="background-color: #FFFAFA"><br><br>
-<div class="container"> 
-              <h3><strong>거래처 수정</strong></h3><br>
-
+<body>
+<div class="container"> <br><br>
+           		<h3><strong>거래처 수정</strong></h3><br>
                  <table class="table table-hover">
                  <tr>
                     <td>사업자 번호</td>
@@ -111,6 +110,30 @@ $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
 document.getElementById("datepicker").value = "<%=ct_start%>";
 document.getElementById("datepicker2").value = "<%=ct_end%>";
 
+
+
+$( "#datepicker" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+$( "#datepicker2" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+
+	
+function dateCheck (first, last) {
+	let firstDates = new Date(first.val()); //시작 
+	let SecondDates = new Date(last.val()); //마지막 
+	if (firstDates >= SecondDates) {
+		alert("게시 시작일짜 보다 빠른 날짜를 선택하 실 수는 없습니다. ");
+		first.val('');
+		last.val(''); 
+		return false;
+	}
+}
+
+
 var cofficeCount1 = 0;
 $.ajax({
     type:"POST",
@@ -125,8 +148,8 @@ $.ajax({
     	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
     	   htmlData += "<input type='hidden' name='cofficeCode' id='cofficeCode"+i+"' value="+data.gCode[i]+">";
     	   htmlData += "<input type='hidden' name='cofficeSeq' id='cofficeSeq"+i+"' value="+arr3[i].replaceAll("]"," ").replaceAll("["," ")+">";
-    	   htmlData += "<td>납품 수량 : <input type='text' name='cofficeCount' id='cofficeCount"+i+"' value="+ arr2[i].replaceAll("]"," ").replaceAll("["," ") +"></td>";
-    	   htmlData += "<td>금액 : <input type='text' name='cofficePrice' id='cofficePrice"+i+"' value="+ arr[i].replaceAll("]"," ").replaceAll("["," ") +"></td>";
+    	   htmlData += "<td>납품 수량 : <input type='number' min='0' max='1000' name='cofficeCount' id='cofficeCount"+i+"' value="+ arr2[i].replaceAll("]"," ").replaceAll("["," ") +"></td>";
+    	   htmlData += "<td>금액 : <input type='number' min='0' max='10000000' name='cofficePrice' id='cofficePrice"+i+"' value="+ arr[i].replaceAll("]"," ").replaceAll("["," ") +"></td>";
     	   htmlData += "</tr>";
        }
        
@@ -158,6 +181,13 @@ $.ajax({
 });
 
 function updateBtn() {
+	
+	var data = confirm("수정하시겠습니까?");
+	
+	if(!data){
+		return false;
+	}
+	
 	
 	var strid = "<%=cli_num %>";
 		

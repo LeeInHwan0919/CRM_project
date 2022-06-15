@@ -28,11 +28,9 @@ div.container{
 </style>
 <title>비밀번호 찾기</title>
 </head>
-<body style="background-color: #FFFAFA">
-<div class="container">
-<div id="img">
-<img style="text-align: center; height: 100px; width: 400; " src="./resources/img/blue_logo.png">
-</div>
+
+<body>
+
 		<div class="findpw">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="emp_code" name="emp_code"> 
 				<input type="text" placeholder="전화번호를 입력해 주세요." id="emp_tel" name="emp_tel"> 

@@ -12,7 +12,9 @@ footer{
 	height: 50px;
 	width:100%;
 	color: white;
+
 	background-color: #555;
+
 }
 </style>
 </head>
