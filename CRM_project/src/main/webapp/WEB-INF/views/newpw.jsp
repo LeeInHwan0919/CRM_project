@@ -25,7 +25,7 @@ div.container{
 
 <form action="./modifyPW.do" method="post">
 <div id="img">
-<img style="text-align: center; height: 100px; width: 400; " src="./resources/img/blue_logo.png">
+<img style="text-align: center; height: 66px;" src="./resources/img/blue_logo.png">
 </div>
 		<div class="login" style="margin-top: 20px;">
 		<input type="hidden" value="${emp_code}" id="emp_code" name="emp_code">

@@ -30,7 +30,10 @@ div.container{
 </head>
 
 <body>
-
+<div class="container">
+<div id="img">
+<img style="text-align: center; height: 66px; " src="./resources/img/blue_logo.png">
+</div>
 		<div class="findpw">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="emp_code" name="emp_code"> 
 				<input type="text" placeholder="전화번호를 입력해 주세요." id="emp_tel" name="emp_tel"> 
@@ -43,6 +46,7 @@ div.container{
 		
 	<!--인증번호 타이머 -->
 		<div class="shadow"></div>
+</div>
 </div>
 <script>
 

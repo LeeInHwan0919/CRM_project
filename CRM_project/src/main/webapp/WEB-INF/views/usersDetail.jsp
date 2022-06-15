@@ -101,15 +101,22 @@ table{
       <td id="label">성별</td>
       <td colspan="3">
       <select name="emp_gender" id="emp_gender">
-		  <option value="${users.emp_gender}" selected>${users.emp_gender}</option>
-		  <option value="남">남</option>
-		  <option value="여">여</option>
+		  	  <c:if test="${users.emp_gender eq '남'}">
+		  		<option value="${users.emp_gender}" selected>남</option>
+		  		<option value="여">여</option>
+			  </c:if>
+			  <c:if test="${users.emp_gender eq '여'}">
+		  		<option value="${users.emp_gender}" selected>여</option>
+		  		<option value="남">남</option>
+			  </c:if>
 	  </select>
       </td>
     </tr>
     <tr>
       <td id="label">전화번호</td>
-      <td colspan="3"><input placeholder="010-000-0000" maxlength="11" id="emp_tel" name="emp_tel" value="${users.emp_tel}"></td>
+      <td colspan="3">
+        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  placeholder="010-000-0000" maxlength="11" id="emp_tel" name="emp_tel" value="${users.emp_tel}">
+      </td>
     </tr>
     <tr>
       <td id="label">주소</td>
@@ -119,21 +126,15 @@ table{
     <tr>
       <td id="label">계정여부</td>
       <td colspan="3">
-      <select id="emp_use" name="emp_use">
-		  <option value="${users.emp_use}" selected>
+	  <select id="emp_use" name="emp_use">
 			  <c:if test="${users.emp_use eq 'Y'}">
-			  <c:out value="계정 활성화">
-			  계정 활성화
-			  </c:out>
+		  		<option value="${users.emp_use}" selected>계정 활성화</option>
+		  		<option value="N">계정 비활성화</option>
 			  </c:if>
-			  <c:if test="${users.emp_use eq 'N'}">
-			  계정 비활성화
-			  <c:out value="계정 비활성화">
-			  </c:out>
+		      <c:if test="${users.emp_use eq 'N'}">
+		  		<option value="${users.emp_use}" selected>계정 비활성화</option>
+		  		<option value="Y">계정 활성화</option>
 			  </c:if>
-		  </option> 
-		  <option value="Y">계정 활성화</option>
-		  <option value="N">계정 비활성화</option>
 	  </select>
       </td>
     </tr>
@@ -141,16 +142,87 @@ table{
       <td id="label">담당지역</td>
       <td colspan="3">
       <select id="area_code" name="area_code">
-             <option value="${users.area_code}">${users.area}</option>
-             <option value="LC01">서울</option>
-             <option value="LC02">대구</option>
-             <option value="LC03">울산</option>
-             <option value="LC04">부산</option>
-             <option value="LC05">춘천</option>
-             <option value="LC06">천안</option>
-             <option value="LC07">대전</option>
-             <option value="LC08">광주</option>
-           </select>
+      		 <c:if test="${users.area_code eq 'LC01'}">
+		  		<option value="${users.area_code}" selected>서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC02'}">
+		  		<option value="${users.area_code}" selected>대구</option>
+                <option value="LC01">서울</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC03'}">
+		  		<option value="${users.area_code}" selected>울산</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC04'}">
+		  		<option value="${users.area_code}" selected>부산</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC05'}">
+		  		<option value="${users.area_code}" selected>춘천</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC06'}">
+		  		<option value="${users.area_code}" selected>천안</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC07">대전</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC07'}">
+		  		<option value="${users.area_code}" selected>대전</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC08">광주</option>
+			  </c:if>
+			  <c:if test="${users.area_code eq 'LC08'}">
+		  		<option value="${users.area_code}" selected>광주</option>
+                <option value="LC01">서울</option>
+                <option value="LC02">대구</option>
+                <option value="LC03">울산</option>
+                <option value="LC04">부산</option>
+                <option value="LC05">춘천</option>
+                <option value="LC06">천안</option>
+                <option value="LC07">대전</option>
+			  </c:if>
+       </select>
 	  </td>
     </tr>
   </table>
