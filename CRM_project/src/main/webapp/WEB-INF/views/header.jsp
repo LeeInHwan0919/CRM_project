@@ -80,12 +80,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
 
       <ul class="nav navbar-nav navbar-center">
-      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px; text-align: center;" src="./resources/img/black_logo.png"></li>
-
+      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:600px; text-align: center;" src="./resources/img/black_logo.png"></li>
       </ul>
-      <ul class="nav navbar-nav navbar-center">
-      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px;" src="./resources/img/black_logo.png"></li>
-      </ul>
+      
       <ul class="nav navbar-nav navbar-right">
 		      <c:set var="id" value="${id}"/>
 		       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	

@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <%@include file="./header.jsp" %>
-<br>
 <title>거래처 상세 조회</title>
  <style type="text/css">
   th,table {
@@ -15,8 +14,8 @@
 </head>
 <body style="background-color: #FFFAFA">
 <div class="container">
+	<h3 style="font-weight: bold; margin-top: 50px;">거래처 상세 조회</h3>
 <table class="table table-bordered" style="text-align: center;"> 
-	<h3><strong>거래처 상세 조회</strong></h3><br>
 	<thead>
 			<tr>
 				<th>사업자 번호</th>
@@ -43,7 +42,24 @@
  				<td>${cVo.ct_end}</td>
 			</c:forEach>
 		</tbody>		
-</table>			
+</table>	
+<table class="table table-bordered" style="text-align: center;"> 
+	<thead>
+			<tr>
+		        <th>납품단가</th>
+		        <th>상품할인 적용가 (소계)</th>
+		        <th>거래처할인 적용가 (합계)</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<c:forEach var="sumPrice" items="${sumPrice}" begin="0" end="0"> 
+			<td><fmt:formatNumber value="${sumPrice.du_price}" pattern="#,###원"/></td>
+			<td><fmt:formatNumber value="${sumPrice.pre_sum}" pattern="#,###원"/></td>
+			<td><fmt:formatNumber value="${sumPrice.sum_price}" pattern="#,###원"/></td>
+			</c:forEach>
+		</tbody>		
+</table>		
 <table class="table table-bordered" style="text-align: center;"> 
 	<thead>
 			<tr>

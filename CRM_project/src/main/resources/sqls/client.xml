@@ -66,6 +66,24 @@ c.CLI_AREA,
 </select>
 
 
+<!-- 거래처별 납품 소계, 합계 -->
+
+<select id="SumPrice" parameterType="String" resultType="cDto">
+SELECT cm.CLI_NUM ,SUM(cg.G_PRICE*cg.DU_CNT) DU_PRICE,SUM(cg.G_PRICE*cg.DU_CNT-cg.G_PRICE*cg.DU_CNT*gd.RATE) PRE_SUM , SUM(cg.G_PRICE*cg.DU_CNT-cg.G_PRICE*cg.DU_CNT*(gd.RATE+cd.RATE)) SUM_PRICE
+FROM CONTRACT c 
+JOIN CONTRACT_GOODS cg
+ON c.CT_CODE = cg.CT_CODE 
+JOIN INVENTORY_GOODS ig 
+ON cg.G_CODE = ig.G_CODE
+JOIN GOODS_DISCOUNT gd 
+ON ig.DCODE_GOODS = gd.DCODE_GOODS
+JOIN CLIENT_DISCOUNT cd 
+ON cd.DCODE_CLIENT = c.DCODE_CLIENT
+JOIN CONTRACT_MANAGEMENT cm 
+ON cm.CTM_CODE = c.CTM_CODE 
+WHERE cm.CLI_NUM=#{cli_num}
+GROUP BY (cm.CLI_NUM)
+</select>
 
 <!--거래처 삭제-->
 <update id="DeleteClient">

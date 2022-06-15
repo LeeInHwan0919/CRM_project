@@ -8,8 +8,8 @@
 <%@include file="./header.jsp"%>
 </head>
 <body style="background-color: #FFFAFA">
-	<div class="container" style="text-align: center; margin-top: 50px;">
-		<h2>계정 관리</h2>
+<div class="container" style="text-align: center; margin-top: 50px;">
+<h2><strong>계정 관리</strong></h2><br>
 		<br>
 		<table id="myTable" class="display" style="width: 100%">
 			<thead>

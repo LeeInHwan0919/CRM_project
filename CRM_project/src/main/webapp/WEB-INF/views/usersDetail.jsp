@@ -15,9 +15,18 @@ p{
 }
 
 img{
-    max-width: 100%;
+    max-width:100%;
     max-height: 100%;
 }
+
+td#label {
+    width: 25%;
+}
+
+.table{
+  width: 500px;
+  height: 500px;
+  }
 
 .form-group{
   width:200px;
@@ -25,18 +34,23 @@ img{
 }
 
 table{
-  width:400px;
   margin-left: 100px;
   margin-top:20px;
 }
+
+ 
 #btn{
  margin-top: 10px;
-   margin-left: 360px;
+   margin-left: 10px;
+   float: left;
  }
- 
+#btn2{
+   margin-left: 250px;
+ }
 #label{
   font: bold;
 }
+
 
 </style>
 <script type="text/javascript">
@@ -46,27 +60,29 @@ table{
 		  if (input.files && input.files[0]) {
 		    var reader = new FileReader();
 		    reader.onload = function(e) {
-		      document.getElementById('emp_img').src = e.target.result;
+		      document.getElementById('img').src = e.target.result;
 		      jQuery('#emp_img').attr("value",e.target.result);
 		    };
 		    reader.readAsDataURL(input.files[0]);
+		    alert('이미지가 업로드 되었습니다.');
 		  } else {
-		    document.getElementById('emp_img').src = "";
+		    document.getElementById('img').src = "";
 		    jQuery('#emp_img').attr("value","");
+		    alert('이미지 업로드에 실패하였습니다.');
 		  }
 		}
 </script>
 <body style="background-color: #FFFAFA">
 <c:forEach var="users" items="${users}">
+      <input type="hidden" id="emp_img" name="emp_img" value="${users.emp_img}">
 <div class="container" style="margin-top: 30px; margin-left: 550px;">
 <h2 style="margin-left: 100px; margin-top: 20px;">사원 정보 수정</h2>
     <form action="./updateUser.do" method="post">
-  <table border="1">
+  <table class="table table-bordered">
     <tr>
-      <td rowspan="3" width="150px;"><img src="${users.emp_img}"></td>
-      <input type="hidden" id="emp_img" name="emp_img" value="${users.emp_img}">
+      <td rowspan="3" width="150px;"><img src="${users.emp_img}" id="img"></td>
       <td id="label">사원코드</td>
-      <td colspan="2">${users.emp_code}</td>
+      <td  colspan="2">${users.emp_code}</td>
     </tr>
     <tr>
       <td id="label">사원이름</td>
@@ -93,7 +109,7 @@ table{
     </tr>
     <tr>
       <td id="label">전화번호</td>
-      <td colspan="3"><input type="text" id="emp_tel" name="emp_tel" value="${users.emp_tel}"></td>
+      <td colspan="3"><input placeholder="010-000-0000" maxlength="11" id="emp_tel" name="emp_tel" value="${users.emp_tel}"></td>
     </tr>
     <tr>
       <td id="label">주소</td>
@@ -138,13 +154,14 @@ table{
 	  </td>
     </tr>
   </table>
-  <div id="btn">
-  <button class="btn btn-success" id="modify" type="submit" >수정</button>
+  <div id="btn2">
+  <button id="btn" class="btn btn-success" id="modify" type="submit">수정</button>
 </form>
-  <button class="btn btn-warning" onclick="location.href='javascript:history.back();'">뒤로가기</button>
+  <div id="btn">
+  <button class="btn btn-warning" onclick="location.href='./UsersList.do'">뒤로가기</button>
+  </div>
   </div>
 </div>
 </c:forEach>
 </body>
-
 </html>

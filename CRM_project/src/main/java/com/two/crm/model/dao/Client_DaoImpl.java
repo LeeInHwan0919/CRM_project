@@ -137,6 +137,11 @@ public class Client_DaoImpl implements Client_IDao{
 		return cnt;
 	}
 
+	@Override
+	public List<ClientDto> SumPrice(String cli_num) {
+		return sqlSession.selectList(NS+"SumPrice",cli_num);
+	}
+
 
 
 }

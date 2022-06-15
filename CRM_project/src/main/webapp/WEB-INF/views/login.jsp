@@ -6,14 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/login.css">
+<style type="text/css">
+div#img{
+  text-align: center;
+}
 
+div.container{
+  margin-top: 180px;
+}
+</style>
 <title>로그인 페이지</title>
 </head>
 
 <body style="background-color: #FFFAFA">
 
 <div class="container">
-<h2 align="center" style="margin-top: 230px;">LOGIN</h2>
+<div id="img">
+<img style="text-align: center; height: 100px; width: 400; " src="./resources/img/blue_logo.png">
+</div>
 	<form action="./logingo.do" class="signin-form" method="POST">
 		<div class="login" style="margin-top: 30px;">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="username" name="emp_code"> 
