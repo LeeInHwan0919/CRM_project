@@ -20,7 +20,7 @@ div.container{
 <body>
 <div class="container">
 <div id="img">
-<img style="text-align: center; height: 100px; width: 400; " src="./resources/img/blue_logo.png">
+<img style="text-align: center; height: 66px; " src="./resources/img/blue_logo.png">
 </div>
 	<form action="./logingo.do" class="signin-form" method="POST">
 		<div class="login" style="margin-top: 30px;">

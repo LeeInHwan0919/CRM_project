@@ -38,7 +38,7 @@
     }
     
     footer {
-      background-color: #555;
+      background-color: #rgb(26, 28, 32);
       color: white;
       padding: 15px;
     }
@@ -64,6 +64,11 @@
     margin-left: 60px;
     background-color: #8b5f5f";
     }
+    
+    .navbar-inverse {
+    background-color: rgb(26, 28, 32);
+    border-color: rgb(26, 28, 32);
+}
   </style>
 </head>
 <body>
@@ -80,20 +85,20 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-center">
 
-      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px; text-align: center;" src="./resources/img/black_logo.png"></li>
+      <li><img style="width:400px; height:100px; margin-top: -20px; margin-left:600px; text-align: center;" src="./resources/img/white_logo.png"></li>
 
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
 		      <c:set var="id" value="${id}"/>
 		       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
-		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [시스템 관리자]	</li>
+		         <li style="color: #afafaf; margin-top: 15px; margin-right: 15px;">${id} : [시스템 관리자]	</li>
 		       </c:if>
 		       <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}">	
-		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [거래처 관리자]	</li>
+		         <li style="color: #afafaf; margin-top: 15px; margin-right: 15px;">${id} : [거래처 관리자]	</li>
 		       </c:if>
       		   <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}">	
-		         <li style="color: gray; margin-top: 15px; margin-right: 15px;">${id} : [재고 관리자]	</li>
+		         <li style="color: #afafaf; margin-top: 15px; margin-right: 15px;">${id} : [재고 관리자]	</li>
 		       </c:if>
       	
         <li><a href="./logout.do"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
