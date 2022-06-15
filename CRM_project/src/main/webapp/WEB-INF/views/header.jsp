@@ -78,11 +78,10 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a href="./result.do">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>
+
+      <ul class="nav navbar-nav navbar-center">
+      <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px; text-align: center;" src="./resources/img/black_logo.png"></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-center">
       <li><img style="width:400px; height: 100px; margin-top: -20px; margin-left:400px;" src="./resources/img/black_logo.png"></li>
@@ -90,6 +89,7 @@
       <ul class="nav navbar-nav navbar-right">
 		      <c:set var="id" value="${id}"/>
 		       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
+
 		         <li style="color:#dbdbdb; margin-top: 15px; margin-right: 15px;">${id} : [시스템 관리자]	</li>
 		       </c:if>
 		       <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}">	
@@ -97,6 +97,7 @@
 		       </c:if>
       		   <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}">	
 		         <li style="color: #dbdbdb; margin-top: 15px; margin-right: 15px;">${id} : [재고 관리자]	</li>
+
 		       </c:if>
       	
         <li><a href="./logout.do"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

@@ -4,8 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>거래처 상세 조회</title>
 <%@include file="./header.jsp" %>
+<br>
+<title>거래처 상세 조회</title>
+ <style type="text/css">
+  th,table {
+  text-align: center;
+}
+  </style>
 </head>
 <body style="background-color: #FFFAFA">
 <div class="container">
@@ -59,15 +65,16 @@
 			</c:forEach>
 		</tbody>
 
-		<button class="btn btn-default" onclick="deletClient()">삭제</button>
 
-</table>
+</table><br>
 		<div>
-		<button class="btn btn-info" onclick="location.href='./clientList.do'" style="float: right;margin: 0 0 0 10px;" >목록</button>
-		<button class="btn btn-danger" onclick="deletClient()" style="float: right;margin: 0 0 0 10px;" >삭제</button>
-		<button class="btn btn-success" onclick="updateClient()"  style="float: right;margin: 0 0 0 10px;">거래처 수정</button>
+		<button class="btn btn-warning" onclick="location.href='./clientList.do'" style="float: right; margin: 0 0 0 10px;" >목록</button>
+		<button class="btn btn-danger" onclick="deletClient()" style="float: right; margin: 0 0 0 10px;" >삭제</button>
+		<button class="btn btn-success" onclick="updateClient()"  style="float: right; margin: 0 0 0 10px;">거래처 수정</button>
 		</div>
 </div>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 </body>
 	<script type="text/javascript">
 

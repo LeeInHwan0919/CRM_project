@@ -19,12 +19,22 @@ int strSeq = srMap.getSeq();
       width: 800px;
       height: 540px;
       margin: 40px auto;
+      
    }
+   
+     input[type=checkbox] {
+	-ms-transform: scale(S); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	padding: 10px;
+	
 </style>
 </head>
+
 <body style="background-color: #FFFAFA">
 <div class="container"> 
-              <h3>글 수정</h3>
+              <br><h3><strong>글 수정</strong></h3> <br>
                  <table class="table table-hover">
                  <tr>
                  <td>번호</td>
@@ -44,7 +54,7 @@ int strSeq = srMap.getSeq();
 					<td><input type="text" name="enddate" id="datepicker2"  readonly="readonly"></td>
                  </tr>
                   <tr>
-					<td>중요 공지 사항 :</td>
+					<td>중요 공지 사항 </td>
 					<td><input type="checkbox" id="important" name="important" value="1"></td>
                  </tr>
                  
@@ -54,8 +64,8 @@ int strSeq = srMap.getSeq();
                  </tr>
                  </table>
               <div style="text-align: center;">
-              <input class="btn btn-success" id="updateBtn" type="button" value="수정하기">
-              <input class="btn btn-info"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
+              <input class="btn btn-success" id="updateBtn" type="button" style="margin: 0 0 0 10px;" value="수정하기">
+              <input class="btn btn-warning"  type="button" value="뒤로가기" style="margin: 0 0 0 10px;" onclick="javascript:history.back(-1)">
               </div>
 </div>
    </body>
@@ -66,26 +76,6 @@ CKEDITOR.replace( 'content', {
 
 });
 
-CKEDITOR.editorConfig = function( config ) {
-	config.enterMode = CKEDITOR.ENTER_BR;
-	config.shiftEnterMode = CKEDITOR.ENTER_P;
-};
-
-function insert(){
-	var data = document.getElementById("inputContent").value;
-	console.log(data);
-	CKEDITOR.instances.content.setData(data); 
-}
-
-
-$( "#datepicker" ).change(function() {
-	dateCheck($("#datepicker"),$("#datepicker2"));
-});
-
-$( "#datepicker2" ).change(function() {
-	dateCheck($("#datepicker"),$("#datepicker2"));
-});
-	
 	
 function dateCheck (first, last) {
 	let firstDates = new Date(first.val()); //시작 
@@ -98,8 +88,6 @@ function dateCheck (first, last) {
 	}
 }
 
-
-	
    $( "#datepicker" ).datepicker({ minDate: 0});
    $( "#datepicker2" ).datepicker({ minDate: 0});
 	

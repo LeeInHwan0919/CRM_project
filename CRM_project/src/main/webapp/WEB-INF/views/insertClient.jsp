@@ -9,8 +9,8 @@
 <%@include file="./header.jsp" %>
 <body style="background-color: #FFFAFA">
 
-<div class="container">
-		        <h3>계약 등록</h3>
+<div class="container"><br><br>
+		        <h3><strong>계약 등록</strong></h3><br>
 		        <table class="table table-hover">
 		        <tr>
 		        		<td>사업자 번호</td>
@@ -64,23 +64,23 @@
 		        <table class="table table-hover" id="cofficeTable">
 		        <tbody>
 		        </tbody>
-		        </table>
+		        </table><br><br>
 		        	<div style="text-align: center;">
-		        <input class="btn btn-success"  type="button" value="거래처 등록" onclick="insertBtn()">
-		        <input class="btn btn-info"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
+				        <input class="btn btn-success" style="margin: 0 0 0 10px;"  type="button" value="거래처 등록" onclick="insertBtn()">
+				        <input class="btn btn-info" style="margin: 0 0 0 10px;"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
 		       		</div>
 		    </div>
-	</body>
+	<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 </body>
 <script type="text/javascript">
 
-
+// 사업자 번호 정규식 
 $('#cliid').on('keyup', function(){
     var num = $('#cliid').val();
     num.trim(); 
     this.value = AutoHypen(num) ;
 });
-
 
 function AutoHypen(companyNum){
     companyNum = companyNum.replace(/[^0-9]/g, '');
@@ -117,7 +117,7 @@ function AutoHypen(companyNum){
 
 
 
-
+//datepicker api 사용 
 $( "#datepicker" ).datepicker({ minDate: 0});
 $( "#datepicker2" ).datepicker({ minDate: 0});
 	
@@ -173,8 +173,8 @@ $.ajax({
     	   htmlData += "<td>"+ data.gName[i] +"</td>";
     	   htmlData += "<input type='hidden' name='cofficeName' id='cofficeName"+i+"' value="+data.gName[i]+">";
     	   htmlData += "<input type='hidden' name='cofficeCode' id='cofficeCode"+i+"' value="+data.gCode[i]+">";
-    	   htmlData += "<td>납품 수량 : <input type='text' name='cofficeCount' id='cofficeCount"+i+"'></td>";
-    	   htmlData += "<td>금액 : <input type='text' name='cofficePrice' id='cofficePrice"+i+"'></td>";
+    	   htmlData += "<td>납품 수량 : <input type='number' name='cofficeCount' id='cofficeCount"+i+"'></td>";
+    	   htmlData += "<td>금액 : <input type='number' name='cofficePrice' id='cofficePrice"+i+"'></td>";
     	   htmlData += "</tr>";
        }
        
@@ -191,7 +191,6 @@ function insertBtn(){
 	var strid = $("#cliid").val();
 	if(strid == null || strid == " "){
 		alert("not null data")
-	/* 	strid.force(); */
 		return false;
 	}
 		

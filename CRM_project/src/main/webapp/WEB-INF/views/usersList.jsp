@@ -41,7 +41,7 @@
 						</td>
 						<td style="text-align: center;">${users.emp_tel}</td>
 						<td style="text-align: center;">
-						<button type="button" data-toggle="modal" data-target="#myModal"
+						<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success"
 						onclick="location.href='./usersDetail.do?emp_code=${users.emp_code}'">정보수정</button></td>
 					</tr>
 				</c:forEach>
@@ -49,8 +49,8 @@
 		</table>
 		<br>
 		<div style='text-align: right;'>
-		<button class="btn btn-primary" onclick="location.href='./insertUserGo.do'">계정등록</button>
-			<button class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
+		<button class="btn btn-primary" style="margin: 0 0 0 10px;" onclick="location.href='./insertUserGo.do'">계정등록</button>
+			<button class="btn btn-warning" style="margin: 0 0 0 10px;" onclick="location.href='./result.do'">뒤로가기</button>
 		</div>
 
 

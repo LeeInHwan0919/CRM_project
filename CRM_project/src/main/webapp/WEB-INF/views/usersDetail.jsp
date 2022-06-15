@@ -139,7 +139,7 @@ table{
     </tr>
   </table>
   <div id="btn">
-  <button class="btn btn-success" id="modify" type="submit">수정</button>
+  <button class="btn btn-success" id="modify" type="submit" >수정</button>
 </form>
   <button class="btn btn-warning" onclick="location.href='javascript:history.back();'">뒤로가기</button>
   </div>

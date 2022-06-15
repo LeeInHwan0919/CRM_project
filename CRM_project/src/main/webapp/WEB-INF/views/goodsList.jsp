@@ -61,8 +61,7 @@ function clickBtn(){
 </head>
 <body style="background-color: #FFFAFA">
 <div class="container" style="text-align: center; margin-top: 50px;">
-<h2>재고 관리</h2><br>
-<input type="button" value="재고 리스드 다운로드" onclick="clickBtn();"><br>
+<h2><strong>재고 관리</strong></h2><br>
 <table id="myTable" class="display" style="width:100%">
 		<thead>
 			<tr >
@@ -89,11 +88,14 @@ function clickBtn(){
       </tr>
     </c:forEach>
     </tbody>
-</table>
+</table><br><br>
 		<div style='text-align: right;'>
-		 <button  class="btn btn-warning" onclick="location.href='./result.do'">뒤로가기</button>
+		 <input style= 'text-align: right;' type="button" class="btn btn-info"  style="margin: 0 0 0 10px;" value="재고 리스드 다운" onclick="clickBtn();">
+		 <button  class="btn btn-warning"  style="margin: 0 0 0 10px;" onclick="location.href='./result.do'">뒤로가기</button>
          </div>
 </div>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 </body>
 
 <script type="text/javascript">
