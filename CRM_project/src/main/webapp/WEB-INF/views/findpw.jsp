@@ -6,9 +6,31 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/findpw.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style type="text/css">
+div#img{
+  text-align: center;
+}
+
+div.container{
+  margin-top: 180px;
+}
+
+.findpw {
+  background: #eceeee;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+  height: 450px;
+  margin: 20px auto 0;
+  width: 400px;
+  margin-top:30px;
+}
+
+</style>
 <title>비밀번호 찾기</title>
 </head>
+
 <body>
+
 		<div class="findpw">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="emp_code" name="emp_code"> 
 				<input type="text" placeholder="전화번호를 입력해 주세요." id="emp_tel" name="emp_tel"> 
@@ -21,7 +43,7 @@
 		
 	<!--인증번호 타이머 -->
 		<div class="shadow"></div>
-		
+</div>
 <script>
 
 var timer = null;

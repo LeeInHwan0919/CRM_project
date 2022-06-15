@@ -16,7 +16,6 @@ public class ClientDto {
 	private String g_code;
 	private String status;
 	private String ct_date_year_sum;
-//	private String du_date;
 	private String ct_start;
 	private String ct_end;
 	private String ctm_code;
@@ -26,16 +25,25 @@ public class ClientDto {
 	private String ct_code;
 	
 	private String dcode_client;
-	private String du_price;
 	private String du_date;
-	public ClientDto() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	private String du_price;
+	private String pre_sum;
+	private String sum_price;
+	@Override
+	public String toString() {
+		return "ClientDto [cli_num=" + cli_num + ", emp_code=" + emp_code + ", cli_name=" + cli_name + ", cli_addr="
+				+ cli_addr + ", cli_tel=" + cli_tel + ", cli_area=" + cli_area + ", cli_use=" + cli_use + ", rate="
+				+ rate + ", g_name=" + g_name + ", g_code=" + g_code + ", status=" + status + ", ct_date_year_sum="
+				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code
+				+ ", du_cnt=" + du_cnt + ", g_price=" + g_price + ", seq=" + seq + ", ct_code=" + ct_code
+				+ ", dcode_client=" + dcode_client + ", du_date=" + du_date + ", du_price=" + du_price + ", pre_sum="
+				+ pre_sum + ", sum_price=" + sum_price + "]";
 	}
 	public ClientDto(String cli_num, String emp_code, String cli_name, String cli_addr, String cli_tel, String cli_area,
 			String cli_use, String rate, String g_name, String g_code, String status, String ct_date_year_sum,
 			String ct_start, String ct_end, String ctm_code, String du_cnt, String g_price, String seq, String ct_code,
-			String dcode_client, String du_price, String du_date) {
+			String dcode_client, String du_date, String du_price, String pre_sum, String sum_price) {
 		super();
 		this.cli_num = cli_num;
 		this.emp_code = emp_code;
@@ -57,17 +65,14 @@ public class ClientDto {
 		this.seq = seq;
 		this.ct_code = ct_code;
 		this.dcode_client = dcode_client;
-		this.du_price = du_price;
 		this.du_date = du_date;
+		this.du_price = du_price;
+		this.pre_sum = pre_sum;
+		this.sum_price = sum_price;
 	}
-	@Override
-	public String toString() {
-		return "ClientDto [cli_num=" + cli_num + ", emp_code=" + emp_code + ", cli_name=" + cli_name + ", cli_addr="
-				+ cli_addr + ", cli_tel=" + cli_tel + ", cli_area=" + cli_area + ", cli_use=" + cli_use + ", rate="
-				+ rate + ", g_name=" + g_name + ", g_code=" + g_code + ", status=" + status + ", ct_date_year_sum="
-				+ ct_date_year_sum + ", ct_start=" + ct_start + ", ct_end=" + ct_end + ", ctm_code=" + ctm_code
-				+ ", du_cnt=" + du_cnt + ", g_price=" + g_price + ", seq=" + seq + ", ct_code=" + ct_code
-				+ ", dcode_client=" + dcode_client + ", du_price=" + du_price + ", du_date=" + du_date + "]";
+	public ClientDto() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public String getCli_num() {
 		return cli_num;
@@ -189,19 +194,32 @@ public class ClientDto {
 	public void setDcode_client(String dcode_client) {
 		this.dcode_client = dcode_client;
 	}
-	public String getDu_price() {
-		return du_price;
-	}
-	public void setDu_price(String du_price) {
-		this.du_price = du_price;
-	}
 	public String getDu_date() {
 		return du_date;
 	}
 	public void setDu_date(String du_date) {
 		this.du_date = du_date;
 	}
-
+	public String getDu_price() {
+		return du_price;
+	}
+	public void setDu_price(String du_price) {
+		this.du_price = du_price;
+	}
+	public String getPre_sum() {
+		return pre_sum;
+	}
+	public void setPre_sum(String pre_sum) {
+		this.pre_sum = pre_sum;
+	}
+	public String getSum_price() {
+		return sum_price;
+	}
+	public void setSum_price(String sum_price) {
+		this.sum_price = sum_price;
+	}
+	
+	
 	
 	
 	

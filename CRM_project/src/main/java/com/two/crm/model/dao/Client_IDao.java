@@ -38,4 +38,7 @@ public interface Client_IDao {
 	public int UpdateClient(Map<String, Object> map);
 	public int UpdateContract(Map<String, Object> map);
 	public int UpdateGoods(Map<String, Object> map);
+	
+	//거래처 납품가 소계, 합계
+	public List<ClientDto> SumPrice(String cli_num);
 }

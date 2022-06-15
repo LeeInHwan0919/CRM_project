@@ -36,4 +36,6 @@ public interface Client_IService {
 	public int UpdateClient(Map<String, Object> map);
 	public int UpdateContract(Map<String, Object> map);
 	public int UpdateGoods(Map<String, Object> map);
+	
+	public List<ClientDto> SumPrice(String cli_num);
 }

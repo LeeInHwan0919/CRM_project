@@ -146,10 +146,9 @@ public class BackUpController {
 		headerRow.createCell(3).setCellValue("Emp_pw");
 		headerRow.createCell(4).setCellValue("Emp_gender");
 		headerRow.createCell(5).setCellValue("Emp_use");
-		headerRow.createCell(6).setCellValue("Emp_img");
-		headerRow.createCell(7).setCellValue("getEmp_auth");
-		headerRow.createCell(8).setCellValue("getEmp_tel");
-		headerRow.createCell(9).setCellValue("getEmp_addr");
+		headerRow.createCell(6).setCellValue("getEmp_auth");
+		headerRow.createCell(7).setCellValue("getEmp_tel");
+		headerRow.createCell(8).setCellValue("getEmp_addr");
 
 		
 		List<UserDto> lists = userService.BackUpUsers();
@@ -161,10 +160,9 @@ public class BackUpController {
 			row.createCell(3).setCellValue(ulist.getEmp_pw());
 			row.createCell(4).setCellValue(ulist.getEmp_gender());
 			row.createCell(5).setCellValue(ulist.getEmp_use());
-			row.createCell(6).setCellValue(ulist.getEmp_img());
-			row.createCell(7).setCellValue(ulist.getEmp_auth());
-			row.createCell(8).setCellValue(ulist.getEmp_tel());
-			row.createCell(9).setCellValue(ulist.getEmp_addr());
+			row.createCell(6).setCellValue(ulist.getEmp_auth());
+			row.createCell(7).setCellValue(ulist.getEmp_tel());
+			row.createCell(8).setCellValue(ulist.getEmp_addr());
 			
 		}
 

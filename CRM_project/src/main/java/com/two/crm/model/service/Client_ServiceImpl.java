@@ -175,4 +175,11 @@ public class Client_ServiceImpl implements Client_IService{
 	}
 
 
+	@Override
+	public List<ClientDto> SumPrice(String cli_num) {
+		logger.info("Client_ServiceImpl query: SumPrice ");
+		return dao.SumPrice(cli_num);
+	}
+
+
 }

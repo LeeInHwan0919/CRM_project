@@ -58,10 +58,11 @@ public class ClientController {
 	public String getOneBoard(@RequestParam String cli_num, Authentication user, Model model) {
 		System.out.println("사업자 번호 입니다 :"+cli_num);
 		List<ClientDto> cVo = cService.DetailClient(cli_num);
-		
+		List<ClientDto> sumPrice = cService.SumPrice(cli_num);
 		System.out.println(user.getName());
-
+		System.out.println(sumPrice.toString());
 		model.addAttribute("cVo",cVo);
+		model.addAttribute("sumPrice",sumPrice);
 		return "clientDetail";
 	}
 	

@@ -6,15 +6,15 @@
 <title>Footer</title>
 <style type="text/css">
 footer{
-	
-
 	position: fixed;
 	bottom : 0px;
 	left :0px;
 	height: 50px;
 	width:100%;
 	color: white;
-	background-color: #333;
+
+	background-color: #555;
+
 }
 </style>
 </head>
