@@ -31,10 +31,9 @@ int strSeq = srMap.getSeq();
 	
 </style>
 </head>
-
-<body style="background-color: #FFFAFA">
-<div class="container"> 
-              <br><h3><strong>글 수정</strong></h3> <br>
+<body>
+<div class="container">
+           		 <br><h3><strong>글 수정</strong></h3> <br>
                  <table class="table table-hover">
                  <tr>
                  <td>번호</td>
@@ -77,11 +76,21 @@ CKEDITOR.replace( 'content', {
 });
 
 	
+$( "#datepicker" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+$( "#datepicker2" ).change(function() {
+	dateCheck($("#datepicker"),$("#datepicker2"));
+});
+
+
+	
 function dateCheck (first, last) {
 	let firstDates = new Date(first.val()); //시작 
-	let SecondDates = new Date(last.val()); //지막 
+	let SecondDates = new Date(last.val()); //마지막 
 	if (firstDates >= SecondDates) {
-		alert("일정 종료일이 시작일보다 이전 날짜입니다.");
+		alert("게시 시작일짜 보다 빠른 날짜를 선택하 실 수는 없습니다. ");
 		first.val('');
 		last.val(''); 
 		return false;

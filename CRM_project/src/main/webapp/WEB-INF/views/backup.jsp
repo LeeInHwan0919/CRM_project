@@ -6,23 +6,161 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>백업 페이지 입니다. </title>
+<%@include file="./header.jsp" %>
 </head>
-
 <body>
- <input type="button" value="게시판 백업" onclick="BackUpBoard();"><br> 
- <input type="button" value="게시판 파일 백업" onclick="BackUpFile();"><br> 
- <input type="button" value="사원 정보 백업" onclick="BackUpUsers();"><br>
- <input type="button" value="지역 정보 백업" onclick="BackUpLocation();"><br>
- <input type="button" value="재고 관리 백업" onclick="BackUpiMGR();"><br> 
- <input type="button" value="재고 상품 백업" onclick="BackUpGoods();"><br> 
- <input type="button" value="계약 상품 백업" onclick="BackUpContractGoods();"><br> 
- <input type="button" value="상품 할인 백업" onclick="BackUpGoodsDiscount();"><br> 
- <input type="button" value="거래처 백업" onclick="BackUpClient();"><br> 
- <input type="button" value="계약 관리 백업" onclick="BackUpcMGR();"><br> 
- <input type="button" value="계약 백업" onclick="BackUpContract();"><br> 
- <input type="button" value="거래처 할인 백업" onclick="BackUpGoodsClient();"><br>
 
+<div class="container"><br><br>
+	<div style='text-align: center;'>
+		        <h3><strong>BACK UP</strong></h3><br>
+		        <table class="table table-hover">
+		        <tr>
+		        		<td><strong>게시판 백업</strong></td>
+		        	<td>
+		       			<input class="btn " type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>게시판 파일 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 파일 백업" onclick="BackUpFile();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사원 정보 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="사원 정보 백업" onclick="BackUpUsers();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>지역 정보 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="지역 정보 백업" onclick="BackUpLocation();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>재고 관리 백업</strong></td>
+		        	<td>
+		       			<input class="btn  " type="button" value="재고 관리 백업" onclick="BackUpiMGR();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>재고 상품 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="재고 상품 백업" onclick="BackUpGoods();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>계약 상품 백업</strong></td>
+		        	<td>
+		       			<input class="btn " type="button" value="게계약 상품 백업" onclick="BackUpContractGoods();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>상품 할인 백업</strong></td>
+		        	<td>
+		       			<input class="btn " type="button" value="상품 할인 백업" onclick="BackUpGoodsDiscount();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>거래처 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="거래처 백업" onclick="BackUpClient();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>계약 관리 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="계약 관리 백업" onclick="BackUpcMGR();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>계약 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="계약 백업" onclick= "BackUpContract();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>거래처 할인 백업</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="거래처 할인 백업" onclick="BackUpGoodsClient();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn     " type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        
+		         <tr>
+		        		<td><strong>사업자 번호</strong></td>
+		        	<td>
+		       			<input class="btn" type="button" value="게시판 백업" onclick="BackUpBoard();">
+		        	</td>
+		        </tr>
+		        </table>
+		        </div>
+		    </div>
+		<br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br>
 </body>
+
+
+<!-- <body> -->
+<!--  <input type="button" value="게시판 백업" onclick="BackUpBoard();"><br>  -->
+<!--  <input type="button" value="게시판 파일 백업" onclick="BackUpFile();"><br>  -->
+<!--  <input type="button" value="사원 정보 백업" onclick="BackUpUsers();"><br> -->
+<!--  <input type="button" value="지역 정보 백업" onclick="BackUpLocation();"><br> -->
+<!--  <input type="button" value="재고 관리 백업" onclick="BackUpiMGR();"><br>  -->
+<!--  <input type="button" value="재고 상품 백업" onclick="BackUpGoods();"><br>  -->
+<!--  <input type="button" value="계약 상품 백업" onclick="BackUpContractGoods();"><br>  -->
+<!--  <input type="button" value="상품 할인 백업" onclick="BackUpGoodsDiscount();"><br>  -->
+<!--  <input type="button" value="거래처 백업" onclick="BackUpClient();"><br>  -->
+<!--  <input type="button" value="계약 관리 백업" onclick="BackUpcMGR();"><br>  -->
+<!--  <input type="button" value="계약 백업" onclick="BackUpContract();"><br>  -->
+<!--  <input type="button" value="거래처 할인 백업" onclick="BackUpGoodsClient();"><br> -->
+<!-- </body> -->
 
 <script type="text/javascript">
 

@@ -7,7 +7,7 @@
 <title>사원 리스트</title>
 <%@include file="./header.jsp"%>
 </head>
-<body style="background-color: #FFFAFA">
+<body>
 	<div class="container" style="text-align: center; margin-top: 50px;">
 		<h2>계정 관리</h2>
 		<br>

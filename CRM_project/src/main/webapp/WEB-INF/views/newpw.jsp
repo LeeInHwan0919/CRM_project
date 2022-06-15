@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>새 비밀번호 입력</title>
 </head>
-<body style="background-color: #FFFAFA">
+<body>
 <form action="./modifyPW.do" method="post">
 		<div class="login">
 		<input type="text" value="${emp_code}" id="emp_code" name="emp_code">

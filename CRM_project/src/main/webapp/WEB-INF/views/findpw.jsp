@@ -8,7 +8,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>비밀번호 찾기</title>
 </head>
-<body style="background-color: #FFFAFA">
+<body>
 		<div class="findpw">
 			<input type="text" placeholder="사원코드를 입력해 주세요." id="emp_code" name="emp_code"> 
 				<input type="text" placeholder="전화번호를 입력해 주세요." id="emp_tel" name="emp_tel"> 
