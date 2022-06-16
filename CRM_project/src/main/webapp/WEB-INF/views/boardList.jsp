@@ -14,7 +14,7 @@
   </style>
   
 </head>
-<body>
+<body  style="background-color: #FFFAFA">
 
 <div class="container">
     <div style='text-align: center;'>

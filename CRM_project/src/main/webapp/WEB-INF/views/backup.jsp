@@ -8,7 +8,7 @@
 <title>백업 페이지 입니다. </title>
 <%@include file="./header.jsp" %>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 
 <div class="container"><br><br>
 	<div style='text-align: center;'>

@@ -59,7 +59,7 @@ function clickBtn(){
 
 </script>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container" style="text-align: center; margin-top: 50px;">
 <h2><strong>재고 관리</strong></h2><br>
 <table id="myTable" class="display" style="width:100%">

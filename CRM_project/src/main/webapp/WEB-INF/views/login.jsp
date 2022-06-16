@@ -17,8 +17,8 @@ div.container{
 </style>
 <title>로그인 페이지</title>
 </head>
-<body>
-<div class="container">
+<body style="background-color: #FFFAFA">
+<div class="container" >
 <div id="img">
 <img style="text-align: center; height: 66px;" src="./resources/img/blue_logo.png">
 </div>
@@ -34,8 +34,4 @@ div.container{
 	</form>
 </div>
 </body>
-<script type="text/javascript">
-  
-
-</script>
 </html>

@@ -29,7 +29,7 @@ div.container{
 <title>비밀번호 찾기</title>
 </head>
 
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container">
 <div id="img">
 <img style="text-align: center; height: 66px; " src="./resources/img/blue_logo.png">

@@ -29,36 +29,36 @@
       </li>
       <li>
       <c:set var="id" value="${id}"/>
-<%--       <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}"> --%>
+      <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}">
         <a href="./GoodsList.do">
           <span>
            <i class="fa-solid fa-trophy"></i>
           </span>
           <span>재고관리</span>
         </a>
-<%--         </c:if> --%>
+        </c:if>
       </li>
       <li>
       <c:set var="id" value="${id}"/>
-<%--       <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}"> --%>
+      <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}">
          <a href="./clientList.do">
           <span>
               <i class="fa-solid fa-magnifying-glass-plus"></i>
           </span>
           <span>거래처관리</span>
         </a>
-<%--       </c:if> --%>
+      </c:if>
       </li>
       <li>
       <c:set var="id" value="${id}"/>
-<%--       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}"> --%>
+      <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">
           <a href="./UsersList.do">
           <span>
             <i class="fa-solid fa-comment-dots"></i>
           </span>
           <span>계정관리</span>
           </a>
-<%--       </c:if> --%>
+      </c:if>
       </li>
       
       <li>

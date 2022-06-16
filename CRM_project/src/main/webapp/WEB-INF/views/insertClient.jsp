@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <%@include file="./header.jsp" %>
-<body>
+<body style="background-color: #FFFAFA">
 
 <div class="container"><br><br>
 		        <h3><strong>계약 등록</strong></h3><br>

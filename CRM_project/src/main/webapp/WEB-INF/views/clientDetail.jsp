@@ -12,7 +12,7 @@
 }
   </style>
 </head>
-<body>
+<body style="background-color: #FFFAFA" >
 <div class="container">
 	<h3 style="font-weight: bold; margin-top: 50px;">거래처 상세 조회</h3>
 <table class="table table-bordered" style="text-align: center;"> 

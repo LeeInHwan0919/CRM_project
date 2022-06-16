@@ -31,7 +31,7 @@ int strSeq = srMap.getSeq();
 	
 </style>
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container">
            		 <br><h3><strong>글 수정</strong></h3> <br>
                  <table class="table table-hover">

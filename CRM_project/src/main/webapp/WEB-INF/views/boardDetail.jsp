@@ -8,7 +8,7 @@
 <br>
 <title>공지 글 상세보기</title>  
 </head>
-<body>
+<body style="background-color: #FFFAFA">
 <div class="container">
 <table class="table table-bordered" style="text-align: center;"> 
 			<h3><strong>공지 글 상세 조회</strong></h3><br>
