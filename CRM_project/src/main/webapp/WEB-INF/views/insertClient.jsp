@@ -137,7 +137,7 @@ $( "#datepicker2" ).change(function() {
 });
 
 
-	
+//시작일자 마지막 일자 비교 ( 이전날짜 선택 못하게)
 function dateCheck (first, last) {
 	let firstDates = new Date(first.val()); //시작 
 	let SecondDates = new Date(last.val()); //마지막 
@@ -150,7 +150,7 @@ function dateCheck (first, last) {
 }
 
 
-
+//거래처 사업자번호 조회
 $.ajax({
 	type:"POST",
 	url:"./selectCliNum.do",
@@ -165,7 +165,7 @@ $.ajax({
 });
 
 
-
+//계약 관리 코드 조회
 var clinum = [];
 var ctm_code = 0;
 var cofficeCount1 = 0;
@@ -185,7 +185,7 @@ $.ajax({
 	
 });
 
-
+//원두 상품 정보 
 $.ajax({
     type:"POST",
     url:"./selectGoodsName.do",
@@ -212,6 +212,8 @@ $.ajax({
 });
 
 
+
+//거래처 등록 
 function insertBtn(){
 	
 	var data = confirm("새로운 거래처를 등록 하시겠습니까?");
@@ -275,6 +277,8 @@ function insertBtn(){
 	}
 }
 
+
+//거래처 등록 시 원두 입력 
 function cofficeInsert(){
 	
 	var dataObj = {};
