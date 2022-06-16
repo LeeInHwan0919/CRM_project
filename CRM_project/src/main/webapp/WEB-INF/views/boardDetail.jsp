@@ -51,6 +51,8 @@
 </div>
 </body>
 <script type="text/javascript">
+
+//게시글 삭제
 function deletboard(seq){
 	console.log(seq) 
 	
@@ -75,7 +77,7 @@ function deletboard(seq){
     });
  }
 
-
+// 파일 조회 
 $.ajax({
     type:"POST",
     url:"./selectFileInfo.do",
@@ -99,6 +101,8 @@ $.ajax({
 });
 
 
+
+//파일 다운로드
 function download(fileName){
 	
 	var filePath = "C:/test/";

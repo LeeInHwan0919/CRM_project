@@ -92,16 +92,6 @@ GROUP BY (cm.CLI_NUM)
 </update>
 
 
-
-<!--거래처 정보 수정
-<update id="UpdateClient" parameterType="java.util.Map">
-UPDATE 
-CLIENT 
-SET CLI_TEL =#{cli_tel},
-CLI_ADDR=#{cli_addr}
-WHERE CLI_NUM =#{cli_num}
-</update>-->
-
 <!--거래처 등록-->
 <insert id="insertClient" parameterType="java.util.Map">
 INSERT INTO CLIENT

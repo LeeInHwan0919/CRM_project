@@ -112,9 +112,7 @@
 	    $("#datepicker2").datepicker("option", "dateFormat","yy-mm-dd");
 	});
 
-	
-	
-	
+	//거래처 삭제 
 		function deletClient(){
 			
 			let data = confirm("삭제하시겠습니까?");
@@ -139,6 +137,7 @@
 		    });
 		}
 		
+	//거래처 업데이트 페이지로 이동 
 		function updateClient(){
 			
 			var data = confirm("거래처를 수정 하시겠습니까 ? ");
@@ -149,7 +148,7 @@
 			}
 		}
 		
-	
+	//원두 조회
 	$.ajax({
 	    type:"POST",
 	    url:"./selectGoodsName.do",

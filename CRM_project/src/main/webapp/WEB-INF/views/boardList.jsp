@@ -14,7 +14,6 @@
   </style>
   
 </head>
-
 <body>
 
 <div class="container">
@@ -64,6 +63,9 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
+//dataTable
 $(document).ready(function () {
 	
 	table = $("#myTable").DataTable({

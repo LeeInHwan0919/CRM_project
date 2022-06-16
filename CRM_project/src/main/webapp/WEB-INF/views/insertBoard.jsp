@@ -172,7 +172,6 @@ function dateCheck (first, last) {
 	
 function Btnsave() {
 	
-	
 	var data = confirm("새 공지사항을 입력 하시겠습니까?");
 	
 	if(!data){
@@ -190,7 +189,7 @@ function Btnsave() {
 			"startdate" : $("#datepicker").val(),
 			"enddate" : $("#datepicker2").val(),
 			"title" : $("#title").val(),
-			"content" : CKEDITOR.instances.content.getData().replace(regText,'') //$("#content").val()
+			"content" : CKEDITOR.instances.content.getData().replace(regText,'')
 			, "important" : checkState
 	}
 

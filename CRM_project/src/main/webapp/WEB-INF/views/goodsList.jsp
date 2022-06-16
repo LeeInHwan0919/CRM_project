@@ -22,7 +22,7 @@ function callFun(str){
                fileName : str
            },
            success : function(){
-              alert("PDF 다운로드 성공"); 
+              alert("재고 리스트 PDF 다운로드 성공"); 
            },
            error:function(error){
               console.log("error");
@@ -48,7 +48,7 @@ function clickBtn(){
              fileName : str
          },
          success : function(){
-            alert("Excel 다운로드 성공"); 
+            alert("재고 리스트 Excel 다운로드 성공"); 
             callFun(str);
          },
          error:function(error){

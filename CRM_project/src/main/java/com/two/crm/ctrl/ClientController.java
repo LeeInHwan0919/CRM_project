@@ -66,6 +66,7 @@ public class ClientController {
 		return "clientDetail";
 	}
 	
+	//입력 페이지 이동 
 	@RequestMapping(value = "/insertPage.do", method = RequestMethod.GET)
 	public String insertPage() {
 		logger.info("ClientController insertPage");
@@ -73,7 +74,7 @@ public class ClientController {
 	}
 	
 	
-	
+	//계약 관리 코드 조회
 	@RequestMapping(value = "/selectMGR.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectMGR(@RequestParam Map<String, Object> map) {
@@ -184,7 +185,7 @@ public class ClientController {
 
 	
 	
-	
+	//상품정보 조회 
 	@RequestMapping(value = "/selectGoodsName.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectGoodsName(@RequestParam Map<String, Object> map) {
@@ -249,7 +250,7 @@ public class ClientController {
 	
 	
 	
-
+	//excel 다운로드 
 	@RequestMapping(value = "/DBtoExcel2.do", method =RequestMethod.POST)
 	@ResponseBody
 	public String DBtoExcel(@RequestParam Map<String, Object> map) throws IOException, java.io.IOException {
@@ -299,7 +300,7 @@ public class ClientController {
 	
 	
 	
-	//거래처 수정 
+	//거래처 수정 페이지 이동
 	@RequestMapping(value = "/updateClientPage.do", method=RequestMethod.GET)
 	public String UpdateClient(String cli_num, Model model) {
 		List<ClientDto>  cVo = cService.DetailClient(cli_num);
@@ -308,6 +309,8 @@ public class ClientController {
 		
 	}
 	
+	
+	//거래처 수정
 	@ResponseBody
 	@RequestMapping(value = "/updateClient.do", method = RequestMethod.POST)
 	public void UpdateClient(@RequestParam Map<String, Object> map, Model model) {
@@ -338,7 +341,7 @@ public class ClientController {
 		
 	}
 	
-	
+	//원두 수정
 	@RequestMapping(value = "/updateGoods.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int updateGoods(@RequestParam Map<String, Object> map) {
@@ -371,7 +374,7 @@ public class ClientController {
 	
 	
 	
-	//지역 검색
+	//지역 조회 
 	@RequestMapping(value = "/selectLocation.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectLocation(@RequestParam Map<String, Object> map) {
