@@ -21,7 +21,7 @@
 	<option value="종료">종료</option>
 </select>
 
-<input type="button" class="btn btn-info" value="리스드 다운로드" onclick="clickBtn();">
+<input type="button" class="btn btn-info" value="리스트 다운로드" onclick="clickBtn();">
 
 </div><br>
 

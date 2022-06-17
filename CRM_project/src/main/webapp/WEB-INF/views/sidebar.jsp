@@ -34,7 +34,7 @@
           <span>
            <i class="fa-solid fa-trophy"></i>
           </span>
-          <span>재고관리</span>
+          <span>재고조회</span>
         </a>
         </c:if>
       </li>
