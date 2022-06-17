@@ -79,25 +79,25 @@ public class GoodsController {
 
 		Row headerRow = sheet.createRow(rowNo++);
 		headerRow.createCell(0).setCellValue("상품코드");
-		headerRow.createCell(1).setCellValue("할인코드");
-		headerRow.createCell(2).setCellValue("원두명");
-		headerRow.createCell(3).setCellValue("kg");
-		headerRow.createCell(4).setCellValue("지역");
-		headerRow.createCell(5).setCellValue("원두 함량");
-		headerRow.createCell(6).setCellValue("EA");
-		headerRow.createCell(7).setCellValue("개수");
+		headerRow.createCell(1).setCellValue("원두명");
+		headerRow.createCell(2).setCellValue("kg");
+		headerRow.createCell(3).setCellValue("지역");
+		headerRow.createCell(4).setCellValue("원두 함량");
+		headerRow.createCell(5).setCellValue("EA");
+		headerRow.createCell(6).setCellValue("개수");
+		headerRow.createCell(7).setCellValue("비고");
 
 		List<GoodsDto> lists = gService.AllGoods();
 		for (GoodsDto goods : lists) {
 			Row row = sheet.createRow(rowNo++);
 			row.createCell(0).setCellValue(goods.getG_code());
-			row.createCell(1).setCellValue(goods.getDcode_goods());
 			row.createCell(2).setCellValue(goods.getG_name());
 			row.createCell(3).setCellValue(goods.getG_kg());
 			row.createCell(4).setCellValue(goods.getG_country());
 			row.createCell(5).setCellValue(goods.getG_content());
 			row.createCell(6).setCellValue(goods.getG_amount());
 			row.createCell(7).setCellValue(goods.getIv_cnt());
+			row.createCell(1).setCellValue(goods.getDcode_goods());
 		}
 
 		FileOutputStream fileOutPut = new FileOutputStream("C:\\Users\\User\\Downloads\\재고리스트_"+fileName+".xlsx");
