@@ -14,29 +14,30 @@
   </style>
   
 </head>
-<body  style="background-color: #FFFAFA">
+
+<body>
 
 <div class="container">
     <div style='text-align: center;'>
-  	<h2><strong>공지 게시판</strong></h2><br>
+     <h2><strong>공지 게시판</strong></h2><br>
 
-	<table id="myTable" class="display" style="width:100%; font-size:120%;">
-		<thead>
-			<tr>
-			<th style="text-align: center;"><strong>번호</strong></th>
-		        <th style="text-align: center;">제목</th>
-		        <th style="text-align: center;">작성자</th>
-		      	<th style="text-align: center;">등록일</th>
-		        <th style="text-align: center;">조회</th>
-			</tr>
-		</thead>
-		
-		
+   <table id="myTable" class="display" style="width:100%; font-size:120%;">
+      <thead>
+         <tr>
+         <th style="text-align: center;"><strong>번호</strong></th>
+              <th style="text-align: center;">제목</th>
+              <th style="text-align: center;">작성자</th>
+               <th style="text-align: center;">등록일</th>
+              <th style="text-align: center;">조회</th>
+         </tr>
+      </thead>
+      
+      
       <tbody>
       
       <c:forEach var="ls" items="${lists}">
       <tr>
-		<td>${ls.seq}</td>
+      <td>${ls.seq}</td>
         <c:if test="${ls.important eq 1}">
         <td style= 'text-align: left;' ><strong><a href="./boardDetail.do?seq=${ls.seq}" style=' color: red;'>&nbsp&nbsp&nbsp<img alt=""src="./resources/img/bbb.png">&nbsp&nbsp&nbsp${ls.title}</a></strong></td>
         </c:if>
@@ -53,25 +54,20 @@
 </table>
 <br>
 <br>
-		<div style='text-align: right;'>
-		 <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">	
+      <div style='text-align: right;'>
+       <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">   
          <button type="button"class="btn btn-primary" onclick="location.href='./insertBoardPage.do'"style=' margin: 0 0 0 10px; '>새글 입력</button>
-		 </c:if>
-		 <button  class="btn btn-warning" onclick="location.href='./result.do'" style=' margin: 0 0 0 10px;'>뒤로가기</button>
+       </c:if>
+       <button  class="btn btn-warning" onclick="location.href='./result.do'" style=' margin: 0 0 0 10px;'>뒤로가기</button>
          </div><br>
-		</div>
+      </div>
 </div>
-<br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br>
 </body>
 <script type="text/javascript">
-
-
-//dataTable
 $(document).ready(function () {
-	
-	table = $("#myTable").DataTable({
-		"language": { 
+   
+   table = $("#myTable").DataTable({
+      "language": { 
             "info": "현재 _START_ - _END_ / _TOTAL_건",
             "infoEmpty": "데이터 없음",
             "search": "검색: ",
@@ -81,7 +77,7 @@ $(document).ready(function () {
                 "previous": "이전"
             }
         },
-		
+      
         
         columnDefs: [
             {
