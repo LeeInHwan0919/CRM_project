@@ -19,21 +19,12 @@ int strSeq = srMap.getSeq();
       width: 800px;
       height: 540px;
       margin: 40px auto;
-      
    }
-   
-     input[type=checkbox] {
-	-ms-transform: scale(S); /* IE */
-	-moz-transform: scale(2); /* FF */
-	-webkit-transform: scale(2); /* Safari and Chrome */
-	-o-transform: scale(2); /* Opera */
-	padding: 10px;
-	
 </style>
 </head>
-<body style="background-color: #FFFAFA">
-<div class="container">
-           		 <br><h3><strong>글 수정</strong></h3> <br>
+<body>
+<div class="container"> 
+              <h3>글 수정</h3>
                  <table class="table table-hover">
                  <tr>
                  <td>번호</td>
@@ -53,7 +44,7 @@ int strSeq = srMap.getSeq();
 					<td><input type="text" name="enddate" id="datepicker2"  readonly="readonly"></td>
                  </tr>
                   <tr>
-					<td>중요 공지 사항 </td>
+					<td>중요 공지 사항 :</td>
 					<td><input type="checkbox" id="important" name="important" value="1"></td>
                  </tr>
                  
@@ -63,8 +54,8 @@ int strSeq = srMap.getSeq();
                  </tr>
                  </table>
               <div style="text-align: center;">
-              <input class="btn btn-success" id="updateBtn" type="button" style="margin: 0 0 0 10px;" value="수정하기">
-              <input class="btn btn-warning"  type="button" value="뒤로가기" style="margin: 0 0 0 10px;" onclick="javascript:history.back(-1)">
+              <input class="btn btn-success" id="updateBtn" type="button" value="수정하기">
+              <input class="btn btn-info"  type="button" value="뒤로가기" onclick="javascript:history.back(-1)">
               </div>
 </div>
    </body>
@@ -75,7 +66,18 @@ CKEDITOR.replace( 'content', {
 
 });
 
-	
+CKEDITOR.editorConfig = function( config ) {
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
+};
+
+function insert(){
+	var data = document.getElementById("inputContent").value;
+	console.log(data);
+	CKEDITOR.instances.content.setData(data); 
+}
+
+
 $( "#datepicker" ).change(function() {
 	dateCheck($("#datepicker"),$("#datepicker2"));
 });
@@ -83,20 +85,21 @@ $( "#datepicker" ).change(function() {
 $( "#datepicker2" ).change(function() {
 	dateCheck($("#datepicker"),$("#datepicker2"));
 });
-
-
+	
 	
 function dateCheck (first, last) {
 	let firstDates = new Date(first.val()); //시작 
-	let SecondDates = new Date(last.val()); //마지막 
+	let SecondDates = new Date(last.val()); //지막 
 	if (firstDates >= SecondDates) {
-		alert("게시 시작일짜 보다 빠른 날짜를 선택하 실 수는 없습니다. ");
+		alert("일정 종료일이 시작일보다 이전 날짜입니다.");
 		first.val('');
 		last.val(''); 
 		return false;
 	}
 }
 
+
+	
    $( "#datepicker" ).datepicker({ minDate: 0});
    $( "#datepicker2" ).datepicker({ minDate: 0});
 	

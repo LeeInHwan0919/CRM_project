@@ -270,6 +270,7 @@ public class BoardController {
 	* 2022.06.06
 	* @author nohsubin
 	*/
+	//파일 업로드
 	@PostMapping(value = "/fileUpload.do") //ajax에서 호출하는 부분
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest multipartRequest,@RequestParam int seq) { //Multipart로 받는다.
@@ -338,6 +339,5 @@ public class BoardController {
               .header(HttpHeaders.CONTENT_TYPE, contentType)
               .body(resource);
 	}
-	
 	
 }
