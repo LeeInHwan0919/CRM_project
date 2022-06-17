@@ -269,5 +269,27 @@ UPDATE CONTRACT_GOODS
 	WHERE SEQ = #{seq}
 </update>
 
+<!--거래처 상태 별 조회 후 엑셀 다운-->
+<select id="selectStatus" resultType="cDto" parameterType="java.util.Map">
+SELECT * FROM(
+	SELECT c.CLI_NUM, 
+	c.EMP_CODE, 
+	c.CLI_NAME, 
+	c.CLI_ADDR, 
+	c.CLI_TEL,
+	c.CLI_AREA,
+	<![CDATA[ CASE WHEN SYSDATE  > c2.CT_START AND SYSDATE < c2.CT_END THEN '진행' ]]>
+	<![CDATA[ WHEN SYSDATE < c2.CT_START THEN '대기' ]]>
+	<![CDATA[ WHEN SYSDATE > c2.CT_END THEN '종료' ]]>
+	 END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, c2.CT_START ,c2.CT_END
+		FROM CLIENT c
+			JOIN CONTRACT_MANAGEMENT cm 
+			ON c.CLI_NUM = cm.CLI_NUM 
+		    JOIN CONTRACT c2 
+		    ON c2.CTM_CODE =cm.CTM_CODE
+	    ) WHERE STATUS = #{status}
+</select>
+
+
 
 </mapper>

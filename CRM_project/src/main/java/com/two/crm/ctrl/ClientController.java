@@ -258,7 +258,6 @@ public class ClientController {
 		Map<String, Object> rMap = new HashMap<String, Object>();
 		
 		rMap.put("status",map.get("status"));
-		//rMap.put("date",map.get("date"));
  		
 
 		Workbook workbook = new XSSFWorkbook();

@@ -160,7 +160,7 @@ public class GoodsController {
 		float[] widths = {30, 30, 30, 30, 30, 30, 30, 30};
 		PdfPTable table = new PdfPTable(widths);
 		try{
-			PdfWriter.getInstance(doc, new FileOutputStream(new File("C:/Users/User/Downloads/"+ pdffile)));//경로 설정 후 pdf 파일 생성
+			PdfWriter.getInstance(doc, new FileOutputStream(new File("C:/Users/User/Downloads/재고리스트_"+ pdffile)));//경로 설정 후 pdf 파일 생성
 			doc.open(); //Document open
 			
 			//폰트설정 ("폰트이름","폰트 배열","외부에 있는 폰트 사용")
