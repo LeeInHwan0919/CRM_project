@@ -29,7 +29,7 @@
       </li>
       <li>
       <c:set var="id" value="${id}"/>
-      <c:if test="${fn:substring(id, 0, 3) eq 'IAD'}">
+      <c:if test="${fn:substring(id, 0, 3) eq 'IAD' eq 'SYS'}">
         <a href="./GoodsList.do">
           <span>
            <i class="fa-solid fa-trophy"></i>
@@ -40,7 +40,7 @@
       </li>
       <li>
       <c:set var="id" value="${id}"/>
-      <c:if test="${fn:substring(id, 0, 3) eq 'CAD'}">
+      <c:if test="${fn:substring(id, 0, 3) eq 'CAD' eq 'SYS'}">
          <a href="./clientList.do">
           <span>
               <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -62,12 +62,15 @@
       </li>
       
       <li>
+      <c:set var="id" value="${id}"/>
+      <c:if test="${fn:substring(id, 0, 3) eq 'SYS'}">
           <a href="./Backup.do">
           <span>
             <i class="fa-solid fa-comment-dots"></i>
           </span>
           <span>백업</span>
         </a>
+        </c:if>
       </li>
       <li>
         <a href="./result.do">
