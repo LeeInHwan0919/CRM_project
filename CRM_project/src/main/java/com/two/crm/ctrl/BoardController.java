@@ -234,7 +234,6 @@ public class BoardController {
         return "fileUpload";
         
     }
-<<<<<<< HEAD
 	
 	/**
 	* 파일을 업로드
@@ -262,30 +261,7 @@ public class BoardController {
 	            String fileFullPath = filePath+"/"+originalFilename; //파일 전체 경로
 	            
 	            Map<String, Object> map = new HashMap<String, Object>();
-=======
-   
-   //파일 업로드
-   @PostMapping(value = "/fileUpload.do") //ajax에서 호출하는 부분
-   @ResponseBody
-   public void upload(MultipartHttpServletRequest multipartRequest,@RequestParam int seq) { //Multipart로 받는다.
-           
-//         System.out.println("확인확인");
-         
-         System.out.println(seq);
-           Iterator<String> itr =  multipartRequest.getFileNames();
-           
-           String filePath = "C:/test"; //설정파일로 뺀다.
-           
-           while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
-               
-               
-               MultipartFile mpf = multipartRequest.getFile(itr.next());
-               
-               String originalFilename = mpf.getOriginalFilename(); //파일명
-               String fileFullPath = filePath+"/"+originalFilename; //파일 전체 경로
-               
-               Map<String, Object> map = new HashMap<String, Object>();
->>>>>>> 74ac50bc660a36429b827e3f8f3da5e5a187ff27
+
 
                map.put("file_name", originalFilename);
                map.put("file_folder", fileFullPath);
@@ -328,12 +304,7 @@ public class BoardController {
               .header(HttpHeaders.CONTENT_DISPOSITION, "attachement; filename=\"" + map.get("fileName").toString() +"\"")
               .header(HttpHeaders.CONTENT_TYPE, contentType)
               .body(resource);
-<<<<<<< HEAD
+
 	}
 	
-=======
-   }
-   
-   
->>>>>>> 74ac50bc660a36429b827e3f8f3da5e5a187ff27
 }
