@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Client_DaoImpl">
+
+
+<!--거래처 전체조회-->
+<select id="AllClient"  resultType="cDto">
+SELECT c2.CLI_NUM, 
+	c2.EMP_CODE, 
+	c2.CLI_NAME, 
+	c2.CLI_ADDR, 
+	c2.CLI_TEL,
+	c2.CLI_AREA,
+	c.CT_START,
+	c.CT_END,
+<![CDATA[CASE WHEN TO_DATE(CT_START,'YYYY-MM-DD') > TO_DATE(SYSDATE,'YYYY-MM-DD')]]>
+<![CDATA[       THEN '대기']]>
+<![CDATA[     WHEN TO_DATE(CT_END,'YYYY-MM-DD') < TO_DATE(SYSDATE,'YYYY-MM-DD')]]>
+<![CDATA[       THEN '종료']]>
+            ELSE '진행'
+       END AS STATUS,
+TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM
+  FROM CONTRACT c 
+    JOIN CONTRACT_MANAGEMENT cm 
+    ON c.CTM_CODE = cm.CTM_CODE
+     JOIN CLIENT c2 
+    ON c2.CLI_NUM = cm.CLI_NUM
+    WHERE c2.CLI_USE = 'Y'
+</select>
+
+
+<!--거래처 상세조회-->
+<select id="DetailClient" parameterType="String" resultType="cDto">
+SELECT c.CLI_NUM, 
+c.EMP_CODE, 
+c.CLI_NAME, 
+c.CLI_ADDR, 
+c.CLI_TEL,
+cd.RATE,
+cg.G_NAME,
+gd.RATE AS G_CODE,
+CG.DU_CNT,
+CG.G_PRICE,
+cg.SEQ,
+c2.CT_CODE,
+c.CLI_AREA,
+<![CDATA[ CASE WHEN SYSDATE  > c2.CT_START AND SYSDATE < c2.CT_END THEN '진행중' ]]>
+<![CDATA[ WHEN SYSDATE < c2.CT_START THEN '대기중' ]]>
+<![CDATA[ WHEN SYSDATE > c2.CT_END THEN '종료' ]]>
+ END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, TO_CHAR(c2.CT_START , 'YYYY-MM-DD') AS CT_START ,TO_CHAR(c2.CT_END , 'YYYY-MM-DD') AS CT_END
+	FROM CLIENT c
+		JOIN CONTRACT_MANAGEMENT cm 
+		ON c.CLI_NUM = cm.CLI_NUM 
+	    JOIN CONTRACT c2 
+	    ON c2.CTM_CODE =cm.CTM_CODE 
+		JOIN CLIENT_DISCOUNT cd 
+		ON c2.DCODE_CLIENT = cd.DCODE_CLIENT 
+		JOIN CONTRACT_GOODS cg 
+		ON c2.CT_CODE = cg.CT_CODE 
+		JOIN INVENTORY_GOODS ig 
+		ON cg.G_CODE = ig.G_CODE 
+		JOIN GOODS_DISCOUNT gd 
+		ON ig.DCODE_GOODS = gd.DCODE_GOODS
+		WHERE c.CLI_NUM=#{cli_num}
+		ORDER BY gd.RATE DESC
+</select>
+
+
+<!-- 거래처별 납품 소계, 합계 -->
+
+<select id="SumPrice" parameterType="String" resultType="cDto">
+SELECT cm.CLI_NUM ,SUM(cg.G_PRICE*cg.DU_CNT) DU_PRICE,SUM(cg.G_PRICE*cg.DU_CNT-cg.G_PRICE*cg.DU_CNT*gd.RATE) PRE_SUM , SUM(cg.G_PRICE*cg.DU_CNT-cg.G_PRICE*cg.DU_CNT*(gd.RATE+cd.RATE)) SUM_PRICE
+FROM CONTRACT c 
+JOIN CONTRACT_GOODS cg
+ON c.CT_CODE = cg.CT_CODE 
+JOIN INVENTORY_GOODS ig 
+ON cg.G_CODE = ig.G_CODE
+JOIN GOODS_DISCOUNT gd 
+ON ig.DCODE_GOODS = gd.DCODE_GOODS
+JOIN CLIENT_DISCOUNT cd 
+ON cd.DCODE_CLIENT = c.DCODE_CLIENT
+JOIN CONTRACT_MANAGEMENT cm 
+ON cm.CTM_CODE = c.CTM_CODE 
+WHERE cm.CLI_NUM=#{cli_num}
+GROUP BY (cm.CLI_NUM)
+</select>
+
+<!--거래처 삭제-->
+<update id="DeleteClient">
+	UPDATE CLIENT SET CLI_USE ='N' 
+	WHERE CLI_NUM=#{cli_num}
+</update>
+
+
+<!--거래처 등록-->
+<insert id="insertClient" parameterType="java.util.Map">
+INSERT INTO CLIENT
+(	CLI_NUM , 
+	EMP_CODE , 
+	CLI_NAME , 
+	CLI_ADDR , 
+	CLI_TEL  ,
+	CLI_AREA ,
+	CLI_USE
+)VALUES(
+	#{cli_num} , 
+	#{emp_code} , 
+	#{cli_name} , 
+	#{cli_addr} , 
+	#{cli_tel} ,
+	#{cli_area} ,
+	'Y'
+)
+</insert>
+
+<!--계약 관리 코드 조회-->
+<select id="selectConractCode" resultType="cDto">
+SELECT MAX(CTM_CODE) AS CTM_CODE
+FROM CONTRACT_MANAGEMENT
+</select>
+
+
+<!--계약 관리 등록-->
+<insert id="insertMGT" parameterType="java.util.Map">
+INSERT INTO CONTRACT_MANAGEMENT(
+	CTM_CODE,
+	CLI_NUM
+)
+VALUES(
+	#{ctm_code},
+	#{cli_num}
+)
+</insert>
+
+
+<!-- 계약 등록 --> 
+<insert id="insertContract" parameterType="java.util.Map">
+
+<selectKey resultType="int" keyProperty="contractKey" order="BEFORE">
+    SELECT MAX(CT_CODE)+1 FROM CONTRACT        
+</selectKey>    
+    
+INSERT INTO CONTRACT
+(CT_CODE, CTM_CODE, DCODE_CLIENT, DU_PRICE, DU_DATE, CT_START, CT_END)
+VALUES(#{contractKey}, #{ctm_code}, 'C01', 0,  #{du_date}, #{ct_start}, #{ct_end})
+
+</insert>
+
+
+<!--상품등록 after-->
+<insert id="insertGoods" parameterType="java.util.Map">
+
+<selectKey resultType="hashmap" keyProperty="SEQ,CT_CODE" order="BEFORE">
+    SELECT MAX(T1.SEQ)+1 AS SEQ , MAX(T2.CT_CODE) AS CT_CODE
+    FROM contract_goods T1
+    	FULL OUTER JOIN CONTRACT T2
+    	ON T1.CT_CODE = T2.CT_CODE
+</selectKey>    
+
+
+INSERT INTO contract_goods(
+	SEQ,
+	G_CODE,
+	G_NAME,
+	G_PRICE,
+	DU_CNT,
+	CT_CODE
+)
+VALUES(
+	#{SEQ},
+	#{g_code},
+	#{g_name},
+	#{g_price},
+	#{du_cnt},
+	#{CT_CODE}
+)
+</insert>
+
+
+<!--상품정보 조회-->
+<select id="selectGoodsName" resultType="cDto">
+SELECT G_NAME, G_CODE FROM inventory_goods
+</select>
+
+<!--거래처 사업자 번호 조회-->
+<select id="selectCliNum" resultType="cDto">
+SELECT CLI_NUM
+FROM CLIENT
+</select>
+
+<!--지역 조회-->
+<select id="selectLocation" resultType="java.util.Map">
+SELECT
+   AREA
+  FROM location 
+</select>
+
+<!-- ****************************백업 query**************************** -->
+
+<!--거래처-->
+<select id="BackUpClient"  resultType="cDto">
+SELECT 
+    CLI_NUM, 
+    EMP_CODE, 
+    CLI_NAME, 
+    CLI_ADDR, 
+    CLI_TEL, 
+    CLI_AREA, 
+    CLI_USE
+FROM client
+</select>
+
+
+
+<!--계약관리-->
+<select id="BackUpcMGR"  resultType="cDto">
+SELECT
+   CTM_CODE, 
+   CLI_NUM 
+   FROM contract_management
+</select>
+
+
+
+<!-- 거래처 할인-->
+<select id="BackUpGoodsClient"  resultType="cDto">
+select  
+	DCODE_CLIENT, 
+	RATE 
+from client_discount
+</select>
+
+
+<!--계약-->
+<select id="BackUpContract"  resultType="cDto">
+SELECT
+ CT_CODE, 
+ CTM_CODE, 
+ DCODE_CLIENT, 
+ DU_PRICE, 
+ DU_DATE, 
+ CT_START, 
+ CT_END 
+ FROM contract
+</select>
+
+<!-- ****************************백업 query**************************** -->
+<!--거래처 수정-->  
+<update id="UpdateClient" parameterType="java.util.Map">  
+UPDATE CLIENT
+	SET 
+	CLI_NAME = #{cli_name}, 
+	CLI_ADDR = #{cli_addr}, 
+	CLI_TEL = #{cli_tel}, 
+	CLI_AREA = #{cli_area}
+	WHERE CLI_NUM = #{cli_num}
+</update>
+
+
+<update id="UpdateContract" parameterType="java.util.Map"> 
+UPDATE CONTRACT
+	SET CT_START = #{ct_start}, CT_END = #{ct_end}
+WHERE CT_CODE = #{ct_code}
+</update>
+
+<update id="UpdateGoods" parameterType="java.util.Map"> 
+UPDATE CONTRACT_GOODS
+	SET G_PRICE = #{g_price}, DU_CNT = #{du_cnt}
+	WHERE SEQ = #{seq}
+</update>
+
+<!--거래처 상태 별 조회 후 엑셀 다운-->
+<select id="selectStatus" resultType="cDto" parameterType="java.util.Map">
+SELECT * FROM(
+	SELECT c.CLI_NUM, 
+	c.EMP_CODE, 
+	c.CLI_NAME, 
+	c.CLI_ADDR, 
+	c.CLI_TEL,
+	c.CLI_AREA,
+	<![CDATA[ CASE WHEN SYSDATE  > c2.CT_START AND SYSDATE < c2.CT_END THEN '진행' ]]>
+	<![CDATA[ WHEN SYSDATE < c2.CT_START THEN '대기' ]]>
+	<![CDATA[ WHEN SYSDATE > c2.CT_END THEN '종료' ]]>
+	 END AS STATUS,TRUNC(TO_NUMBER(TO_CHAR(TO_DATE(CT_END,'yyyy-mm-dd')-TO_DATE(CT_START,'yyyy-mm-dd')))/365) CT_DATE_YEAR_SUM, c2.CT_START ,c2.CT_END
+		FROM CLIENT c
+			JOIN CONTRACT_MANAGEMENT cm 
+			ON c.CLI_NUM = cm.CLI_NUM 
+		    JOIN CONTRACT c2 
+		    ON c2.CTM_CODE =cm.CTM_CODE
+	    ) WHERE STATUS = #{status}
+</select>
+
+
+
+</mapper>

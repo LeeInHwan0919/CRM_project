@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Goods_DaoImpl">
+
+
+<!-- 2022.06.08 파일 다운로드를 위해 ig.G_CODE 조회 추가 subin-->
+
+
+<!--재고 전체조회-->
+<select id="AllGoods"  resultType="gDto">
+SELECT DISTINCT ig.G_NAME,
+	CASE WHEN ig.G_CODE = FIRST_VALUE(ig.G_CODE) OVER() THEN '0.3% 할인' ELSE '할인 미적용' END AS DCODE_GOODS,IV_CNT,
+
+	 ig.G_KG, ig.G_COUNTRY, ig.G_CONTENT,  ig.G_AMOUNT,ig.G_CODE 
+
+	FROM CONTRACT c 
+	JOIN CONTRACT_GOODS cg
+	ON c.CT_CODE = cg.CT_CODE 
+	JOIN INVENTORY_GOODS ig 
+	ON cg.G_CODE = ig.G_CODE
+	JOIN GOODS_DISCOUNT gd 
+	ON ig.DCODE_GOODS = gd.DCODE_GOODS 
+			<![CDATA[WHERE CT_START < SYSDATE
+			AND CT_END > SYSDATE]]>
+		ORDER BY IV_CNT
+</select>
+
+
+<!-- ****************************백업 query**************************** -->
+
+<!--계약 상품-->
+<select id="BackUpContractGoods"  resultType="gDto">
+SELECT
+    SEQ, 
+    CT_CODE, 
+    G_CODE, 
+    G_NAME, 
+    G_PRICE, 
+    DU_CNT
+    FROM contract_goods
+</select>
+
+<!-- 상품 할인 -->
+<select id="BackUpGoodsDiscount"  resultType="gDto">
+select 
+   DCODE_GOODS, 
+   RATE 
+   from goods_discount
+</select>
+
+<select id="BackUpiMGR"  resultType="gDto">
+SELECT
+    SEQ, 
+    G_CODE, 
+    EMP_CODE, 
+    G_NAME, 
+    IN_DATE, 
+    IN_CNT 
+    FROM inventory_management
+    
+</select>
+
+<!--재고 -->
+<select id="BackUpGoods"  resultType="gDto">
+SELECT
+   G_CODE,
+    DCODE_GOODS, 
+    G_NAME, 
+    IV_CNT, 
+    G_KG, 
+    G_COUNTRY, 
+    G_CONTENT, 
+    G_AMOUNT, 
+    G_DATE
+    FROM inventory_goods
+</select>
+
+
+
+</mapper>

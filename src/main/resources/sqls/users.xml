@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.two.crm.model.dao.Users_DaoImpl">
+
+<!--사원 전체조회-->
+<select id="AllUsers" resultType="UDto">
+SELECT u.EMP_NAME,
+u.EMP_AUTH ,
+u.EMP_CODE, u.EMP_GENDER, u.EMP_USE, u.EMP_TEL
+FROM USER_INFO u
+LEFT JOIN LOCATION l 
+ON u.AREA_CODE= l.AREA_CODE
+</select>
+
+<!-- 사원 상세조회 -->
+<select id="UserDetail" resultType="UDto">
+SELECT EMP_CODE, l.AREA , EMP_NAME, EMP_GENDER, EMP_USE,l.AREA_CODE,
+EMP_IMG, CASE WHEN SUBSTR(EMP_AUTH,1,2)='CL' THEN '거래처관리'
+WHEN SUBSTR(EMP_AUTH,1,2)='SY' THEN '시스템관리' ELSE '재고관리' END AS EMP_AUTH 
+, EMP_TEL ,EMP_ADDR
+FROM USER_INFO ui
+LEFT JOIN LOCATION l
+ON l.AREA_CODE = ui.AREA_CODE 
+WHERE EMP_CODE=#{emp_code}
+</select>
+
+
+<!-- 사원 정보 수정 -->
+<update id="updateUser" parameterType="java.util.HashMap">
+UPDATE USER_INFO
+SET EMP_GENDER=#{emp_gender}, EMP_USE=#{emp_use}, EMP_TEL=#{emp_tel}, EMP_ADDR=#{emp_addr},AREA_CODE=#{area_code}
+WHERE EMP_CODE=#{emp_code}
+</update>
+
+<!-- 사원 등록 -->
+<insert id="insertUser" parameterType="UDto">
+INSERT INTO USER_INFO
+(EMP_CODE, AREA_CODE, EMP_NAME, EMP_PW, EMP_GENDER, EMP_USE,  EMP_AUTH, EMP_TEL, EMP_ADDR,EMP_IMG)
+VALUES(#{emp_code}, #{area_code}, #{emp_name}, #{emp_pw}, #{emp_gender}, 'Y',  #{emp_auth}, #{emp_tel}, #{emp_addr},UTL_RAW.CAST_TO_RAW('./resources/img/image.png'))
+</insert>
+
+
+
+
+
+
+
+<!-- ****************************백업 query subin 수정 x **************************** -->
+
+<!--사원-->
+<select id="BackUpUsers"  resultType="UDto">
+SELECT
+    EMP_CODE, 
+    AREA_CODE, 
+    EMP_NAME, 
+    EMP_PW, 
+    EMP_GENDER, 
+    EMP_USE, 
+    EMP_IMG, 
+    EMP_AUTH, 
+    EMP_TEL, 
+    EMP_ADDR 
+    FROM user_info
+</select>
+
+<!--지역-->
+<select id="BackUpLocation"  resultType="UDto">
+SELECT
+    AREA_CODE, 
+    AREA FROM 
+    location
+</select>
+<!-- ****************************백업 query**************************** -->
+
+</mapper>
